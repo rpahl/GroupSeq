@@ -1,12 +1,12 @@
 "groupseq" <-
-function( mode=chosenMode )
+function( mode="g" )
 {
   #default is gui mode
   if(missing(mode))
   {
     guiMode()
   }
-  
+
   # "c" is console mode
   else if(mode=="c")
        {
