@@ -21,7 +21,7 @@ to eventually process them further on.
 
 
 \usage{
-groupseq(mode = chosenMode)
+groupseq(mode = "g")
 }
 
 \arguments{
