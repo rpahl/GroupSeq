@@ -1,7 +1,7 @@
 "guiInputTask1" <-
 function(taskWindow)
 {
-  
+
   ### Initialize Variables ###
   #default inputs
   n<-1 # number of interim analyses
@@ -11,26 +11,26 @@ function(taskWindow)
   enterBoundsManually<-FALSE # denotes whether bounds are entered manually by user (enterBoundsManually==TRUE) or to be computed by spending function
   BoundsSymmetry<-1 # BoundsSymmetry==1 means one-sided bounds, BoundsSymmetry==2 means two-sided symmetric and BoundsSymmetry==3 means asymmetric bounds.
   functionInput<-1 # indicates type I error spending rate function e.g. the function(s) the user choosed
-  TruncateBoundsInput<-8 ## here 8 equals infity 
+  TruncateBoundsInput<-8 ## here 8 equals infity
   truncateBoundsYesNo<-FALSE # default is no truncating of bounds
-  
-  
+
+
   #some lists (names are self-explanatory)
-  t<-1  # list of interim analyses 
-  t2<-t    # list of second time scale - by default t2==t 
-  listOfTimePointLabel.unequalTimes<-list() 
+  t<-1  # list of interim analyses
+  t2<-t    # list of second time scale - by default t2==t
+  listOfTimePointLabel.unequalTimes<-list()
   listOfInputFields.unequalTimes<-list()
   listOfEntries.unequalTimes<-list()
-  
+
   listOfTimePointLabel.secondTimes<-list()
   listOfInputFields.secondTimes<-list()
   listOfEntries.secondTimes<-list()
-  
+
   #some status variables (names are self-explanatory)
   nInputEdited<-FALSE
   equallySpacedTimesCheckBoxClicked<-FALSE
   secondTimeScaleCheckBoxClicked<-FALSE
-          
+
   #operating variables
   nBackup<-n # backup n
   boundBackup<-BoundsSymmetry # backup BoundsSymmetry
@@ -40,23 +40,23 @@ function(taskWindow)
   function2<-functionInput # function2 is need in case of asymmetric bounds
   phi1<-1 # optional Parameter referring to Power Family
   phi2<-1 # phi2 is need in case of asymmetric bounds both using Power family
-    
+
   #Define some Fonts
   fontItalic <- tkfont.create(family="times",size=10,slant="italic")
   fontBig <- tkfont.create(family="times",size=10,weight="bold")
-  
-  
+
+
 ####################################################################################################
 #################------------------------------------------------------------#######################
 ##################  FUNCTIONS THAT HANDLE EVENTS TAKING PLACE IN THE WINDOW ########################
 #################------------------------------------------------------------#######################
 ####################################################################################################
-  
-  #########################################################  
+
+  #########################################################
   # function handles change on number of interim analyses #
-  ######################################################### 
+  #########################################################
   onChangeInterimAnalyses<-function(nValue)
-  { 
+  {
     #First check whether n has changed
     if(n==nValue)
     {
@@ -66,7 +66,7 @@ function(taskWindow)
     {
       #set new n
       n<<-nValue
-      
+
       #First we´ll have to recompute the lists t,t2 new e.g
       #they got default values equally spaced
       t<<-1
@@ -75,14 +75,14 @@ function(taskWindow)
         t[i] <<- i/n
       }
       t2<<-t
-      
+
       #update n in menu bar
-      tkdelete(topMenu,0,1)  
+      tkdelete(topMenu,0,1)
       tkadd(topMenu,"cascade",label=paste("#Interim Times: K=",as.character(n)),menu=nMenu)
-      
+
       ### equally or unequally spaced times? get it from the checkbox ###
       equallySpacedTimesInput <- as.logical(as.numeric(tclvalue(equallySpacedTimesCheckBoxValue)))
-     
+
       # check case unequally checkboxes - grid input fields with number of interim analyses into the frames
       if(!equallySpacedTimesInput)
       {
@@ -96,16 +96,16 @@ function(taskWindow)
         listOfInputFields.unequalTimes<<-list()
         listOfTimePointLabel.unequalTimes<<-list()
         listOfEntries.unequalTimes<<-list()
-        
+
         #create new labels by calling function 'onCheckBoxEquallySpacedTimes()'
         onCheckBoxEquallySpacedTimes()
-        
+
       }#end <--*if(!equallySpacedTimesInput)*
-        
-        
+
+
       ### Second Time scale - will it be used? ###
       secondTimeScaleIsUsedInput <- as.logical(as.numeric(tclvalue(secondTimeScaleIsUsedCheckBoxValue)))
-        
+
       #check case second times scale checkbox is activated
       if(secondTimeScaleIsUsedInput)
       {
@@ -119,27 +119,27 @@ function(taskWindow)
         listOfInputFields.secondTimes<<-list()
         listOfTimePointLabel.secondTimes<<-list()
         listOfEntries.secondTimes<<-list()
-        
+
         #create new labels by calling function 'onCheckBoxSecondTimeScale()'
         onCheckBoxSecondTimeScale()
-        
+
       }#end <--*if(secondTimeScaleIsUsedInput)*
 
     }#end <--*else #interim times changed*
-    
+
     #update nBackup
     nBackup<<-n
   }#end <--*onChangeInterimAnalyses<-function(nValue)*
-  
-  
+
+
   ###################################################################################
   # function handles a click on checkbox for equally/unequally spaced interim times #
-  ###################################################################################     
+  ###################################################################################
   onCheckBoxEquallySpacedTimes <- function()
   {
     #equally or unequally spaced times? get it from the checkbox
     equallySpacedTimesInput <- as.logical(as.numeric(tclvalue(equallySpacedTimesCheckBoxValue)))
-    
+
     # case unequally checkboxes - grid input fields with number of interim analyses into the frames
     if(!equallySpacedTimesInput)
     {
@@ -147,25 +147,25 @@ function(taskWindow)
       {
         #create label in a list thus we can dynamically change number of input fields
         listOfTimePointLabel.unequalTimes<<-c(listOfTimePointLabel.unequalTimes,list(tklabel(unEquallyDynamicFrame, text=paste("time",as.character(i)))))
-        
+
         #We need a list of Input Fields to be able to save the dynamic created tclVar's
         listOfInputFields.unequalTimes<<-c(listOfInputFields.unequalTimes,list(tclVar(as.character(t[i]))))
         listOfEntries.unequalTimes<<-c(listOfEntries.unequalTimes, list(tkentry(unEquallyDynamicFrame,width="11",textvariable=as.character(listOfInputFields.unequalTimes[[i]]))))
-                
+
         #put label with Input field
         tkgrid(listOfTimePointLabel.unequalTimes[[i]],listOfEntries.unequalTimes[[i]])
         tkgrid.configure(listOfTimePointLabel.unequalTimes[[i]],sticky="nw")
         tkgrid.configure(listOfEntries.unequalTimes[[i]],sticky="nw")
       }#end <--*for*
     #put frame
-    tkgrid(unEquallyDynamicFrame)  
+    tkgrid(unEquallyDynamicFrame)
     }#end <--*if*
-    
+
     else #equally spaced - remove all input fields cause they should disappear in the window
     {
       #fade out frame
       tkgrid.forget(unEquallyDynamicFrame)
-      
+
       for(i in 1:n)
       {
         #remove labels and input fields
@@ -177,18 +177,18 @@ tkgrid.remove(listOfTimePointLabel.unequalTimes[[i]],listOfEntries.unequalTimes[
         listOfEntries.unequalTimes<<-list()
     }
   }#end <--*function()*
-      
+
   ##############################################################
-  # function handles a click on checkbox for second time scale 
-  # 
+  # function handles a click on checkbox for second time scale
+  #
   # ATTENTION: this feature of a second time scale is currently NOT used!
   #
-  ##############################################################  
+  ##############################################################
   onCheckBoxSecondTimeScale <- function()
   {
     #second time scale used?
     secondTimeScaleIsUsedInput <- as.logical(as.numeric(tclvalue(secondTimeScaleIsUsedCheckBoxValue)))
-    
+
     # case unequally checkboxes - grid input fields with number of interim analyses into the frames
     if(secondTimeScaleIsUsedInput)
     {
@@ -196,11 +196,11 @@ tkgrid.remove(listOfTimePointLabel.unequalTimes[[i]],listOfEntries.unequalTimes[
       {
         #create label in a list thus we can dynamically change number of input fields
         listOfTimePointLabel.secondTimes<<-c(listOfTimePointLabel.secondTimes,list(tklabel(secondTimesDynamicFrame, text=paste("time",as.character(i)))))
-        
+
         #We need a list of Input Fields to be able to save the dynamic created tclVar's
         listOfInputFields.secondTimes<<-c(listOfInputFields.secondTimes,list(tclVar(as.character(t2[i]))))
         listOfEntries.secondTimes<<-c(listOfEntries.secondTimes, list(tkentry(secondTimesDynamicFrame,width="11",textvariable=as.character(listOfInputFields.secondTimes[[i]]))))
-                
+
         #put label with Input field
         tkgrid(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i]])
         tkgrid.configure(listOfTimePointLabel.secondTimes[[i]],sticky="nw")
@@ -209,12 +209,12 @@ tkgrid.remove(listOfTimePointLabel.unequalTimes[[i]],listOfEntries.unequalTimes[
     #put frame
     tkgrid(secondTimesDynamicFrame)
     }#end <--*if*
-    
+
     else #equally spaced - remove all input fields cause they should disappear in the window
     {
       #fade out frame
       tkgrid.forget(secondTimesDynamicFrame)
-      
+
       for(i in 1:n)
       {
 #remove labels and input fields
@@ -225,11 +225,11 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         listOfTimePointLabel.secondTimes<<-list()
         listOfEntries.secondTimes<<-list()
     }
-    
+
   }#end <--*onCheckBoxSecondTimeScale <- function()*
 
 
-  
+
   ####################################################################
   # functions handle a click on CONFIRM-Buttons to choose a function #
   ####################################################################
@@ -237,9 +237,9 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   {
     #check whether we got symmetric or asymmetric bounds
     BoundsSymmetry <<- as.numeric(tclvalue(SymmetryValue))
-        
+
     #get value from listbox and ask for additional parameters if necessary
-    if( BoundsSymmetry==1 || BoundsSymmetry==2)  
+    if( BoundsSymmetry==1 || BoundsSymmetry==2)
     {
       function1<<-as.numeric(tkcurselection(listBoxFunction1of1))+1
     }
@@ -247,13 +247,13 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
     {
       function1<<-as.numeric(tkcurselection(listBoxFunction1of2))+1
     }
-    
+
     #check whether user selected a function
     if( length(function1)==0 )
     {
-      tkmessageBox(message="You must select a function!",icon="error",type="ok") 
+      tkmessageBox(message="You must select a function!",icon="error",type="ok")
     }
-    
+
     else # handle select
     {
       ### ASYMMETRIC ###
@@ -261,18 +261,18 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
       {
         #first of all remove earlier input field
         tkgrid.remove(phiLabel1of2,entry.functionParameter1of2)
-     
+
         #case Power Family
         if (function1==3)
-        { 
+        {
           #set new label and input field
           phiLabel1of2<<-tklabel(additionalParametersFrame1of2,text="Enter Paramter phi>0:")
           entry.functionParameter1of2 <<-tkentry(additionalParametersFrame1of2,width="6",textvariable=phi1of2)
           tkgrid(phiLabel1of2,sticky="w")
           tkgrid(entry.functionParameter1of2,sticky="w")
         }
-     
-        #case Hwang-Shih-DeCani family 
+
+        #case Hwang-Shih-DeCani family
         else if (function1==4)
              {
                #set new label and input field
@@ -281,32 +281,32 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
                tkgrid(phiLabel1of2,sticky="w")
                tkgrid(entry.functionParameter1of2,sticky="w")
              }
-             #case no additional parameters needed 
+             #case no additional parameters needed
              else
              {
                #do nothing else
              }
       }#end <--*if(BoundsSymmetry==3)*
-    
-      else ### SYMMETRIC - do the same in other frame###     
+
+      else ### SYMMETRIC - do the same in other frame###
       {
         #first of all remove earlier input field
         tkgrid.remove(phiLabel1of1,entry.functionParameter1of1)
-    
+
         #get value from listbox and ask for additional parameters if necessary
-        functionInput1 <<- as.numeric(tkcurselection(listBoxFunction1of1))+1
-   
+        functionInput <<- as.numeric(tkcurselection(listBoxFunction1of1))+1
+
         #case Power Family
         if (function1==3)
-        { 
+        {
           #set new label and input field
           phiLabel1of1<<-tklabel(additionalParametersFrame1of1,text="Enter Paramter phi>0:")
           entry.functionParameter1of1 <<-tkentry(additionalParametersFrame1of1,width="6",textvariable=phi1of1)
           tkgrid(phiLabel1of1,sticky="w")
           tkgrid(entry.functionParameter1of1,sticky="w")
         }
-    
-        #case Hwang-Shih-DeCani family 
+
+        #case Hwang-Shih-DeCani family
         else if (function1==4)
              {
                #set new label and input field
@@ -321,39 +321,39 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
                #do nothing else
              }
       }#end <--*else ### SYMMETRIC - do the same in other frame###     *
-    }#end <--*else # handle select*     
+    }#end <--*else # handle select*
   }#end <--*onConfirmFunction1 <-function()*
-  
-  
-  
-  
+
+
+
+
   onConfirmFunction2 <-function()
   {
     #get value from listbox and ask for additional parameters if necessary
     function2<<-as.numeric(tkcurselection(listBoxFunction2of2))+1
-    
+
     #check whether user selected a function
     if( length(function2)==0 )
     {
-      tkmessageBox(message="You must have select a function!",icon="error",type="ok") 
+      tkmessageBox(message="You must have select a function!",icon="error",type="ok")
     }
-    
+
     else # handle select
     {
       #first of all remove earlier input field
       tkgrid.remove(phiLabel2of2,entry.functionParameter2of2)
-    
+
       #case Power Family
       if (function2==3)
-      { 
+      {
         #set new label and input field
         phiLabel2of2<<-tklabel(additionalParametersFrame2of2,text="Enter Paramter phi>0:")
         entry.functionParameter2of2 <<-tkentry(additionalParametersFrame2of2,width="6",textvariable=phi2of2)
         tkgrid(phiLabel2of2,sticky="w")
         tkgrid(entry.functionParameter2of2,sticky="w")
       }
-    
-      #case Hwang-Shih-DeCani family 
+
+      #case Hwang-Shih-DeCani family
       else if (function2==4)
            {
              #set new label and input field
@@ -367,10 +367,10 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
            {
              #do nothing else
            }
-    }#end <--*else # handle select*              
+    }#end <--*else # handle select*
   }#end <--*onConfirmFunction2 <-function()*
-  
-  
+
+
 
   ##################################################################
   # function handles a click on Radio Button for ASYMMETRIC BOUNDS #
@@ -379,7 +379,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   {
     #check whether we got asymmetric bounds
     BoundsSymmetry <<- as.numeric(tclvalue(SymmetryValue))
-    
+
     #Asymmetric Bounds!
     if( (BoundsSymmetry==1 || BoundsSymmetry==2) & boundBackup!=3)
     {
@@ -396,7 +396,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
                 #exchange frames
                 tkgrid.remove(symmetricBoundsFrame)
                 tkgrid(nonSymmetricBoundsFrame,sticky="nw")
-                
+
               }
   #update boundBackup
   boundBackup<<-BoundsSymmetry
@@ -407,10 +407,10 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   # function handles a click on Trunate Bounds Checkbox #
   #######################################################
   onTruncateCheckbox <- function()
-  { 
+  {
     #checkbox activated?
     truncateBoundsYesNo <<- as.logical(as.numeric(tclvalue(TruncateBoundsCheckBoxValue)))
-    
+
     if(truncateBoundsYesNo) #activated
     {
       ##grid edit box
@@ -422,21 +422,21 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
       tkgrid.forget(TruncateDynamicFrame)
     }
   }
-  
-  
+
+
   ##################################################
   # function handles a click on 'CALCULATE'-Button #
   ##################################################
   OnCalculateInputTask1 <- function()
   {
     readyForCalculate <- TRUE
-  
+
     #get values from checkboxes, listboxes and radiobuttons
     equallySpacedTimesInput <<- as.logical(as.numeric(tclvalue(equallySpacedTimesCheckBoxValue)))
     secondTimeScaleIsUsedInput <<- as.logical(as.numeric(tclvalue(secondTimeScaleIsUsedCheckBoxValue)))
     BoundsSymmetry <<- as.numeric(tclvalue(SymmetryValue))
     truncateBoundsYesNo <<- as.logical(as.numeric(tclvalue(TruncateBoundsCheckBoxValue)))
-    
+
     if(truncateBoundsYesNo)
     {
       TruncateBoundsInput <<- abs(as.numeric(tclvalue(boundsTruncation)))
@@ -445,7 +445,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
     {
       TruncateBoundsInput<-8
     }
-    
+
     #get chosen function(s) and check alpha
     ###################
     # case asymmetric #
@@ -454,15 +454,15 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
     {
       alpha1 <<- as.numeric(tclvalue(alpha1of2))
       alpha2 <<- as.numeric(tclvalue(alpha2of2))
-      
+
       #check alpha
       alphaAll<- alpha1 + alpha2
-      if( !(alpha1>=0 & alpha1<=1 & alpha2>=0 & alpha2<=1 & alphaAll<=1) ) 
+      if( !(alpha1>=0 & alpha1<=1 & alpha2>=0 & alpha2<=1 & alphaAll<=1) )
       {
         readyForCalculate<-FALSE
         tkmessageBox(message="Alpha out of range! Correct it and try again.",icon="error",type="ok")
       }
-      
+
       #check phi if entered as parameter
       phi1 <<- as.numeric(tclvalue(phi1of2))
       phi2 <<- as.numeric(tclvalue(phi2of2))
@@ -482,8 +482,8 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
                readyForCalculate<-FALSE
                tkmessageBox(message="Parameter phi in function for UPPER bounds may NOT be zero!",icon="error",type="ok")
              }
-        } 
-        
+        }
+
       #same with function for LOWER bounds
       if(function2==3)
       {
@@ -500,11 +500,11 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
                readyForCalculate<-FALSE
                tkmessageBox(message="Parameter phi in function for LOWER bounds may NOT be zero!",icon="error",type="ok")
              }
-        } 
-      
+        }
+
     }#end <--*if(BoundsSymmetry==3)*
-    
-    
+
+
     ##################
     # case symmetric #
     ##################
@@ -517,10 +517,10 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         readyForCalculate<-FALSE
         tkmessageBox(message="Alpha out of range! Correct it and try again.",icon="error",type="ok")
       }
-      
+
       #check phi if entered as parameter
       phi1 <<- as.numeric(tclvalue(phi1of1))
-      #what function used? 
+      #what function used?
       if(function1==3)
       {
         if( !(phi1>0) )
@@ -536,10 +536,10 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
                readyForCalculate<-FALSE
                tkmessageBox(message="Parameter phi in function may NOT be zero!",icon="error",type="ok")
              }
-        }   
+        }
     }
-    
-        
+
+
     ##if user typed in unequally spaced times - get them and
     ##check them to be in intervall(0,1] and in right order
     if(!equallySpacedTimesInput)
@@ -549,16 +549,16 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
       for(i in 1:n)
       {
         tempVal[i] <- as.numeric(tclvalue(listOfInputFields.unequalTimes[[i]]))
-        
+
         if (tempVal[i]<=0) { interimTimesBad<-TRUE }
         if (tempVal[i]>1) { interimTimesBad<-TRUE }
         if (i>1)
         {
           if (tempVal[i]<=tempVal[i-1]) { interimTimesBad<-TRUE }
         }
-      }#end <--*for(i in 1:n)* 
-      
-      ##if times are not good => error and keep old times 
+      }#end <--*for(i in 1:n)*
+
+      ##if times are not good => error and keep old times
         if(interimTimesBad)
         {
           readyForCalculate <- FALSE
@@ -569,8 +569,8 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         {
           t<<-tempVal
         }
-      
-    }#end <--*if(equallySpacedTimesInput)* 
+
+    }#end <--*if(equallySpacedTimesInput)*
     else
     {
      for(i in 1:n)
@@ -578,7 +578,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
        t[i]<<-i/n
      }
     }
-    
+
     ##if user typed in second time scales - get them and
     ##check them to be in intervall(0,1] and in right order
     if(secondTimeScaleIsUsedInput)
@@ -588,16 +588,16 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
       for(i in 1:n)
       {
         tempVal[i] <- as.numeric(tclvalue(listOfInputFields.secondTimes[[i]]))
-        
+
         if (tempVal[i]<=0) { secondTimesBad<-TRUE }
         if (tempVal[i]>1) { secondTimesBad<-TRUE }
         if (i>1)
         {
           if (tempVal[i]<=tempVal[i-1]) { secondTimesBad<-TRUE }
         }
-      }#end <--*for(i in 1:n)* 
-      
-      ##if times are not good => error and keep old times 
+      }#end <--*for(i in 1:n)*
+
+      ##if times are not good => error and keep old times
         if(secondTimesBad)
         {
           readyForCalculate <- FALSE
@@ -608,9 +608,9 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
         {
           t2<<-tempVal
         }
- 
-    }#end <--*if(secondTimeScaleIsUsedInput)*     
-    
+
+    }#end <--*if(secondTimeScaleIsUsedInput)*
+
     if(readyForCalculate)
     {
       # second time scale is not used so far --> set t2=t
@@ -623,27 +623,27 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
       tkmessageBox(message="Error - maybe you forgot to CONFIRM your function(s)",icon="error",type="ok")
     }
   }
-  
+
 
 
 #######################################################################################################
 #################------------------------------------------------------------------####################
 ##################  FROM HERE ON LABELS AND FRAMES ARE CREATED AND PUT TOGETHER   #####################
 #################------------------------------------------------------------------####################
-#######################################################################################################  
-  
+#######################################################################################################
+
   #Set Toplevel
   task1 <- tktoplevel(taskWindow)
   tkwm.title(task1,"-1- Compute Bounds")
-  
+
   #Define main Frame
   InputTask1 <- tkframe(task1, relief="groove",borderwidth=2)
-  
-  
+
+
   ##--------------------------------------------------------------------------------##
   ##------------------------  number of Interim Times  -----------------------------##
   ##--------------------------------------------------------------------------------##
- 
+
   #create pull down menu to select interim analyses from n==1 to n==25(=nMax)
   topMenu <- tkmenu(task1)
   tkconfigure(task1,menu=topMenu)
@@ -674,38 +674,38 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkadd(nMenu,"command",label="24",command=function() onChangeInterimAnalyses(24))
   tkadd(nMenu,"command",label="25",command=function() onChangeInterimAnalyses(25))
   tkadd(topMenu,"cascade",label=paste("#Interim Times: K= ",as.character(n)),menu=nMenu)
-  
+
   tkgrid(tklabel(InputTask1,text="")) # Blank line
-   
-    
+
+
   ##--------------------------------------------------------------------------------##
   ##-------------  Interim Times equally or unequally spaced? ----------------------##
   ##-------------       Second Time Scale will be used?       ----------------------##
   ##--------------------------------------------------------------------------------##
-  
+
   ## prepare Frames
-  interimTimesFrame<- tkframe(InputTask1,relief="groove",borderwidth=0)   
-  equallySpacedTimesFrame <- tkframe(interimTimesFrame,relief="groove",borderwidth=0)   
+  interimTimesFrame<- tkframe(InputTask1,relief="groove",borderwidth=0)
+  equallySpacedTimesFrame <- tkframe(interimTimesFrame,relief="groove",borderwidth=0)
   secondTimesFrame <- tkframe(interimTimesFrame,relief="groove",borderwidth=0)
-    
-  #again we need a frame for dynamic working in it to not affect 
+
+  #again we need a frame for dynamic working in it to not affect
   #the format of 'equallySpacedTimesFrame' respective 'secondTimesFrame'
   equallySpacedLabelFrame<-tkframe(equallySpacedTimesFrame,relief="groove",borderwidth=0)
   unEquallyDynamicFrame<-tkframe(equallySpacedTimesFrame,relief="groove",borderwidth=0)
   secondTimesLabelFrame<-tkframe(secondTimesFrame,relief="groove",borderwidth=0)
   secondTimesDynamicFrame<-tkframe(secondTimesFrame,relief="groove",borderwidth=0)
-  
+
   #Default is Equally Spaced Times and no Second Time Scale
   #create Checkboxes
   #equally spaced
-  equallySpacedTimesCheckBox<-tkcheckbutton(equallySpacedLabelFrame,command=onCheckBoxEquallySpacedTimes) 
+  equallySpacedTimesCheckBox<-tkcheckbutton(equallySpacedLabelFrame,command=onCheckBoxEquallySpacedTimes)
   equallySpacedTimesCheckBoxValue <- tclVar(as.character(as.numeric(equallySpacedTimesInput)))
   tkconfigure(equallySpacedTimesCheckBox,variable=equallySpacedTimesCheckBoxValue)
   #second time scale
   secondTimeScaleIsUsedCheckBox<-tkcheckbutton(secondTimesLabelFrame,command=onCheckBoxSecondTimeScale)
   secondTimeScaleIsUsedCheckBoxValue <- tclVar(as.character(as.numeric(secondTimeScaleIsUsedInput)))
   tkconfigure(secondTimeScaleIsUsedCheckBox,variable=secondTimeScaleIsUsedCheckBoxValue)
-  
+
   #put checkbox and other frames togehter
   equallyTimesBoxLabel<-tklabel(equallySpacedLabelFrame,text="Equally Spaced Times")
   secondTimesBoxLabel<-tklabel(secondTimesLabelFrame,text="Use Second Time Scale")
@@ -718,12 +718,12 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkgrid(secondTimesDynamicFrame,sticky="nw")
   tkgrid(interimTimesFrame,sticky="w")
   tkgrid(tklabel(InputTask1,text="")) # Blank line
-   
+
   ###One- or Two-Sided Bounds or asymmetric Bounds###
   #create frames
   boundsLabelFrame <- tkframe(InputTask1,relief="groove",borderwidth=0)
   boundsRadioButtonFrame <- tkframe(InputTask1,relief="groove",borderwidth=0)
-  
+
   #create radio buttons
   oneSided <- tkradiobutton(boundsRadioButtonFrame,command=onBoundsChosen)
   twoSided <- tkradiobutton(boundsRadioButtonFrame,command=onBoundsChosen)
@@ -732,19 +732,19 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkconfigure(oneSided,variable=SymmetryValue,value="1")
   tkconfigure(twoSided,variable=SymmetryValue,value="2")
   tkconfigure(asymmetric,variable=SymmetryValue,value="3")
-  
+
   #grid labels and buttons together
   tkgrid(tklabel(boundsLabelFrame,text="One-, Two-Sided-Symmetric or Asymmetric Bounds?"),sticky="w")
   tkgrid(tklabel(boundsRadioButtonFrame,text="One-Sided "),oneSided)
   tkgrid(tklabel(boundsRadioButtonFrame,text="Two-Sided "),twoSided)
   tkgrid(tklabel(boundsRadioButtonFrame,text="Asymmetric "),asymmetric)
-  
+
   #put frames
   tkgrid(boundsLabelFrame,sticky="w")
   tkgrid(boundsRadioButtonFrame,sticky="w")
   tkgrid(tklabel(InputTask1,text="")) # Blank line
-  
-  
+
+
 
   ### Significance Level(s) alpha and function(s) to be used to calculate bounds###
   ## if user choses asymmetric bounds two different functions could be used ##
@@ -752,12 +752,12 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   alphaAndFunctionsFrame<-tkframe(InputTask1,relief="groove",borderwidth=0)
   symmetricBoundsFrame<-tkframe(alphaAndFunctionsFrame,relief="groove",borderwidth=0)
   nonSymmetricBoundsFrame<-tkframe(alphaAndFunctionsFrame,relief="groove",borderwidth=0)
-  
+
   ##Default alpha1==0.05, alpha2==0.025
   alpha1of1 <- tclVar(as.character(alphaInput))
   alpha1of2 <- tclVar(as.character("0.025"))
   alpha2of2 <- tclVar(as.character("0.025"))
-  
+
   #########################################################
   ### case symmetric bounds or one-sided test (default) ###
   #########################################################
@@ -765,11 +765,11 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   alphaFrame1of1 <- tkframe(symmetricBoundsFrame,relief="groove",borderwidth=0)
   functionsFrame1of1 <- tkframe(symmetricBoundsFrame,relief="groove",borderwidth=0)
   additionalParametersFrame1of1<-tkframe(symmetricBoundsFrame,relief="groove",borderwidth=0)
-  
+
   ##create Labels for alpha
   alphaLabel1of1<-tklabel(alphaFrame1of1,text="Significance Level: alpha=")
   entry.alpha1of1 <-tkentry(alphaFrame1of1,width="6",textvariable=alpha1of1)
-  
+
   #create Listbox for function choice
   functionLabel1of1<-tklabel(functionsFrame1of1,text="What function should be used?")
   listBoxFunction1of1<-tklistbox(functionsFrame1of1,height=5,width=30,selectmode="single",background="grey")
@@ -780,38 +780,38 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
     tkinsert(listBoxFunction1of1,"end",functionChoice1of1[i])
   }
   tkselection.set(listBoxFunction1of1, functionInput-1)  # Default function is O'Brien-Fleming Type.  Indexing starts at zero.
-    
+
   #create and put button to confirm a function because for example in case of 'Power family: alpha* t^phi'
   #user has to enter additional parameter 'phi'
   confirmFun.button1of1 <-tkbutton(functionsFrame1of1,text=" CONFIRM FUNCTION ",command=onConfirmFunction1)
-  
+
   #create variable for edit box which we will need if additional parameters must be entered
   #edit box is unvisible at beginning since default function O'Brien-Fleming Type does not need any additional parameters
   phi1of1 <- tclVar(as.character(phi1))
   phiLabel1of1<-tklabel(additionalParametersFrame1of1,text="")
   entry.functionParameter1of1 <-tkentry(additionalParametersFrame1of1,width="3",textvariable=phi1of1)
-  
+
   #grid together
   #alpha
   tkgrid(alphaLabel1of1,entry.alpha1of1)
   tkgrid.configure(alphaLabel1of1,sticky="w")
   tkgrid.configure(entry.alpha1of1,sticky="w")
   tkgrid(tklabel(alphaFrame1of1,text="")) # Blank line
-  tkgrid(functionLabel1of1,sticky="w") 
+  tkgrid(functionLabel1of1,sticky="w")
   tkgrid(listBoxFunction1of1)
-    
+
   #put frames and button
   tkgrid(alphaFrame1of1,sticky="w")
   tkgrid(functionsFrame1of1,additionalParametersFrame1of1)
   tkgrid(confirmFun.button1of1)
   tkgrid.configure(functionsFrame1of1,sticky="w")
   tkgrid(tklabel(symmetricBoundsFrame,text="")) # Blank line
-  
+
   #Finally grid frame for symmetric case as default
   tkgrid(symmetricBoundsFrame,sticky="nw")
   tkgrid(alphaAndFunctionsFrame,sticky="w")
-  
-  
+
+
   ##############################
   ### case Asymmetric bounds ###
   ##############################
@@ -822,14 +822,14 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   alphaFrame2of2 <- tkframe(nonSymmetricBoundsFrame,relief="groove",borderwidth=0)
   functionsFrame2of2 <- tkframe(nonSymmetricBoundsFrame,relief="groove",borderwidth=0)
   additionalParametersFrame2of2<-tkframe(nonSymmetricBoundsFrame,relief="groove",borderwidth=0)
-  
+
   ##create Labels for alpha
   alphaLabel1of2<-tklabel(alphaFrame1of2,text="UPPER Bounds: alpha=")
   entry.alpha1of2 <-tkentry(alphaFrame1of2,width="6",textvariable=alpha1of2)
-  
+
   alphaLabel2of2<-tklabel(alphaFrame2of2,text="LOWER Bounds: alpha=")
   entry.alpha2of2 <-tkentry(alphaFrame2of2,width="6",textvariable=alpha2of2)
-  
+
   #create Listboxes for function choice
   #################
   # List Box 1of2 #
@@ -842,14 +842,14 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   {
     tkinsert(listBoxFunction1of2,"end",functionChoice1of2[i])
   }
-     
+
   #create and put first Confirm button which "commands" same function as in symmetric case did
   confirmFun.button1of2 <-tkbutton(functionsFrame1of2,text=" CONFIRM FUNCTION ",command=onConfirmFunction1)
   #edit box for parameter phi[1]
   phi1of2 <- tclVar(as.character(phi1))
   phiLabel1of2<-tklabel(additionalParametersFrame1of2,text="")
   entry.functionParameter1of2 <-tkentry(additionalParametersFrame1of2,width="3",textvariable=phi1of2)
-  
+
   #################
   # List Box 2of2 #
   #################
@@ -861,63 +861,63 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   {
     tkinsert(listBoxFunction2of2,"end",functionChoice2of2[i])
   }
-      
-  #create and put first Confirm button 
+
+  #create and put first Confirm button
   confirmFun.button2of2 <-tkbutton(functionsFrame2of2,text=" CONFIRM FUNCTION ",command=onConfirmFunction2)
-  
+
   #edit box for parameter phi[2]
   phi2of2 <- tclVar(as.character(phi2))
   phiLabel2of2<-tklabel(additionalParametersFrame2of2,text="")
   entry.functionParameter2of2 <-tkentry(additionalParametersFrame2of2,width="3",textvariable=phi2of2)
-  
+
   #grid together
-  
+
   #1of2
   tkgrid(alphaLabel1of2,entry.alpha1of2)
   tkgrid.configure(alphaLabel1of2,sticky="w")
   tkgrid.configure(entry.alpha1of2,sticky="w")
-  tkgrid(functionLabel1of2,sticky="w") 
+  tkgrid(functionLabel1of2,sticky="w")
   tkgrid(listBoxFunction1of2)
-    
+
   #put frames and button
   tkgrid(alphaFrame1of2,sticky="w")
   tkgrid(functionsFrame1of2,additionalParametersFrame1of2)
   tkgrid(confirmFun.button1of2)
   tkgrid.configure(functionsFrame1of2,sticky="w")
   tkgrid(tklabel(nonSymmetricBoundsFrame,text="")) # Blank line
-  
-  
+
+
   #2of2
   tkgrid(alphaLabel2of2,entry.alpha2of2)
   tkgrid.configure(alphaLabel2of2,sticky="w")
   tkgrid.configure(entry.alpha2of2,sticky="w")
-  tkgrid(functionLabel2of2,sticky="w") 
-  tkgrid(listBoxFunction2of2)  
-    
+  tkgrid(functionLabel2of2,sticky="w")
+  tkgrid(listBoxFunction2of2)
+
   #put frames and button
   tkgrid(alphaFrame2of2,sticky="w")
   tkgrid(functionsFrame2of2,additionalParametersFrame2of2)
   tkgrid(confirmFun.button2of2)
   tkgrid.configure(functionsFrame2of2,sticky="w")
   tkgrid(tklabel(nonSymmetricBoundsFrame,text="")) # Blank line
- 
-  ################################################################# 
+
+  #################################################################
 
   ###Truncate Bounds?###
   TruncateBoundsFrame <- tkframe(InputTask1,relief="groove",borderwidth=0)
   TruncateLabelFrame <- tkframe(TruncateBoundsFrame,relief="groove",borderwidth=0)
   TruncateDynamicFrame <-tkframe(TruncateBoundsFrame,relief="groove",borderwidth=0)
-  
+
   #create checkbox
   TruncateBoundsCheckBox<-tkcheckbutton(TruncateLabelFrame,command=onTruncateCheckbox)
   TruncateBoundsCheckBoxValue <- tclVar(as.character(as.numeric(truncateBoundsYesNo)))
   tkconfigure(TruncateBoundsCheckBox,variable=TruncateBoundsCheckBoxValue)
-  
-  #create variable for edit box which we will need if user wants truncation of bounds - 
+
+  #create variable for edit box which we will need if user wants truncation of bounds -
   boundsTruncation <- tclVar(as.character(TruncateBoundsInput))
   boundsTruncationLabel<-tklabel(TruncateDynamicFrame,text="Enter Truncation Point:")
   entry.truncationValue <-tkentry(TruncateDynamicFrame,width="3",textvariable=boundsTruncation)
-    
+
   #put frames
   tkgrid(tklabel(TruncateLabelFrame,text="Truncate Standardized Bounds?"),TruncateBoundsCheckBox)
   tkgrid(boundsTruncationLabel,entry.truncationValue,sticky="w")
@@ -925,13 +925,13 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
   tkgrid(TruncateBoundsFrame,sticky="w")
   tkgrid.forget(TruncateDynamicFrame) #default is no Truncating
   tkgrid(tklabel(InputTask1,text="")) # Blank line
-  
+
   ##put Overall Frame
   tkgrid(InputTask1)
-  
+
   #frame for the buttons
   buttonFrame<-tkframe(task1,relief="groove",borderwidth=0)
-  
+
   #create and put button for calculating
   calculate.button <-tkbutton(buttonFrame,text=" CALCULATE ",command=OnCalculateInputTask1)
 
@@ -941,7 +941,7 @@ tkgrid.remove(listOfTimePointLabel.secondTimes[[i]],listOfEntries.secondTimes[[i
    tkdestroy(task1)
   }
   cancel.button <-tkbutton(buttonFrame,text=" Cancel ",command=onCancel)
-  
+
   # grid buttons
   tkgrid( tklabel(buttonFrame, text=""))   #blank line
   tkgrid(calculate.button, tklabel(buttonFrame, text="            "),
