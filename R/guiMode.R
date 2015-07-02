@@ -1,7 +1,7 @@
 "guiMode" <-
 function()
 {
-  require(tcltk)
+  #requireNamespace(tcltk)
   backupScipen <- options(scipen=10)[[1]]
 
   taskWindow<-tktoplevel()
