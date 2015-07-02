@@ -2,20 +2,20 @@
 function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max,
          lowerBounds,upperBounds,probStopping,probExceedingUpper,probExceedingLower, confidenceLevel,
          BoundsSymmetry,enterBoundsManually,alpha,phi,spendingFunctionUsed, taskWindow)
-         
+
 {
   ###INITIALiZE VARIABLES###
   resultExitProb<-0 #exit probability
   cumulativeExitProb<-0 #cumulative exit probability
   FunctionNames=NULL;
   FunctionNamesUpper=NULL;
-  FunctionNamesLower=NULL;    
-  
+  FunctionNamesLower=NULL;
+
   ##compute exit probability and cumulative exit probability
   for(i in 1:K)
   {
     resultExitProb[i] <- probExceedingUpper[i]+probExceedingLower[i]
-    
+
     if(i==1)
     {
       cumulativeExitProb[i] <- resultExitProb[i]
@@ -23,17 +23,17 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
     else
     {
       cumulativeExitProb[i] <- cumulativeExitProb[i-1] + resultExitProb[i]
-    } 
+    }
   }
-  
-  
+
+
   #Set Toplevel
   outTask2Toplevel <- tktoplevel(taskWindow)
   tkwm.title(outTask2Toplevel,paste("-2-   K =",K,", drift =",round(drift,digits=5),", Power=",confidenceLevel))
-  
+
   #Define main Frame
   OutputTask2 <- tkframe(outTask2Toplevel)
-  
+
   #Define subframes
   staticFrame <- tkframe(OutputTask2,relief="groove",borderwidth=0)
   dynamicFrame <- tkframe(OutputTask2,relief="groove",borderwidth=0)
@@ -45,8 +45,8 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   upperBoundsFrame <- tkframe(dynamicFrame,relief="groove",borderwidth=2)
   exitProbabilityFrame <- tkframe(dynamicFrame,relief="groove",borderwidth=2)
   cumulativeExitProbFrame <- tkframe(dynamicFrame,relief="groove",borderwidth=2)
-  
- 
+
+
   #create label with parameter values:
   tkgrid( tklabel(parametersFrame, text=paste("K =",K)),sticky="w")
   if(!enterBoundsManually)
@@ -59,32 +59,32 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
     {
       tkgrid( tklabel(parametersFrame, text=paste("alpha - Upper Bounds =",alpha[1])),sticky="w")
       tkgrid( tklabel(parametersFrame, text=paste("alpha - Lower Bounds =",alpha[2])),sticky="w")
-    
+
     }
   }
-  
+
   if(!BoundsSymmetry==3)
   {
     if(enterBoundsManually)
     {
-      tkgrid( tklabel(parametersFrame, text="manually entered Bounds"),sticky="w") 
+      tkgrid( tklabel(parametersFrame, text="manually entered Bounds"),sticky="w")
     }
     else
     {
       ##names of spending functions that could have been used
       FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[1],sep=""),
                        paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
-                       
-      # substitute according funtion in output                 
-      tkgrid( tklabel(parametersFrame, text=paste("Function: ",FunctionNames[spendingFunctionUsed[1]])),sticky="w") 
+
+      # substitute according funtion in output
+      tkgrid( tklabel(parametersFrame, text=paste("Function: ",FunctionNames[spendingFunctionUsed[1]])),sticky="w")
     }
   }
   else
-  { 
+  {
     if(enterBoundsManually)
     {
       tkgrid( tklabel(parametersFrame, text="Upper Bounds: manually entered "),sticky="w")
-      tkgrid( tklabel(parametersFrame, text="Lower Bounds: manually entered "),sticky="w")      
+      tkgrid( tklabel(parametersFrame, text="Lower Bounds: manually entered "),sticky="w")
     }
     else
     {
@@ -92,24 +92,24 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
       FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[1],sep=""),
                               paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
       FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: alpha*t^",phi[2],sep=""),
-                              paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds") 
+                              paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds")
 
       # substitute according funtion in output
       tkgrid( tklabel(parametersFrame, text=paste("Function - Upper Bounds: ",FunctionNamesUpper[spendingFunctionUsed[1]])),sticky="w")
-      tkgrid( tklabel(parametersFrame, text=paste("Function - Lower Bounds: ",FunctionNamesLower[spendingFunctionUsed[2]])),sticky="w")      
+      tkgrid( tklabel(parametersFrame, text=paste("Function - Lower Bounds: ",FunctionNamesLower[spendingFunctionUsed[2]])),sticky="w")
 
     }
   }
 
   #drift parameters
-  tkgrid( tklabel(parametersFrame, text=""),sticky="w") #blank line 
-  tkgrid( tklabel(parametersFrame, text=paste("drift=",round(drift,digits=5))),sticky="w") 
+  tkgrid( tklabel(parametersFrame, text=""),sticky="w") #blank line
+  tkgrid( tklabel(parametersFrame, text=paste("drift=",round(drift,digits=5))),sticky="w")
   if(t2max!=0)
   {
     tkgrid( tklabel(parametersFrame, text=paste("Maximum Information =",t2max)),sticky="w")
   }
   tkgrid( tklabel(parametersFrame, text=paste("Power =",confidenceLevel)),sticky="w")
-  tkgrid( tklabel(parametersFrame, text=""),sticky="w") #blank line 
+  tkgrid( tklabel(parametersFrame, text=""),sticky="w") #blank line
 
 
   #create head labels
@@ -124,7 +124,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   #create labels with results
   for(i in 1:K)
   {
-    tkgrid( tklabel(numbersFrame, text=as.character(i)),sticky="w")  
+    tkgrid( tklabel(numbersFrame, text=as.character(i)),sticky="w")
     tkgrid( tklabel(timesFrame, text=as.character(round(t[i],digits=3))),sticky="w")
     tkgrid( tklabel(secondTimesFrame, text=as.character(round(t2[i],digits=3))),sticky="w")
     tkgrid( tklabel(lowerBoundsFrame, text=as.character(round(lowerBounds[i],digits=4))),sticky="w")
@@ -146,17 +146,17 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   }
   tkgrid(staticFrame,sticky="w")
   tkgrid(dynamicFrame,sticky="w")
-  
 
-  ###########################################################################  
+
+  ###########################################################################
  ## function handles click onto button to show results of bounds in a graph ##
   ###########################################################################
   onShowGraph <- function()
-  {  
-  
+  {
+
     if(enterBoundsManually)
     {
-      ## if one-Sided-Test we won´t see negative Z-Values
+      ## if one-Sided-Test we won't see negative Z-Values
       if(BoundsSymmetry==1)
       {
         xCoordinate<-t
@@ -188,10 +188,10 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
         lines(t,upperBounds,col="blue")
       }
     }# endif 'if(enterBoundsManually)'
-  
-    else # spending function was used 
+
+    else # spending function was used
     {
-      ## if one-Sided-Test we won´t see negative Z-Values
+      ## if one-Sided-Test we won't see negative Z-Values
       if(BoundsSymmetry==1)
       {
         xCoordinate<-t
@@ -229,36 +229,36 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
              pch=21,bg="green",font=4,font.axis=4,font.lab=4,font.main=4, cex.main=0.9,
              xlab="Times",ylab="Standardized Z-Value",ylim=c(-4,4))
          }
-         
+
          ##...then add lines between them
          lines(t,lowerBounds,col="blue")
          lines(t,upperBounds,col="blue")
-          
+
       }
-    }  
+    }
   }
-  
-  ################################################################## 
+
+  ##################################################################
   ## function handles click onto button to save results in a file ##
   ##################################################################
   onSave <- function()
   {
-     #create file variable  
+     #create file variable
      fileName <- tclvalue(tkgetSaveFile(initialfile=".html",filetypes="{{html Files} {.html}} {{All files} *}"))
      if (fileName=="") return;
-     
+
      #open file
      zz <- file(fileName,"w")
-     
+
      #output will be writed in HTML
      cat("<html> <body> \n",file = zz)
-     
+
      #output K
      cat("K=",K,"<br> \n",file = zz)
-     
+
      ##ouput alpha
      if(!enterBoundsManually)
-     {     
+     {
        if(!BoundsSymmetry==3)
        {
          cat("&alpha; =",alpha[1],"<br>\n",file = zz)
@@ -267,9 +267,9 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
        {
          cat("Upper &alpha; = ",alpha[1],"<br>\n",file = zz)
          cat("Lower &alpha; = ",alpha[2],"<br>\n",file = zz)
-       } 
+       }
      }
-     
+
      if(!BoundsSymmetry==3)
      {
        if(enterBoundsManually)
@@ -281,13 +281,13 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
          ##output names of spending functions that were used
          FunctionNames <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
                             paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
-       
+
          # substitute according funtion in output
          cat("<b>",FunctionNames[spendingFunctionUsed[1]],"</b>"," was used as spending Function.","<br>\n",file = zz)
        }
      }
      else
-     {       
+     {
        if(enterBoundsManually)
        {
          cat("UPPER Bounds: <b>manually entered</b> <br>\n",file = zz)
@@ -299,14 +299,14 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
          FunctionNamesUpper <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[1],"</sup>"),
                            paste("Hwang-Shih-DeCani Family ( phi =",phi[1],")"),"Exact Pocock Bounds")
          FunctionNamesLower <- c("O'Brien-Fleming Type","Pocock Type",paste("Power Family: &alpha;&sdot;t<sup>",phi[2],"</sup>"),
-                           paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds")                      
-       
-         # substitute according funtion in output                     
+                           paste("Hwang-Shih-DeCani Family ( phi =",phi[2],")"),"Exact Pocock Bounds")
+
+         # substitute according funtion in output
          cat("Spending Function for UPPER Bound:","<b>",FunctionNamesUpper[spendingFunctionUsed[1]],"</b>","<br>\n",file = zz)
          cat("Spending Function for LOWER Bound:","<b>",FunctionNamesLower[spendingFunctionUsed[2]],"</b>","<br>\n",file = zz)
        }
-     } 
-    
+     }
+
      #drift parameters
      cat("drift=",round(drift,digits=5),"<br> \n",file=zz)
      if(t2max!=0)
@@ -314,8 +314,8 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
        cat("Maximum Information=",t2max,"<br> \n",file=zz)
      }
      cat("Power=",confidenceLevel,"<br><br> \n",file=zz)
-     
-     
+
+
      ##output the bounds
      #labels
      cat("<br>\n",file = zz)
@@ -326,18 +326,18 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
      cat("<td>Lower Bounds &#160</td>  <td>Upper Bounds &#160</td> \n",file = zz)
      cat("<td>Exit Probability &#160</td>  <td>Cumulative Exit Prob. &#160</td> \n",file = zz)
      cat("</tr> \n",file = zz)
-     
+
      #values
      for(i in 1:K)
      {
        cat("<tr> \n",file = zz)
-       cat("<td>",round(t[i],digits=3),"</td> \n",file = zz ) 
+       cat("<td>",round(t[i],digits=3),"</td> \n",file = zz )
        if(secondTimeScaleIsUsed) { cat("<td>",round(t2[i],digits=3),"</td> \n",file = zz ) }
-       cat("<td>",round(lowerBounds[i],digits=4),"</td>",   "<td>",round(upperBounds[i],digits=4),"</td>", 
+       cat("<td>",round(lowerBounds[i],digits=4),"</td>",   "<td>",round(upperBounds[i],digits=4),"</td>",
            "<td>",round(resultExitProb[i],digits=10),"</td>",   "<td>",round(cumulativeExitProb[i],digits=10),"</td> \n",file = zz )
-       cat("</tr> \n",file = zz)    
+       cat("</tr> \n",file = zz)
      }
-     
+
      cat("</table> \n",file = zz)
      cat("</body> </html> \n",file = zz)
      close(zz)
@@ -350,13 +350,13 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   {
    tkdestroy(outTask2Toplevel)
   }
-  
+
   #frame for the buttons
   buttonFrame<-tkframe(OutputTask2,relief="groove",borderwidth=0)
 
   #button to show graphic
   showGraph.button <-tkbutton(buttonFrame,text="  Show Graph  ",command=onShowGraph)
-    
+
   #button to save in file
   save.button <-tkbutton(buttonFrame,text="  Save to File  ",command=onSave)
 
@@ -364,16 +364,16 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   cancel.button <-tkbutton(buttonFrame,text="  Cancel   ",command=onCancel)
 
   #grid buttons
-  tkgrid( tklabel(buttonFrame, text=""))   #blank line  
+  tkgrid( tklabel(buttonFrame, text=""))   #blank line
   tkgrid(showGraph.button,tklabel(buttonFrame, text="            "),
          save.button, tklabel(buttonFrame, text="            "),
          cancel.button, sticky="we")
   tkgrid(buttonFrame)
   tkgrid( tklabel(buttonFrame, text=""))   #blank line
-  
+
   #grid allover frame and focus
   tkgrid(OutputTask2,sticky="w")
   tkfocus(outTask2Toplevel)
-     
-   
+
+
 }#end <--*function(...)*

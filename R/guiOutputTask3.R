@@ -155,7 +155,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   {
     if(enterBoundsManually)
     {
-      ## if one-Sided-Test we won´t see negative Z-Values
+      ## if one-Sided-Test we won't see negative Z-Values
       if(BoundsSymmetry==1)
       {
         xCoordinate<-t
@@ -190,7 +190,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
 
     else # spending function was used
     {
-    ## if one-Sided-Test we won´t see negative Z-Values
+    ## if one-Sided-Test we won't see negative Z-Values
       if(BoundsSymmetry==1)
       {
         xCoordinate<-t

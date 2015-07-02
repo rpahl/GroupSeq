@@ -2,14 +2,14 @@
 function(n,alpha,t,lowerBounds,upperBounds,probDifference,probExit,symmetricBoundsYesNo,spendingFunctionUsed)
 {
     cat("", "\n")
-    cat("", "\n")  
+    cat("", "\n")
     cat("#################################", "\n")
     cat("#                               #", "\n")
     cat("# Output of the computed Bounds #", "\n")
     cat("#                               #", "\n")
     cat("#################################", "\n")
     cat("", "\n")
-    cat("", "\n")        
+    cat("", "\n")
     cat("number of interim analyses =",n,"\n")
 
     ##ouput alpha
@@ -32,7 +32,7 @@ function(n,alpha,t,lowerBounds,upperBounds,probDifference,probExit,symmetricBoun
       cat("","\n")
     }
     else
-    {       
+    {
       cat("Spending Function for UPPER Bound:",FunctionNames[spendingFunctionUsed[1]],"\n")
       cat("Spending Function for LOWER Bound:",FunctionNames[spendingFunctionUsed[2]],"\n")
       cat("","\n")

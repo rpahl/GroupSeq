@@ -6,8 +6,8 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
 
   ##Initialize tolerance for result - that implies our accuracy
   tolerance<-1.0e-07
-  
-    
+
+
     ##---------------------------------------------------------------------##
     ##---- first use the "Sekanten-Verfahren" based on Newton Iteration ---##
     ##---------------------------------------------------------------------##
@@ -21,7 +21,7 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
     ##   k+1     f(x ) - f(x   )        k      ##
     ##              k       k-1                ##
 
-    
+
     ## Initialize values
     newtonFailed <- FALSE
 
@@ -30,15 +30,15 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
     ##--------------------
     xkMinusOne <- upperIntegrationLimit[i-1]
     fxkMinusOne <- abs(tailProbability(xkMinusOne, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)-probDifference)
-    
+
     ## choose start point for iteration
-    ## the more interim analysis we have the closer we choose our startpoint to upperIntegrationLimit[i-1] 
+    ## the more interim analysis we have the closer we choose our startpoint to upperIntegrationLimit[i-1]
     ## which is done by (xkMinusOne-epsilon)
-    
+
     ## this choice leads to an average number of about 4 iterations to converge -
     ## in case of equally spaced interim analysis it is mostly even better leading to about 3 iterations
-    
-    ## in spite of that i would be fine with better choices 
+
+    ## in spite of that i would be fine with better choices
     ## if the Reader knows how to choose them
 
     ## if we got very many interim analysis we have to limit our epsilon
@@ -50,26 +50,26 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
     {
       epsilon <- 10^(-numberOfInterimAnalysis)
     }
- 
+
     ##set x  and f(x )
     ##     k        k
     ##----------------
     xk <- xkMinusOne-epsilon
-    fxk <- abs(tailProbability(xk, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)-probDifference) 
-                
+    fxk <- abs(tailProbability(xk, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)-probDifference)
+
     numberOfLoops<-0
 
 ###########################################################################
 ########################### BEGIN SEARCHING ###############################
 ###########################################################################
 
-    ## We do 20 iterations maximally - 
-    ## if we do not have finished then, we won´t have convergence at all
+    ## We do 20 iterations maximally -
+    ## if we do not have finished then, we won't have convergence at all
     for (j in 1:20)
     {
       numberOfLoops <- j
-                
-      ## get new xkPlusOne like shown above    
+
+      ## get new xkPlusOne like shown above
       xkPlusOne <- xk - ( (xk - xkMinusOne)/(fxk - fxkMinusOne) * fxk )
 
       ##catch xkPlusOne is not defined for any reason for example if (fxk-fxkMinusOne == 0)
@@ -87,7 +87,7 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
       }
 
       ##calculate new fxkPlusOne
-      fxkPlusOne <- abs(tailProbability(xkPlusOne, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)-probDifference)                   
+      fxkPlusOne <- abs(tailProbability(xkPlusOne, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)-probDifference)
 
 
       ## check if we reached tolerance
@@ -100,8 +100,8 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
       }
       else
       {
-        ## not within tolerance yet - set new values and do next iteration 
-        xkMinusOne<- xk 
+        ## not within tolerance yet - set new values and do next iteration
+        xkMinusOne<- xk
         fxkMinusOne <- fxk
 
         xk <- xkPlusOne
@@ -109,29 +109,29 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
       }
     }#end <--*for (j in 1:20)*
 
-    ##If all 20 loops were made, something must be wrong - 
+    ##If all 20 loops were made, something must be wrong -
     ##therefore we try old method from Fortran Implementation
-    if (numberOfLoops==20)  
-    {    
+    if (numberOfLoops==20)
+    {
       newtonFailed <- TRUE
-    }      
+    }
 
 ###########################################################################
 ########### Old Implementation - usually it should NOT be used ############
 ###########################################################################
 
 
-  ##"Sekanten-Verfahren" failed - so we try old conservative method  
+  ##"Sekanten-Verfahren" failed - so we try old conservative method
   if(newtonFailed)
   {
     searchingWithOldMethod <- TRUE
-  
+
     ##Initialize variables and values
     numberOfLoops<-0
-      
+
     ##Initialize estimates at previous integration limit.
-    uppr <- upperIntegrationLimit[i-1]      
-      
+    uppr <- upperIntegrationLimit[i-1]
+
     ##Initialize step size.
     del<-10.0
 
@@ -157,12 +157,12 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
        else if (q>(probDifference+tolerance))
        {
          ##count for-loops for the purpose of controlling convergence
-         numberOfLoops<-0     
+         numberOfLoops<-0
 
          ##Reduce step size by factor of 10.
-         del <- del/10 
-   
-         ##Increase uppr by del... 
+         del <- del/10
+
+         ##Increase uppr by del...
          for (j in 1:50)
          {
            numberOfLoops <- numberOfLoops + 1
@@ -171,11 +171,11 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
            #...and check whether q is near probDifference.
            q <- tailProbability(uppr, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)
 
-           if (q<=(probDifference+tolerance)) 
+           if (q<=(probDifference+tolerance))
            {
              break ##leave the for-loop and do another *while(stillSearching)*-loop
-           } 
-             
+           }
+
            #If many iterations do not converge, print warning after each 10 loops.
            if ((j %% 10) == 0)
            {
@@ -185,13 +185,13 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
            }
          }#end <--*for*
          ##If all 50 loops were made, something must be wrong - abort!
-         if (numberOfLoops==50)  
+         if (numberOfLoops==50)
          {
            searchingWithOldMethod<-FALSE
            noError<-FALSE
          }
 
-       }#end <--*else if (q>(probDifference+tolerance))*     
+       }#end <--*else if (q>(probDifference+tolerance))*
 
        ##--------------------------------------------------------##
        ##------------------- q is too small ---------------------##
@@ -200,25 +200,25 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
        else if (q<(probDifference-tolerance))
             {
               ##count for-loops for the purpose of controlling convergence
-              numberOfLoops<-0     
+              numberOfLoops<-0
 
               ##Reduce step size by factor of 10.
-              del <- del/10 
-   
-              ##Increase uppr by del... 
+              del <- del/10
+
+              ##Increase uppr by del...
               for (j in 1:80)
               {
                 numberOfLoops <- numberOfLoops + 1
                 uppr <- uppr - del
- 
+
                 #...and check whether q is near probDifference.
                 q <- tailProbability(uppr, lastGrid, numberOfIntegrationIntervalls[i-1], lowerIntegrationLimit[i-1], upperIntegrationLimit[i-1], standardDeviation)
 
-                if (q>=(probDifference-tolerance)) 
+                if (q>=(probDifference-tolerance))
                 {
                   break ##leave the for-loop and do another *while(searchingWithOldMethod)*-loop
-                } 
-             
+                }
+
                 #If many iterations do not converge, print warning after each 10 loops.
                 if ((j %% 10) == 0)
                 {
@@ -228,29 +228,29 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
                 }
               }#end <--*for*
               ##If all 80 loops were made, something must be wrong - abort!
-              if (numberOfLoops==80)  
+              if (numberOfLoops==80)
               {
                 searchingWithOldMethod<-FALSE
                 noError<-FALSE
               }
-              
-            }#end <--*else if (q>(probDifference+tolerance))*      
-     
-    }#end <--*while(searchingWithOldMethod)*   
+
+            }#end <--*else if (q>(probDifference+tolerance))*
+
+    }#end <--*while(searchingWithOldMethod)*
   }#end <--*if(newtonFailed)*
-       
+
      else
      {
        ## "Sekanten-Verfahren" was successful
      }
- 
-  
+
+
   ##if one of the routines above worked correctly -> return the calculated value...
   if (noError)
   {
     return(upperIntegrationLimit[i])
   }
-  
+
   ##...else abort analysis
   else
   {
@@ -260,4 +260,4 @@ function (lastGrid, numberOfIntegrationIntervalls, i, gridSize, probDifference, 
 
 
 
-}#end <--*function(...) 
+}#end <--*function(...)

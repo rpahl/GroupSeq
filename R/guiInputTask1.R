@@ -67,7 +67,7 @@ function(taskWindow)
       #set new n
       n<<-nValue
 
-      #First we´ll have to recompute the lists t,t2 new e.g
+      #First we'll have to recompute the lists t,t2 new e.g
       #they got default values equally spaced
       t<<-1
       for(i in 1:n)

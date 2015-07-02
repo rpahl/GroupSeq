@@ -4,7 +4,7 @@ function(confidenceLevel, Zvalue, n, t, t2, lowerBounds, upperBounds,nMax)
   ###INITIALIZE VARIABLES###
   confidenceLimit<-0
   zcrit<-0
-  
+
   ##Save upperBounds[n]
   tempUpperBounds <- upperBounds[n]
   upperBounds[n] <- Zvalue

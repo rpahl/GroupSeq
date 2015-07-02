@@ -5,10 +5,10 @@ function(upperBound, previousDensity, numberOfIntegrationIntervalls,lowerIntegra
   tempValue<-0
   grid<-0
   previousGrid<-0
-  
+
   ##previous grid size
   previousGrid <- (upperIntegrationLimit-lowerIntegrationLimit)/numberOfIntegrationIntervalls
-  
+
 
   ##Compute function grid points##
   tempValue <- seq(lowerIntegrationLimit,upperIntegrationLimit,length=numberOfIntegrationIntervalls+1)
@@ -16,7 +16,7 @@ function(upperBound, previousDensity, numberOfIntegrationIntervalls,lowerIntegra
 
 
   #Numerical integration
-  result <- integrateByTrapez(tempValue, numberOfIntegrationIntervalls, previousGrid) 
+  result <- integrateByTrapez(tempValue, numberOfIntegrationIntervalls, previousGrid)
 
-  return(result) 
+  return(result)
 }#end <--*function(...)*

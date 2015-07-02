@@ -31,26 +31,26 @@ function()
                        guiInputTask3(taskWindow), guiInputTask4(taskWindow) )
     }
   }
-  
+
   quitGroupSeq <- function()
   {
    tkdestroy(taskWindow)
-   
+
    # restore scipen value
    options(scipen=backupScipen)
    cat("GroupSeq closed by user.\n\n")
    return()
   }
-  
+
   OK.button <-tkbutton(taskWindow,text="   Perform Selected Task   ",command=OnOKtaskWindow)
   Quit.buttton <- tkbutton(taskWindow,text="  QUIT GroupSeq  ",command=quitGroupSeq)
-  
+
   # place buttons
   tkgrid(OK.button)
   tkgrid(tklabel(taskWindow,text="")) # Blank line
   tkgrid(Quit.buttton)
   tkgrid(tklabel(taskWindow,text="")) # Blank line
-  
+
   tkfocus(taskWindow)
 
 

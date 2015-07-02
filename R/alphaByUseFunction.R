@@ -3,7 +3,7 @@ function(whatSpendingFunctionIsUsed,n,alpha,phi,OneOrTwoSidedBounds,t)
 {
   ###Initialize variables###
   probExit<-0
-  
+
 
   #calculate probabilities according to use function
 
@@ -15,7 +15,7 @@ function(whatSpendingFunctionIsUsed,n,alpha,phi,OneOrTwoSidedBounds,t)
     probExit[k] <- OneOrTwoSidedBounds * asOBF( alpha, t[k], OneOrTwoSidedBounds )
     }
   }
-    
+
     ### Pocock-type ###
     else if (whatSpendingFunctionIsUsed==2 || whatSpendingFunctionIsUsed==5)
          {
@@ -24,7 +24,7 @@ function(whatSpendingFunctionIsUsed,n,alpha,phi,OneOrTwoSidedBounds,t)
              probExit[k] <- OneOrTwoSidedBounds *  asPocock( alpha, t[k], OneOrTwoSidedBounds )
            }
          }
-     
+
          ### Power Family ###
          else if (whatSpendingFunctionIsUsed==3)
               {
@@ -34,7 +34,7 @@ function(whatSpendingFunctionIsUsed,n,alpha,phi,OneOrTwoSidedBounds,t)
                 }
               }
 
-              ### Hwang-Shih-de Cani family ###  
+              ### Hwang-Shih-de Cani family ###
               else if (whatSpendingFunctionIsUsed==4)
                    {
                      for (k in 1:n)
@@ -44,18 +44,18 @@ function(whatSpendingFunctionIsUsed,n,alpha,phi,OneOrTwoSidedBounds,t)
                    }
 
                    ###-----------------------------------------------###
-                   ##-- more spending functions could be added here --## 
+                   ##-- more spending functions could be added here --##
                    ###-----------------------------------------------###
                    else
                    {
-                     #if this else-tree is reached something went wrong before  
+                     #if this else-tree is reached something went wrong before
                      print(" Chosen Use Function does not exist", quote=FALSE)
                      print(" or is not implemented correctly yet!", quote=FALSE)
                    }
 
-  
+
   ## returns the vector 'probExit' of type I error spent at each analysis
-  ## with length 'n' 
+  ## with length 'n'
   return(probExit)
 
 

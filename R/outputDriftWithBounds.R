@@ -1,17 +1,17 @@
 "outputDriftWithBounds" <-
-function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2, t2max, lowerBounds, upperBounds, 
+function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2, t2max, lowerBounds, upperBounds,
          probStopping, probExceedingUpper, probExceedingLower, confidenceLevel)
 {
   ###INITIALiZE VARIABLES###
   cumulativeExitProb<-0 #cumulative exit probability
   resultExitProb<-0 #exit probability
-    
-  
+
+
   ##compute exit probability and cumulative exit probability
   for(i in 1:n)
   {
     resultExitProb[i] <- probExceedingUpper[i]+probExceedingLower[i]
-    
+
     if(i==1)
     {
       cumulativeExitProb[i] <- resultExitProb[i]
@@ -19,7 +19,7 @@ function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2
     else
     {
       cumulativeExitProb[i] <- cumulativeExitProb[i-1] + resultExitProb[i]
-    } 
+    }
   }
 
 
@@ -27,7 +27,7 @@ function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2
   ##Start output##
 
   cat("\n")
-  cat("\n")  
+  cat("\n")
   cat("############################", "\n")
   cat("#                          #", "\n")
   cat("# Output Drift with Bounds #", "\n")
@@ -38,10 +38,10 @@ function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2
   cat("*-----*","\n")
   cat("*Drift:",format(drift,digits=5),"\n")
   cat("*-----*","\n")
-  cat("Maximum Information:",t2max,"\n") 
+  cat("Maximum Information:",t2max,"\n")
   cat("Power is ",confidenceLevel,"\n")
   cat("\n")
-  cat("\n")  
+  cat("\n")
 
   ##if no second information time is used output without information time
   if(!secondTimeScaleIsUsed || t2max<=0)
@@ -53,7 +53,7 @@ function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2
 
     print( cbind( format(times,digits=3), format(bounds,digits=5),
                        format(exitProbability,digits=5), format(cumulativeExitProbability,digits=5) ) )
-    cat("\n")  
+    cat("\n")
 
   }
 
@@ -70,5 +70,5 @@ function(n, probTotal, drift, expectedStoppingTime, secondTimeScaleIsUsed, t, t2
                        format(exitProbability,digits=5), format(cumulativeExitProbability,digits=5) ) )
     cat("\n")
   }
- 
+
 }#end <--*function(...)*
