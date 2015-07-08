@@ -45,7 +45,7 @@ to the user, who may create separate windows for each task so that multiple task
 (e.g., computing and comparing several designs) can be performed simultanously.
 }
 
-\references{ \url{http://www.biostat.wisc.edu/Software/landemets/index.html} }
+\references{ \url{https://www.biostat.wisc.edu/content/lan-demets-method-statistical-programs-clinical-trials} }
 
 \author{ Roman Pahl }
 

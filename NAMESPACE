@@ -1,2 +1,4 @@
 export(groupseq)
+import("graphics")
+import("stats")
 import("tcltk")
