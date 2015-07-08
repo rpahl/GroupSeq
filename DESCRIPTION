@@ -1,14 +1,12 @@
 Package: GroupSeq
-Title: A GUI-based Program to Compute Probabilities Regarding Group Sequential Designs
+Title: A GUI-Based Program to Compute Probabilities Regarding Group Sequential Designs
 Version: 1.3.3
 Author: Roman Pahl
-Description: This package provides a Tcl/Tk-based graphical user interface. It
-    enables the construction of group sequential designs based on normally
-    distributed test statistics, and particularly to compute critical
-    boundaries, power, drift, and confidence intervals for such designs. All
-    computations are done via the alpha spending approach by Lan-DeMets.
-    Various alpha spending functions are made available to the user for this
-    purpose.
+Description: A graphical user interface to compute group sequential designs
+    based on normally distributed test statistics, particularly critical
+    boundaries, power, drift, and confidence intervals of such designs. All
+    computations are based on the alpha spending approach by Lan-DeMets with
+    various alpha spending functions being available to choose among.
 Imports:
     tcltk
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
