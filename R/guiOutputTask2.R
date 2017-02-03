@@ -245,7 +245,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   {
      #create file variable
      fileName <- tclvalue(tkgetSaveFile(initialfile=".html",filetypes="{{html Files} {.html}} {{All files} *}"))
-     if (fileName=="") return;
+     if (fileName=="") return()
 
      #open file
      zz <- file(fileName,"w")

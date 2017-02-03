@@ -152,7 +152,7 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
   {
      #create file variable
      fileName <- tclvalue(tkgetSaveFile(initialfile=".html",filetypes="{{html Files} {.html}} {{All files} *}"))
-     if (fileName=="") return;
+     if (fileName=="") return()
 
      #open file
      zz <- file(fileName,"w")
