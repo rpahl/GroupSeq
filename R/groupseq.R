@@ -2,6 +2,7 @@ pkg.env <- new.env(parent=emptyenv())
 pkg.env$taskWindow <- NULL
 pkg.env$scipen.old <- options(scipen=10)[[1]]
 
+
 groupseq <- function(mode="g")
 {
     mode <- match.arg(mode)
@@ -17,7 +18,7 @@ groupseq <- function(mode="g")
 
 quitGroupSeq <- function() {
     if (!is.null(pkg.env$taskWindow)) {
-        tkdestroy(pkg.env$taskWindow)
+        tcltk::tkdestroy(pkg.env$taskWindow)
         pkg.env$taskWindow <- NULL
     }
     options(scipen=pkg.env$scipen.old)
@@ -26,11 +27,11 @@ quitGroupSeq <- function() {
 
 .onUnload <- function(libpath)
 {
-    GroupSeq:::quitGroupSeq()
+    quitGroupSeq()
 }
 
 .onDetach <- function(libpath)
 {
-    GroupSeq:::quitGroupSeq()
+    quitGroupSeq()
 }
 

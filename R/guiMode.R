@@ -1,6 +1,6 @@
 guiMode <- function()
 {
-  pkg.env$taskWindow <- tktoplevel()
+  pkg.env$taskWindow <- tcltk::tktoplevel()
   taskWindow <- pkg.env$taskWindow
 
   tkwm.title(taskWindow,"Choose a Task")
