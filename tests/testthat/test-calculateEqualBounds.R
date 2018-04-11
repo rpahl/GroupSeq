@@ -6,7 +6,7 @@ test_that("calculateEqualBounds", {
     bb <- rep(2, n)
     res <- calculateEqualBounds(0.05, bb, n, t2)
     expect_equal(res, qnorm(1 - 0.05))
-    
+
     n <- 4
     t2 <- (1:n)/n
     bb <- rep(2, n)

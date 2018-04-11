@@ -1,10 +1,8 @@
-"guiMode" <-
-function()
+guiMode <- function()
 {
-  #requireNamespace(tcltk)
-  backupScipen <- options(scipen=10)[[1]]
+  pkg.env$taskWindow <- tktoplevel()
+  taskWindow <- pkg.env$taskWindow
 
-  taskWindow<-tktoplevel()
   tkwm.title(taskWindow,"Choose a Task")
   listBoxTasks<-tklistbox(taskWindow,height=4,width=40,selectmode="single",background="white")
   tkgrid(tklabel(taskWindow,text="Select a Task!"))
@@ -30,16 +28,6 @@ function()
      switch(taskChoice, guiInputTask1(taskWindow), guiInputTask2(taskWindow),
                        guiInputTask3(taskWindow), guiInputTask4(taskWindow) )
     }
-  }
-
-  quitGroupSeq <- function()
-  {
-   tkdestroy(taskWindow)
-
-   # restore scipen value
-   options(scipen=backupScipen)
-   cat("GroupSeq closed by user.\n\n")
-   return()
   }
 
   OK.button <-tkbutton(taskWindow,text="   Perform Selected Task   ",command=OnOKtaskWindow)
