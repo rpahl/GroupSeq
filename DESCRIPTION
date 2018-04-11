@@ -11,3 +11,4 @@ Imports:
     tcltk
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 License: GPL (>= 2)
+RoxygenNote: 6.0.1
