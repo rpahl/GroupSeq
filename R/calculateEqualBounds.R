@@ -36,9 +36,14 @@ function(targetAlpha, provisionallyBounds, n, t2)
     fxk <- abs(sum(qpos + qneg) - targetAlpha)
 
     ## Max 20 iterations - if not finished by then, probably never converges
+    error.msg <- paste0("!!! Convergence problem while computing exact Pocock Bounds !!!\n",
+                        "    Computation has been aborted!\n")
     for (j in 1:20) {
         xkPlusOne <- xk - ( (xk - xkMinusOne)/(fxk - fxkMinusOne) * fxk )
-        if(is.nan(xkPlusOne) || is.infinite(xkPlusOne)) break
+        if(is.nan(xkPlusOne) || is.infinite(xkPlusOne)) {
+            cat(error.msg)
+            return(FALSE)
+        }
 
         ## for calculating fxkPlusOne we will need a vector of equal bounds
         xkPlusOneUpperBounds <- seq(xkPlusOne, xkPlusOne, length=n)
@@ -62,8 +67,7 @@ function(targetAlpha, provisionallyBounds, n, t2)
     }
 
     # If we end up here, iteration did not converge
-    cat("!!! Convergence problem while computing exact Pocock Bounds !!!","\n")
-    cat("    Computation has been stopped!","\n")
+    cat(error.msg)
     return(FALSE)
 }
 
