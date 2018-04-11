@@ -63,3 +63,18 @@ test_that("computeAlphaLevel", {
     expect_equal(res$totalTypeOneError, 0.07818052, tol=1e-7)
 })
 
+test_that("computeBounds", {
+
+    n <- 3
+    drift <- 0
+    alpha <- 0.05
+    phi <- 1
+    t <- (1:n)/n
+    t2 <- t
+    res <- computeBounds(n, drift, alpha, 1, t, t2, 1, 1, 8)
+    expect_equal(res$lowerBounds, rep(-8, n))
+    expect_equal(res$upperBounds, c(3.200102, 2.140797, 1.694775), tol=1e-6)
+    expect_equal(res$exitProbabilities, c(0.0006868949, 0.0163746665, 0.05), tol=1e-6)
+    diffs <- c(res$exitProbabilities[1], diff(res$exitProbabilities))
+    expect_equal(res$differencesExitProbabilities, diffs)
+})

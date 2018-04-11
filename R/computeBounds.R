@@ -1,13 +1,12 @@
 "computeBounds" <-
 function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,boundsTruncation)
 {
+
 ###########################################################################
 ######################### INITIALIZE VARIABLES ############################
 ###########################################################################
   probExit<-0 # probExit is a vector of exit probabilities
   probDifference<-0 # probDifference(i) = probExit(i)-probExit(i-1) where probExit is a vector of exit probabilities.
-  standardDeviation<-0 #  the standard deviation of the process increment
-  standardDeviationProcess<-0 #the standard deviation of the process.
   lowerBounds <-0 # lowerBounds is the vector of lower standardized boundaries
   upperBounds <-0 # upperBounds is the vector of upper standardized boundaries
   gridSize<-0.05 # the grid size for numerical integration by trapezoidal rule
@@ -76,11 +75,9 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
    }#end <--*for*
 
 
-   ###--- Calculate standard deviations of increments and process ---###
-   ##function stdDeviations(...) returns (standardDeviation, standardDeviationProcess)
-   stdDeviationVector<-stdDeviations( n, t2 )
-   standardDeviation <- stdDeviationVector[[1]]
-   standardDeviationProcess <- stdDeviationVector[[2]]
+   # Standard deviations of increments and process
+   stdDev.inc <- c(sqrt(t2[1]), sqrt(diff(t2)))
+   stdDev.proc <- sqrt(t2)
 
 ###########################################################################
 ################### BEGIN CALCULATING BOUNDARIES ##########################
@@ -117,14 +114,14 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
         probDifference[2] <- probExit[2] - probExit[1]
       }
     }
-    upperIntegrationLimit[1] <- upperBounds[1]*standardDeviation[1]
+    upperIntegrationLimit[1] <- upperBounds[1]*stdDev.inc[1]
   }#end <--*if*
 
   ##Spending probability is one (or more - so it was set to one)
   else if (probDifference[1]==1)
        {
          upperBounds[1] <- 0
-         upperIntegrationLimit[1] <- upperBounds[1]*standardDeviation[1]
+         upperIntegrationLimit[1] <- upperBounds[1]*stdDev.inc[1]
        }
 
        else
@@ -147,7 +144,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
              cat("probDifference: ",probDifference[2],"\n")
            }
          }
-         upperIntegrationLimit[1] <- upperBounds[1]*standardDeviation[1]
+         upperIntegrationLimit[1] <- upperBounds[1]*stdDev.inc[1]
        }#end <--*else*
   ###end Checking type I error to spend
 
@@ -157,7 +154,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
   if (OneOrTwoSidedBounds==1)
   {
     lowerBounds[1] <- negInf
-    lowerIntegrationLimit[1] <- lowerBounds[1]*standardDeviation[1]
+    lowerIntegrationLimit[1] <- lowerBounds[1]*stdDev.inc[1]
   }
   else
   {
@@ -168,7 +165,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
 
 
   ##Number of intervals for numerical integration
-  numberOfIntegrationIntervalls[1] <- trunc( (upperIntegrationLimit[1]-lowerIntegrationLimit[1]) / (gridSize*standardDeviation[1]) )
+  numberOfIntegrationIntervalls[1] <- trunc( (upperIntegrationLimit[1]-lowerIntegrationLimit[1]) / (gridSize*stdDev.inc[1]) )
 
 ##------------------------------------------------##
 ##-- Calculations for second and later analyses --##
@@ -190,7 +187,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
       {
         ##call function 'jointDensity' with parameter==1,
         ##for computing joint Density in 1st analysis - look also function jointDensity
-        lastGrid <- jointDensity(1, lowerIntegrationLimit[1], upperIntegrationLimit[1], standardDeviation[1], numberOfIntegrationIntervalls, lastGrid)
+        lastGrid <- jointDensity(1, lowerIntegrationLimit[1], upperIntegrationLimit[1], stdDev.inc[1], numberOfIntegrationIntervalls, lastGrid)
         #                    |
         #               parameter==1
       }
@@ -213,7 +210,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
         if (upperBounds[i]>boundsTruncation)
         {
           upperBounds[i] <- boundsTruncation
-          probDifference[i]<-OneOrTwoSidedBounds*tailProbability(upperBounds[i]*standardDeviationProcess[i],lastGrid,numberOfIntegrationIntervalls[i-1],lowerIntegrationLimit[i-1],upperIntegrationLimit[i-1],standardDeviation[i])
+          probDifference[i]<-OneOrTwoSidedBounds*tailProbability(upperBounds[i]*stdDev.proc[i],lastGrid,numberOfIntegrationIntervalls[i-1],lowerIntegrationLimit[i-1],upperIntegrationLimit[i-1],stdDev.inc[i])
           probExit[i] <- probDifference[i] + probExit[i-1]
 
           if(n>i)
@@ -221,7 +218,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
             probDifference[i+1] <- probExit[i+1]-probExit[i]
           }
         }
-        upperIntegrationLimit[i] <- upperBounds[i]*standardDeviationProcess[i]
+        upperIntegrationLimit[i] <- upperBounds[i]*stdDev.proc[i]
 
       }#end <--*if*
 
@@ -230,7 +227,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
       else if (probDifference[i]==1)
            {
              upperBounds[i] <- 0
-             upperIntegrationLimit[i] <- upperBounds[i]*standardDeviation[i] ## that is <- 0
+             upperIntegrationLimit[i] <- upperBounds[i]*stdDev.inc[i] ## that is <- 0
            }
 
       ##-------------------------------------------------##
@@ -241,7 +238,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
            ##the previous analysis
            else
            {
-             upperIntegrationLimit[i] <- searchForBound(lastGrid,numberOfIntegrationIntervalls,i,gridSize, probDifference[i]/OneOrTwoSidedBounds, standardDeviation[i], lowerIntegrationLimit, upperIntegrationLimit,n)
+             upperIntegrationLimit[i] <- searchForBound(lastGrid,numberOfIntegrationIntervalls,i,gridSize, probDifference[i]/OneOrTwoSidedBounds, stdDev.inc[i], lowerIntegrationLimit, upperIntegrationLimit,n)
 
              ##check if function searchForBound(...) worked correctly
              if (!is.numeric(upperIntegrationLimit[i]))
@@ -254,7 +251,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
              else ##everything went ok - function returned a numeric
              {
                #standarize upper boundary
-               upperBounds[i] <- upperIntegrationLimit[i]/standardDeviationProcess[i]
+               upperBounds[i] <- upperIntegrationLimit[i]/stdDev.proc[i]
              }
 
              ##If a truncation point is used, check to see if it
@@ -262,14 +259,14 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
              if(upperBounds[i]>boundsTruncation)
              {
                upperBounds[i]<-boundsTruncation
-               probDifference[i]<-OneOrTwoSidedBounds*tailProbability(upperBounds[i]*standardDeviationProcess[i],lastGrid,numberOfIntegrationIntervalls[i-1],lowerIntegrationLimit[i-1],upperIntegrationLimit[i-1],standardDeviation[i])
+               probDifference[i]<-OneOrTwoSidedBounds*tailProbability(upperBounds[i]*stdDev.proc[i],lastGrid,numberOfIntegrationIntervalls[i-1],lowerIntegrationLimit[i-1],upperIntegrationLimit[i-1],stdDev.inc[i])
 
                if(n>i)
                {
                  probDifference[i+1] <- probExit[i+1]-probExit[i]
                }
              }
-             upperIntegrationLimit[i] <- upperBounds[i]*standardDeviationProcess[i]
+             upperIntegrationLimit[i] <- upperBounds[i]*stdDev.proc[i]
 
            }#end <--*else*
 
@@ -278,7 +275,7 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
       ##or -upperIntegrationLimit (two-sided test )
       if (OneOrTwoSidedBounds==1)
       {
-        lowerIntegrationLimit[i] <- negInf*standardDeviationProcess[i]
+        lowerIntegrationLimit[i] <- negInf*stdDev.proc[i]
         lowerBounds[i] <- negInf
       }
       else
@@ -288,12 +285,12 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
       }
 
       ##Number of intervals for numerical integration.
-      numberOfIntegrationIntervalls[i] <- trunc( (upperIntegrationLimit[i]-lowerIntegrationLimit[i]) / (gridSize*standardDeviation[i]) )
+      numberOfIntegrationIntervalls[i] <- trunc( (upperIntegrationLimit[i]-lowerIntegrationLimit[i]) / (gridSize*stdDev.inc[i]) )
 
       ##Calculate joint density for use in next step.
       if (i!=n)
       {
-        lastGrid <- jointDensity(i, lowerIntegrationLimit, upperIntegrationLimit, standardDeviation[i], numberOfIntegrationIntervalls, lastGrid)
+        lastGrid <- jointDensity(i, lowerIntegrationLimit, upperIntegrationLimit, stdDev.inc[i], numberOfIntegrationIntervalls, lastGrid)
       }
 
       #goto next step i.e. to i-th step in the for-loop
@@ -301,6 +298,5 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
   }#end <--*else #go on with further analysis*
 
   ##Return a list containing the vectors lowerBounds, upperBounds, probExit, probDifference
-  toBeReturned<-list(lowerBounds=lowerBounds, upperBounds=upperBounds, exitProbabilities=probExit,differencesExitProbabilities=probDifference)
-  return(toBeReturned)
+  list(lowerBounds=lowerBounds, upperBounds=upperBounds, exitProbabilities=probExit,differencesExitProbabilities=probDifference)
 }#end <--*function(...)*
