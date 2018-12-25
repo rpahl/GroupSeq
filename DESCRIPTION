@@ -1,14 +1,14 @@
 Package: GroupSeq
-Title: A GUI-Based Program to Compute Probabilities Regarding Group Sequential Designs
-Version: 1.3.5
+Title: Group Sequential Design Probabilities - With Graphical User Interface
+Version: 2.0.0
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
-Description: A graphical user interface to compute group sequential designs
-    based on normally distributed test statistics, particularly critical
-    boundaries, power, drift, and confidence intervals of such designs. All
-    computations are based on the alpha spending approach by Lan-DeMets with
-    various alpha spending functions being available to choose among.
+Description: Computes probabilities related to group sequential designs for
+    normally distributed test statistics. Enables to derive critical
+    boundaries, power, drift, and confidence intervals of such designs.
+    Supports the alpha spending approach by Lan-DeMets as well as the
+    conditional rejection probability principle by Müller and Schäfer.
 Imports:
     tcltk
 Suggests: testthat
@@ -20,3 +20,4 @@ Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
 RoxygenNote: 6.0.1
+Encoding: UTF8
