@@ -8,7 +8,7 @@ groupseq <- function(mode="g")
     mode <- match.arg(mode)
     switch(mode,
            "g" = guiMode(),
-           "c" = consoleMode())
+           stop("Invalid mode '", mode, "'"))
 }
 
 .onAttach <- function(libname, pkgname)
