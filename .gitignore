@@ -1,0 +1,8 @@
+.last.vim
+
+man
+*.html
+.Rproj.user
+.RData
+.Rhistory
+*.Rproj
