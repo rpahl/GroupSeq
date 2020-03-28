@@ -1,3 +1,5 @@
 .git
 last.vim
 .gitignore
+^.*\.Rproj$
+^\.Rproj\.user$

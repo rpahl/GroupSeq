@@ -19,24 +19,27 @@ pkg.env$scipen.old <- options(scipen=10)[[1]]
 
 #' @title Start GroupSeq
 #' @description Starts the graphical user interface, optionally the legacy
-#'  version of GroupSeq prior to version 2.0.
-#' @param legacy (logical) if \code{TRUE} starts legacy GroupSeq version < 2.0
+#'  version of GroupSeq prior to version 2.
+#' @param legacy `logical` if `TRUE`, starts legacy GroupSeq version < 2.
 #' @export
-groupseq <- function(legacy=FALSE)
+start_gui <- function(legacy = FALSE)
 {
-    mode <- match.arg(mode)
-    switch(mode,
-           "g" = guiMode(),
-           stop("Invalid mode '", mode, "'"))
+    if (legacy) {
+        guiMode()
+    } else {
+        gui()
+    }
+    invisible()
 }
-
 
 
 #' @keywords internal
 .onAttach <- function(libname, pkgname)
 {
-    #groupseq()
+    doStart <- getOption("AutostartGroupSeq", default = TRUE)
+    if (interactive() && doStart) GroupSeq::start_gui()
 }
+
 
 #' @keywords internal
 quitGroupSeq <- function() {
@@ -48,15 +51,10 @@ quitGroupSeq <- function() {
     invisible()
 }
 
-#' @keywords internal
-.onUnload <- function(libpath)
-{
-    quitGroupSeq()
-}
 
 #' @keywords internal
-.onDetach <- function(libpath)
-{
-    quitGroupSeq()
-}
+.onUnload <- function(libpath) quitGroupSeq()
+
+#' @keywords internal
+.onDetach <- function(libpath) quitGroupSeq()
 
