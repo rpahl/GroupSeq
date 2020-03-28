@@ -41,9 +41,14 @@
 #' seqProb(c(2, 1), mean=0, tau=c(.25, 0.5)) == p         # TRUE
 #' seqProb(c(2, 1), mean=0, tau=c(.25, 1)) == p           # FALSE
 #' @export
-seqProb <- function(up, mean=0, lo=rep(-Inf, length(up)),
-                    tau=1:length(up)/length(up), sd=1/sqrt(tau),
-                    hasZbounds=TRUE, exitLast=FALSE, alg=mvtnorm::Miwa())
+seqProb <- function(up,
+                    mean = 0,
+                    lo = rep(-Inf, length(up)),
+                    tau = seq_along(up) / length(up),
+                    sd = 1/sqrt(tau),
+                    hasZbounds = TRUE,
+                    exitLast = FALSE,
+                    alg = mvtnorm::Miwa())
 {
     # Catch bad input arguments and provide informative error message
     check_input_args <- function() {
@@ -185,8 +190,11 @@ seqProb <- function(up, mean=0, lo=rep(-Inf, length(up)),
 #' res <- seqDesign(pocock, mu=.3, n=98)
 #' lapply(unlist(res, recursive=FALSE)[c("n.nkExp", "p.exit")], sum)
 #' @export
-seqDesign <- function(crit, mu=0, sd=1, futStop=rep(-Inf, length(crit)),
-                      tau=1:length(crit)/length(crit), n=1, ...)
+seqDesign <- function(crit,
+                      mu = 0, sd = 1,
+                      futStop = rep(-Inf, length(crit)),
+                      tau = seq_along(crit) / length(crit),
+                      n = 1, ...)
 {
     K <- length(crit)
     if (missing(sd)) sd <- 1/sqrt(tau*n)
@@ -206,7 +214,7 @@ seqDesign <- function(crit, mu=0, sd=1, futStop=rep(-Inf, length(crit)),
         warning = function(w) stop(callStr, ", ", w, call.=FALSE)
     )
 
-    # Probabilities are calculated separately for each stage k - most
+    # Probabilities are calculated separately for each stage k. Most
     # parameters are identical with only mean, sd, and exitLast varying,
     # depending on the desired probability.
     prob_at_k <- function(k, ...) {
