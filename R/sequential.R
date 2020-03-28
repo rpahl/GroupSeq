@@ -3,27 +3,26 @@
 #' @description Compute sequential probabilities based on normally distributed
 #' test statistics and assuming independent increments.
 #'
-#' @param up (numeric) upper bounds
-#' @param mean (numeric) the mean
-#' @param lo (numeric) lower bounds
-#' @param tau (numeric) vector of monotonely increasing information times
-#' @param sd (numeric) vector of standard deviations
-#' @param hasZbounds (logical) if true, bounds are assumed to be standardized,
+#' @param up `numeric` upper bounds
+#' @param mean `numeric` the mean
+#' @param lo `numeric` lower bounds
+#' @param tau `numeric` vector of monotonely increasing information times
+#' @param sd `numeric` vector of standard deviations
+#' @param hasZbounds `logical` if true, bounds are assumed to be standardized,
 #' already, otherwise they will be standardized by the function
-#' @param exitLast (logical) if TRUE, upper bound at the last stage is set to
-#' \code{Inf}, and lower bound to user-specified upper bound, which means to
+#' @param exitLast `logical` if TRUE, upper bound at the last stage is set to
+#' `Inf`, and lower bound to user-specified upper bound, which means to
 #' compute the probability to stay below the upper bounds in all stages except
 #' the last stage. In a sequential study design this corresponds to accepting
 #' the null hypothesis in stages 1 to n-1 but rejecting it at stage n, i.e.,
 #' the probability to exit the study just at stage n.
-#' @param alg (algorithm object) to be used for numerical integration (see
-#' \code{\link[mvtnorm]{pmvnorm}}).
-#' @return (numeric) calculated (multivariate) normal probability to stay
+#' @param alg `algorithm object` to be used for numerical integration (see
+#' [mvtnorm::pmvnorm]).
+#' @return `numeric` calculated (multivariate) normal probability to stay
 #' between bounds, or (if exitLast was set to TRUE) to stay between bounds
 #' and exceed upper bound at last stage.
 #'
-#' @author Roman Pahl <roman.pahl@gsk.com>
-#' @seealso \code{\link[mvtnorm]{pmvnorm}}
+#' @seealso [mvtnorm::pmvnorm()]
 #' @import mvtnorm
 #' @examples
 #' # 1-D
@@ -42,10 +41,9 @@
 #' seqProb(c(2, 1), mean=0, tau=c(.25, 1)) == p           # FALSE
 #' @export
 seqProb <- function(up,
-                    mean = 0,
                     lo = rep(-Inf, length(up)),
                     tau = seq_along(up) / length(up),
-                    sd = 1/sqrt(tau),
+                    mean = 0, sd = 1 / sqrt(tau),
                     hasZbounds = TRUE,
                     exitLast = FALSE,
                     alg = mvtnorm::Miwa())
@@ -127,31 +125,28 @@ seqProb <- function(up,
 #' statistic falls below them at any stage, the study is also stopped due to
 #' futility while the null hypothesis in this case cannot be discarded.
 #'
-#' @param crit (numeric) vector of critical limits for stopping the study with
-#' rejection of the null hypothesis. The length of \code{crit} determines the
+#' @param crit `numeric` vector of critical limits for stopping the study with
+#' rejection of the null hypothesis. The length of 'crit' determines the
 #' number of stages of the design.
-#' @param mu (numeric) the mean (e.g. \code{mu == 0} under H0). Under H1 this
+#' @param mu `numeric` the mean (e.g. `mu == 0` under H0). Under H1 this
 #' is also known as the drift parameter.
-#' @param sd (numeric) standard deviation (or vector of sd)
-#' @param futStop (numeric) vector of futility stopping bounds (optional)
-#' @param tau (numeric) vector of monotonely increasing information times
-#' @param n (numeric) sample size, which only has an effect if \code{mu != 0}.
+#' @param sd `numeric` standard deviation (or vector of sd)
+#' @param tau `numeric` vector of monotonely increasing information times.
+#' @param futStop `numeric` vector of futility stopping bounds (optional).
+#' @param n `numeric` sample size, which only has an effect if `mu != 0`.
 #' Useful to compute expected sample size under H1.
-#' @param ... further arguments passed to \code{seqProb}
-#' @return (list)
-#'  \describe{
-#'      \item{exitP}{The alpha spent at each stage. The cumulative sum of
-#'      this will provide the cumulative exit probability up to each stage,
-#'      that is, the probability of having stopped due to exceeding a bound.}
-#'      \item{undecided}{Probability of continuing the study. In case of the
-#'      last stage, this means stopping without declaring significance.}
-#'      \item{cumFutStop}{Cumulative futility stop probabilities}
-#'      \item{nk}{Planned sample size per stage}
-#'      \item{nkExp}{Expected sample size per stage - the sum over all values
-#'      will provide the total expected sample size.}
-#'  }
+#' @param ... further arguments passed to `seqProb`
+#' @return result is a `list` with the following components:
+#' * `exitP` the alpha spent at each stage. The cumulative sum of this will
+#'   provides the cumulative exit probability up to each stage, that is, the
+#'   probability of having stopped due to exceeding a bound.
+#' * `undecided` probability of continuing the study. In case of the last
+#'   stage, this means stopping without declaring significance.
+#' * `cumFutStop` cumulative futility stop probabilities.
+#' * `nk` planned sample size per stage.
+#' * `kExp` expected sample size per stage - the sum over all values will
+#'   provide the total expected sample size.
 #'
-#' @author Roman Pahl <roman.pahl@gsk.com>
 #' @examples
 #' # 1-stage
 #' # #######
@@ -192,8 +187,8 @@ seqProb <- function(up,
 #' @export
 seqDesign <- function(crit,
                       mu = 0, sd = 1,
-                      futStop = rep(-Inf, length(crit)),
                       tau = seq_along(crit) / length(crit),
+                      futStop = rep(-Inf, length(crit)),
                       n = 1, ...)
 {
     K <- length(crit)

@@ -1,6 +1,5 @@
 .last.vim
 
-man
 *.html
 .Rproj.user
 .RData
