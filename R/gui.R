@@ -9,23 +9,26 @@ add_custom_icons <- function()
 
 #' @title Create graphical user interface.
 #' @description This function builds the main GUI that appears when [GroupSeq]
-#' is started.
+#'  is started.
 #' @return Invoked for its side effects.
 #' @import gWidgets gWidgetstcltk tcltk
 #' @keywords internal
-gui <- function()
+gui <- function(toolkit = c("tcltk", "RGtk2"))
 {
+    # Init
+    selected_toolkit <- match.arg(toolkit)
+    options("guiToolkit" = selected_toolkit)
     version <- utils::packageVersion(utils::packageName())
-    #options("guiToolkit" = "tcltk")
-    options("guiToolkit"="RGtk2")
     add_custom_icons()
+
     win <- gwindow(title = paste0("GroupSeq (version ", version, ")"),
                   visible = TRUE)
 
     items.file <- list(quit = gaction("Quit", icon = "quit",
                                       handler = function(...) dispose(win)))
-    items.calc <- list(calc = gaction("Calculate", icon = "matrix"))
-    items.help <- list(about = gaction("About", icon = "info-icon"))
+    items.calc <- list(calc = gaction("Calculate"))
+    items.help <- list(about = gaction("About", icon = "info-icon",
+                                       handler = show_about))
     menubar <- list("File" = items.file,
                     "Calculate" = items.calc,
                     "Help" = items.help)
@@ -44,6 +47,18 @@ gui <- function()
     gf.out <- gframe("Output", container = grp_main, expand = T)
     g.out <- ggroup(container = gf.out)
     addSpace(g.out, val = 30, horizontal = FALSE)
-    invisible()
+    invisible(win)
+}
+
+show_about <- function(...)
+{
+    msg <- paste0("Computes probabilities related to group sequential ",
+                  "designs for normally distributed test statistics. ",
+                  "Enables to derive critical boundaries, power, drift, ",
+                  "and confidence intervals of such designs. Supports the ",
+                  "alpha spending approach by Lan-DeMets as well as the ",
+                  "conditional rejection probability principle by Müller ",
+                  "and Schäfer.")
+    gmessage(title = "About", message = msg, icon = "info")
 }
 
