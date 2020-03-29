@@ -11,9 +11,29 @@
 #' @name groupseq.pkg
 NULL
 
+# Environment used by legacy version < 2
+pkg.env <- new.env(parent = emptyenv())
+pkg.env$taskWindow <- NULL
+pkg.env$scipen.old <- options(scipen=10)[[1]]
 
+# Environments used since version 2
 .groupseqEnv <- new.env(parent = emptyenv())
-groupseqEnv <- function() .groupseqEnv
+
+
+#' @keywords internal
+gsEnv <- function() .groupseqEnv
+
+#' @keywords internal
+gsget <- function(x, ...) get(x, envir = gsEnv(), inherits = FALSE, ...)
+
+#' @keywords internal
+gsget0 <- function(x, ...) get0(x, envir = gsEnv(), inherits = FALSE, ...)
+
+#' @keywords internal
+gsput <- function(x, value, ...) assign(x, value, envir = gsEnv(), ...)
+
+#' @keywords internal
+gsremove <- function(...) remove(..., envir = gsEnv())
 
 
 #' @title Start GroupSeq
@@ -26,8 +46,8 @@ start_gui <- function(legacy = FALSE)
     if (legacy) {
         guiMode()
     } else {
-        pkg.env$root <- tcltk::tktoplevel()
-        gui(pkg.env$root)
+        gsput("root", tcltk::tktoplevel())
+        gui(gsget("root"))
     }
     invisible()
 }
