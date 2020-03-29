@@ -68,7 +68,7 @@ start_gui <- function(legacy = FALSE)
 #' @keywords internal
 quitGroupSeq <- function() {
     if (!is.null(pkg.env$taskWindow)) {
-        tcltk::tkdestroy(pkg.env$taskWindow)
+        tkdestroy(pkg.env$taskWindow)
         pkg.env$taskWindow <- NULL
     }
     options(scipen=pkg.env$scipen.old)
@@ -77,8 +77,12 @@ quitGroupSeq <- function() {
 
 
 #' @keywords internal
-.onUnload <- function(libpath) quitGroupSeq()
+.onUnload <- function(libpath) {
+    quitGroupSeq()
+}
 
 #' @keywords internal
-.onDetach <- function(libpath) quitGroupSeq()
+.onDetach <- function(libpath) {
+    quitGroupSeq()
+}
 

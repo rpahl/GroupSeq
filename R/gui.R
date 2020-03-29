@@ -12,27 +12,21 @@ add_custom_icons <- function()
 #' @description This function builds the main GUI that appears when [GroupSeq]
 #'  is started.
 #' @return Invoked for its side effects.
-#' @import tcltk
+#' @import tcltk tcltk2
 #' @keywords internal
 gui <- function(root)
 {
     # Init
     version <- utils::packageVersion(utils::packageName())
-    #win <- gwindow(title = , visible = TRUE)
     tkwm.title(root, paste0("GroupSeq (version ", version, ")"))
 
     # Menu
-    menu.file <- tkmenu(root)
+    parent <- tk2menu(root)
+    tkconfigure(root, menu = parent)
+    tkadd(parent, "cascade", label = "File", menu = create_file_menu(parent, root))
+    tkadd(parent, "cascade", label = "Design", menu = create_design_menu(parent))
+    tkadd(parent, "cascade", label = "Help", menu = create_help_menu(parent))
 
-    items.file <- list(quit = "Quit", icon = "quit")
-    items.help <- list("About" = list(icon = "info-icon", handler = show_about))
-    menubar <- list("File" = items.file, "Help" = items.help)
-
-    # Toolbar
-    #a1 <- gaction(label = "   One\nSample", icon = "normal-dens30px", handler = function(h, ...) print("one"))
-    #a2 <- gaction(label = "   Two\nSamples", icon = "normal-dens-bw", handler = function(h, ...) print("two"))
-    #tbl <- list(One = a1, Two = a2)
-    #tb <- gtoolbar(tbl, container = win)
 
     # Notebook
     #nb <- gnotebook(expand = TRUE, container = gf.input)

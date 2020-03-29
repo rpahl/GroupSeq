@@ -2,14 +2,16 @@ context("gui")
 
 test_that("gui", {
     # Interface
-    load_all()
 
     win <- start_gui(legacy = TRUE)
+    expect_true(is.tkwin(pkg.env$taskWindow))
+    quitGroupSeq()
 
-    tl <- tcltk::tktoplevel()
-    win <- gui(tl)
+    load_all()
+    root <- tcltk::tktoplevel()
+    win <- gui(root)
     expect_true(is.tkwin(win))
-    tkdestroy(tl)
+    tkdestroy(root)
 
 
 })
