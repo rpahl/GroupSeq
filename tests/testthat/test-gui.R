@@ -4,12 +4,13 @@ test_that("gui", {
     # Interface
     load_all()
 
-    win <- gui("tcltk")
-    expect_equal(getOption("guiToolkit"), "tcltk")
-    dispose(win)
+    win <- start_gui(legacy = TRUE)
 
-    win <- gui("RGtk2")
-    expect_equal(getOption("guiToolkit"), "RGtk2")
-    dispose(win)
+    tl <- tcltk::tktoplevel()
+    win <- gui(tl)
+    expect_true(is.tkwin(win))
+    tkdestroy(tl)
+
+
 })
 

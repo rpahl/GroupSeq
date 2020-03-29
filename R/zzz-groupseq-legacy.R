@@ -1,3 +1,7 @@
+pkg.env <- new.env(parent = emptyenv())
+pkg.env$taskWindow <- NULL
+pkg.env$scipen.old <- options(scipen=10)[[1]]
+
 "asHSdeCani" <- function( alpha, tk, oneOrTwoSided, gamma) {
   if ( gamma == 0 ) {
     return (alpha * tk)
@@ -6466,8 +6470,6 @@ guiMode <- function()
   tkgrid(tklabel(taskWindow,text="")) # Blank line
 
   tkfocus(taskWindow)
-
-
 }
 
 

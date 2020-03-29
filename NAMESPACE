@@ -3,7 +3,5 @@
 export(seqDesign)
 export(seqProb)
 export(start_gui)
-import(gWidgets)
-import(gWidgetstcltk)
 import(mvtnorm)
 import(tcltk)

@@ -7,47 +7,55 @@ add_custom_icons <- function()
     addStockIcons(iconNames, iconFiles)
 }
 
+
 #' @title Create graphical user interface.
 #' @description This function builds the main GUI that appears when [GroupSeq]
 #'  is started.
 #' @return Invoked for its side effects.
-#' @import gWidgets gWidgetstcltk tcltk
+#' @import tcltk
 #' @keywords internal
-gui <- function(toolkit = c("tcltk", "RGtk2"))
+gui <- function(root)
 {
     # Init
-    selected_toolkit <- match.arg(toolkit)
-    options("guiToolkit" = selected_toolkit)
     version <- utils::packageVersion(utils::packageName())
-    add_custom_icons()
+    #win <- gwindow(title = , visible = TRUE)
+    tkwm.title(root, paste0("GroupSeq (version ", version, ")"))
 
-    win <- gwindow(title = paste0("GroupSeq (version ", version, ")"),
-                  visible = TRUE)
+    # Menu
+    menu.file <- tkmenu(root)
 
-    items.file <- list(quit = gaction("Quit", icon = "quit",
-                                      handler = function(...) dispose(win)))
-    items.calc <- list(calc = gaction("Calculate"))
-    items.help <- list(about = gaction("About", icon = "info-icon",
-                                       handler = show_about))
-    menubar <- list("File" = items.file,
-                    "Calculate" = items.calc,
-                    "Help" = items.help)
-    gmenu(menubar, container = win)
+    items.file <- list(quit = "Quit", icon = "quit")
+    items.help <- list("About" = list(icon = "info-icon", handler = show_about))
+    menubar <- list("File" = items.file, "Help" = items.help)
 
-    grp_main <- ggroup(horizontal = TRUE, container = win)
+    # Toolbar
+    #a1 <- gaction(label = "   One\nSample", icon = "normal-dens30px", handler = function(h, ...) print("one"))
+    #a2 <- gaction(label = "   Two\nSamples", icon = "normal-dens-bw", handler = function(h, ...) print("two"))
+    #tbl <- list(One = a1, Two = a2)
+    #tb <- gtoolbar(tbl, container = win)
 
-    gf.input <- gframe("Input", container = grp_main, expand = T)
-	g.input <- ggroup(container = gf.input)
+    # Notebook
+    #nb <- gnotebook(expand = TRUE, container = gf.input)
+    #glabel(text = "Design Parameters", container = nb, label = "Design Parameters")
+    #glabel(text = "Boundaries", container = nb, label = "Boundaries")
+    #svalue(nb) <- 1
 
-    menu = gcombobox(c("Probabilities given drift",
-                       "Drift given power",
-                       "Confidence interval"),
-                     container = g.input);
 
-    gf.out <- gframe("Output", container = grp_main, expand = T)
-    g.out <- ggroup(container = gf.out)
-    addSpace(g.out, val = 30, horizontal = FALSE)
-    invisible(win)
+    # Input
+    if (F) {
+
+        g.input <- ggroup(container = gf.input)
+
+        menu = gcombobox(c("Probabilities given drift",
+                           "Drift given power",
+                           "Confidence interval"),
+                         container = g.input);
+
+        gf.out <- gframe("Output", container = grp_main, expand = T)
+        g.out <- ggroup(container = gf.out)
+        addSpace(g.out, val = 30, horizontal = FALSE)
+    }
+    invisible(root)
 }
 
 show_about <- function(...)

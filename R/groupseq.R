@@ -12,9 +12,8 @@
 NULL
 
 
-pkg.env <- new.env(parent=emptyenv())
-pkg.env$taskWindow <- NULL
-pkg.env$scipen.old <- options(scipen=10)[[1]]
+.groupseqEnv <- new.env(parent = emptyenv())
+groupseqEnv <- function() .groupseqEnv
 
 
 #' @title Start GroupSeq
@@ -27,7 +26,8 @@ start_gui <- function(legacy = FALSE)
     if (legacy) {
         guiMode()
     } else {
-        gui()
+        pkg.env$root <- tcltk::tktoplevel()
+        gui(pkg.env$root)
     }
     invisible()
 }
@@ -36,8 +36,12 @@ start_gui <- function(legacy = FALSE)
 #' @keywords internal
 .onAttach <- function(libname, pkgname)
 {
-    doStart <- getOption("AutostartGroupSeq", default = TRUE)
-    if (interactive() && doStart) GroupSeq::start_gui()
+    doStart <- getOption("AutostartGroupSeq", default = FALSE)
+    if (interactive() && doStart) {
+        start_gui()
+    } else {
+        invisible()
+    }
 }
 
 

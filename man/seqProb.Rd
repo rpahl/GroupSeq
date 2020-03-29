@@ -26,7 +26,7 @@ seqProb(
 
 \item{sd}{\code{numeric} vector of standard deviations}
 
-\item{hasZbounds}{\code{logical} if true, bounds are assumed to be standardized,
+\item{hasZbounds}{\code{logical} if true, bounds are assumed to be standardized
 already, otherwise they will be standardized by the function}
 
 \item{exitLast}{\code{logical} if TRUE, upper bound at the last stage is set to

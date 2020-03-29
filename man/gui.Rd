@@ -4,7 +4,7 @@
 \alias{gui}
 \title{Create graphical user interface.}
 \usage{
-gui(toolkit = c("tcltk", "RGtk2"))
+gui(root)
 }
 \value{
 Invoked for its side effects.
