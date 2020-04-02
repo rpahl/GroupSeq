@@ -9,7 +9,7 @@
 #' @param tau `numeric` vector of monotonely increasing information times
 #' @param sd `numeric` vector of standard deviations
 #' @param hasZbounds `logical` if true, bounds are assumed to be standardized
-#' already, otherwise they will be standardized by the function
+#' already, otherwise they will be standardized by the function.
 #' @param exitLast `logical` if TRUE, upper bound at the last stage is set to
 #' `Inf`, and lower bound to user-specified upper bound, which means to
 #' compute the probability to stay below the upper bounds in all stages except

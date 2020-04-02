@@ -7,3 +7,4 @@ create_help_menu <- function(parent)
     tkadd(menu, "command", label = "About", command = onAbout)
     menu
 }
+

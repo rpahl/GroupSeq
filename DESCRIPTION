@@ -10,7 +10,7 @@ Description: Computes probabilities related to group sequential designs for
     Supports the alpha spending approach by Lan-DeMets as well as the
     conditional rejection probability principle by Müller and Schäfer.
 Imports: tcltk, tcltk2, mvtnorm
-Suggests: testthat
+Suggests: tinytest
 License: GPL (>= 2)
 URL: https://github.com/rpahl/GroupSeq
 BugReports: https://github.com/rpahl/GroupSeq/issues
