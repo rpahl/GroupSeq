@@ -7,7 +7,6 @@ add_custom_icons <- function()
     addStockIcons(iconNames, iconFiles)
 }
 
-
 #' @title Create graphical user interface.
 #' @description This function builds the main GUI that appears when [GroupSeq]
 #'  is started.
@@ -21,18 +20,28 @@ gui <- function(root)
     tkwm.title(root, paste0("GroupSeq (version ", version, ")"))
 
     # Menu
-    parent <- tk2menu(root)
-    tkconfigure(root, menu = parent)
-    tkadd(parent, "cascade", label = "File", menu = create_file_menu(parent, root))
-    tkadd(parent, "cascade", label = "Design", menu = create_design_menu(parent))
-    tkadd(parent, "cascade", label = "Help", menu = create_help_menu(parent))
+    menu <- tk2menu(root)
+    tkconfigure(root, menu = menu)
+    tkadd(menu, "cascade", label = "File", menu = create_file_menu(menu, root))
+    tkadd(menu, "cascade", label = "Design", menu = create_design_menu(menu))
+    tkadd(menu, "cascade", label = "Help", menu = create_help_menu(menu))
 
+    # Main part
+    fr.main <- tk2frame(root, relief = "flat", borderwidth = 1)
+
+    # Number of looks
+    fr.looks <- tk2frame(fr.main, borderwidth = 5)
+    looks.lab <- tklabel(fr.looks, anchor = "nw", justify = "left",
+                         text = "Number of interim looks ")
+    tkgrid(looks.lab, create_number_of_looks_combobox(parent = fr.looks))
 
     # Notebook
-    #nb <- gnotebook(expand = TRUE, container = gf.input)
-    #glabel(text = "Design Parameters", container = nb, label = "Design Parameters")
-    #glabel(text = "Boundaries", container = nb, label = "Boundaries")
-    #svalue(nb) <- 1
+    nb <- tk2notebook(parent = fr.main,
+                      tabs = c("Design parameters", "Boundaries"))
+
+    tkgrid(fr.looks)
+    tkgrid(nb, sticky = "nw")
+    tkgrid(fr.main)
 
 
     # Input
