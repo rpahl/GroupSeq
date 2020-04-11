@@ -31,9 +31,12 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
 
     # Number of looks
     fr.looks <- tkframe(fr.main, padx = 10)
-    looks.lab <- .tklabel(fr.looks, text = "Number of looks ", justify = "left")
-    tkgrid(looks.lab, create_number_of_looks_combobox(parent = fr.looks),
-           padx = 2, pady = 5)
+    nlook.lab <- .tklabel(fr.looks, text = "Number of looks ", justify = "left")
+    nlook.selector <- create_combo_box(parent = fr.looks,
+                                      param.name = "nlook",
+                                      choices = as.character(1:10),
+                                      state = "readonly")
+    tkgrid(nlook.lab, nlook.selector, padx = 2, pady = 5)
 
     # Notebook
     nb <- tk2notebook(parent = fr.main, tabs = tabs, padding = 5)
