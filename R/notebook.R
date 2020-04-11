@@ -1,17 +1,14 @@
 #' @keywords internal
-on_change_nlook <- function(x)
-{
-    # TODO: implement
-    message("selecting ", x, " looks")
-    #as.integer(tclvalue(tcl(cb, "get")))
-    #.par$set("nlook", default = tclVar("1"))
-}
-
-#' @keywords internal
 create_number_of_looks_combobox <- function(parent, nMax = 10)
 {
+    on_change_nlook <- function(x) {
+        # TODO: implement
+        message("selecting ", x, " looks")
+        #as.integer(tclvalue(tcl(cb, "get")))
+    }
+
     choices <- as.character(seq_len(nMax))
-    if (!.par$has("nlook")) .par$add("nlook", tclVar("1"))
+    if (!.par$has("nlook")) .par$add("nlook", tclVar(choices[1]))
     cb.var <- .par$get("nlook")
     signal_number_of_looks <- function() on_change_nlook(tclvalue(cb.var))
 
@@ -25,14 +22,36 @@ create_number_of_looks_combobox <- function(parent, nMax = 10)
 #' @keywords internal
 `pack Test parameters tab` <- function(nb)
 {
+    on_change_test_type <- function(x) {
+        # TODO: implement
+        message("selecting ", x, " test")
+        #as.integer(tclvalue(tcl(cb, "get")))
+    }
+
     tab <- tk2notetab(nb, "Test parameters")
-    frame <- tkframe(tab)
+
+    # Labels
+    fr.lab <- tkframe(tab)
     add_label <- function(x) {
-        tkgrid(.tklabel(frame, text = x, justify = "left"), sticky = "w")
+        tkgrid(.tklabel(fr.lab, text = x, justify = "left"), sticky = "w")
     }
     labs <- c("Test Type", "Type I Error", "Power", "Sample Size (n)")
     sapply(labs, add_label)
-    tkgrid(frame, sticky = "w")
+
+    # Fields
+    fr.field <- tkframe(tab)
+
+    ## Test type
+    choices <- .par$peek("test.type.choices", default = c("1-Sided", "2-Sided"))
+    if (!.par$has("test.side")) .par$add("test.side", tclVar(choices[1]))
+    cb.var <- .par$get("test.side")
+    signal_test_type <- function() on_change_test_type(tclvalue(cb.var))
+    cb <- ttkcombobox(fr.field, value = choices, textvariable = cb.var,
+                      state = "readonly", width = max(nchar(choices)) + 2)
+    tkbind(cb, "<<ComboboxSelected>>", signal_test_type)
+    tkgrid(cb)
+
+    tkgrid(fr.lab, fr.field, sticky = "w")
     invisible(tab)
 }
 
