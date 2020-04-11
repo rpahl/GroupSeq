@@ -17,10 +17,10 @@ gui <- function(root)
 {
     # Init
     version <- utils::packageVersion(utils::packageName())
-    tkwm.title(root, paste0("GroupSeq (version ", version, ")"))
+    tkwm.title(root, paste0("GroupSeq ", version))
 
     # Menu
-    menu <- tk2menu(root)
+    menu <- tkmenu(root)
     tkconfigure(root, menu = menu)
     tkadd(menu, "cascade", label = "File", menu = create_file_menu(menu, root))
     tkadd(menu, "cascade", label = "Design", menu = create_design_menu(menu))
@@ -30,33 +30,33 @@ gui <- function(root)
     fr.main <- tkframe(root, relief = "flat", borderwidth = 1)
 
     # Number of looks
-    fr.looks <- tkframe(fr.main, borderwidth = 5)
-    looks.lab <- tklabel(fr.looks, anchor = "nw", justify = "left",
-                         text = "Number of interim looks ")
-    tkgrid(looks.lab, create_number_of_looks_combobox(parent = fr.looks))
+    fr.looks <- tkframe(fr.main, padx = 10)
+    looks.lab <- .tklabel(fr.looks, text = "Number of looks ", justify = "left")
+    tkgrid(looks.lab, create_number_of_looks_combobox(parent = fr.looks),
+           padx = 2, pady = 5)
 
     # Notebook
-    nb <- ttknotebook(parent = fr.main)
+    nb <- tk2notebook(parent = fr.main, tabs = c("Test parameters", "Boundaries"),
+                      padding = 5)
 
-    ## Design parameters
-    tab.design <- tkframe(root, borderwidth = 3)
-    tkadd(nb, tab.design, text = "Design parameters", padding = 3)
-    fr.lab <- tkframe(tab.design)
+    ## Test parameters
+    tab.test <- tk2notetab(nb, "Test parameters")
+    #tkadd(nb, tab.test, text = "Test parameters", padding = 5)
+    fr.lab <- tkframe(tab.test, padx = 10)
     add_label <- function(x) {
-        tkgrid(tklabel(fr.lab, text = x, justify = "left"), sticky = "w")
+        tkgrid(.tklabel(fr.lab, text = x, justify = "left"), sticky = "w")
     }
-    labs <- c("Test Type", "Type I Error", "Power", "Sample Size (n)",
-              "Allocation Ratio")
+    labs <- c("Test Type", "Type I Error", "Power", "Sample Size (n)")
     sapply(labs, add_label)
     tkgrid(fr.lab, sticky = "w")
 
     ## Boundaries
-    tab.bounds <- tkframe(root)
-    tkadd(nb, tab.bounds, text = "Boundaries", padding = 3)
+    #tab.bounds <- tkframe(root)
+    tab.bounds <- tk2notetab(nb, "Boundaries")
+    #tkadd(nb, tab.bounds, text = "Boundaries", padding = 5)
 
-
-    tkgrid(fr.looks)
-    tkgrid(nb, sticky = "nw")
+    tkgrid(fr.looks, sticky = "nw")
+    tkgrid(nb, sticky = "w", pady = 2, padx = 3)
     tkgrid(fr.main)
     invisible(root)
 }

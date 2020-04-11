@@ -46,21 +46,23 @@ create_help_menu <- function(parent)
 
 
 #' @keywords internal
-on_change_number_of_looks <- function(x)
+on_change_nlook <- function(x)
 {
     # TODO: implement
     message("selecting ", x, " looks")
     #as.integer(tclvalue(tcl(cb, "get")))
+    #.par$set("nlook", default = tclVar("1"))
 }
 
 #' @keywords internal
 create_number_of_looks_combobox <- function(parent, nMax = 10)
 {
     choices <- as.character(seq_len(nMax))
-    combovar <- tclVar("1")
-    signal_number_of_looks <- function() on_change_number_of_looks(tclvalue(combovar))
+    if (!.par$has("nlook")) .par$add("nlook", tclVar("1"))
+    cb.var <- .par$get("nlook")
+    signal_number_of_looks <- function() on_change_nlook(tclvalue(cb.var))
 
-    cb <- ttkcombobox(parent, value = choices, textvariable = combovar,
+    cb <- ttkcombobox(parent, value = choices, textvariable = cb.var,
                       state = "readonly", width = 2)
     tkbind(cb, "<<ComboboxSelected>>", signal_number_of_looks)
     invisible(cb)

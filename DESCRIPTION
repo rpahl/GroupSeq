@@ -9,7 +9,7 @@ Description: Computes probabilities related to group sequential designs for
     boundaries, power, drift, and confidence intervals of such designs.
     Supports the alpha spending approach by Lan-DeMets as well as the
     conditional rejection probability principle by Müller and Schäfer.
-Imports: tcltk, tcltk2, mvtnorm
+Imports: tcltk, tcltk2, mvtnorm, container
 Suggests: tinytest
 License: GPL (>= 2)
 URL: https://github.com/rpahl/GroupSeq

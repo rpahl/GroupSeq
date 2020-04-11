@@ -35,7 +35,7 @@ verify_arg <- function(x,
 #' @param justify `character` alignment of the text.
 #' @return [tcltk::tklabel()] object
 #' @keywords internal
-.tklabel <- function(..., bg = "white", justify = c("left", "center", "right"))
+.tklabel <- function(..., bg = "grey95", justify = c("left", "center", "right"))
 {
     arg.just <- match.arg(justify)
     tcltk::tklabel(..., bg = bg, justify = arg.just)
