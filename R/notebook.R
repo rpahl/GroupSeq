@@ -2,26 +2,34 @@
 `pack Test parameters tab` <- function(nb)
 {
     tab <- tk2notetab(nb, "Test parameters")
+    gridder <- function(x) tkgrid(x, sticky = "w", pady = 3)
 
     # Labels
     fr.lab <- tkframe(tab)
     add_label <- function(x) {
-        tkgrid(.tklabel(fr.lab, text = x, justify = "left"), sticky = "w")
+        gridder(.tklabel(fr.lab, text = x, justify = "left"))
     }
-    labs <- c("Test Type", "Type I Error", "Power", "Sample Size (n)")
+    labs <- c("Test Type", "Type 1 Error", "Power", "Sample Size (n)")
     sapply(labs, add_label)
 
     # Fields
-    fr.field <- tkframe(tab)
+    fr.field <- tkframe(tab, pady = 3)
 
     ## Test type
-    testtype.selector <- create_combo_box(parent = fr.field,
-                                          param.name = "test.side",
-                                          choices = c("1-Sided", "2-Sided"),
-                                          state = "readonly")
-    tkgrid(testtype.selector)
+    testtype.selector <- create_combobox(parent = fr.field,
+                                         param.name = "test.side",
+                                         choices = c("1-Sided", "2-Sided"),
+                                         state = "readonly")
+    txt.width = 8
+    gridder(testtype.selector)
+    gridder(create_numeric_entry(fr.field, "alpha", "0.05", width = txt.width,
+                                 min = 0, max = 1))
+    gridder(create_numeric_entry(fr.field, "power", "0.8", width = txt.width,
+                                 min = 0, max = 1))
+    gridder(create_numeric_entry(fr.field, "sample.size", width = txt.width,
+                                 min = 0))
+    tkgrid(fr.lab, fr.field, sticky = "w", padx = 5, pady = 5)
 
-    tkgrid(fr.lab, fr.field, sticky = "w")
     invisible(tab)
 }
 

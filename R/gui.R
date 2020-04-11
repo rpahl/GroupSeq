@@ -32,7 +32,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     # Number of looks
     fr.looks <- tkframe(fr.main, padx = 10)
     nlook.lab <- .tklabel(fr.looks, text = "Number of looks ", justify = "left")
-    nlook.selector <- create_combo_box(parent = fr.looks,
+    nlook.selector <- create_combobox(parent = fr.looks,
                                       param.name = "nlook",
                                       choices = as.character(1:10),
                                       state = "readonly")
