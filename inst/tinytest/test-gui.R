@@ -11,10 +11,17 @@ tkdestroy(root)
 
 
 if (F) {
-    test_load <- function() {
+    test_gui <- function() {
         devtools::load_all()
         root <- tcltk::tktoplevel()
         win <- gui(root)
     }
-    test_load()
+    run_tests <- function() {
+        devtools::load_all()
+        tinytest::run_test_dir(system.file("tinytest", package="GroupSeq"))
+    }
+    run_tests()
+
+    test_gui()
+
 }

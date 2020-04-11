@@ -13,7 +13,7 @@ add_custom_icons <- function()
 #' @return Invoked for its side effects.
 #' @import tcltk tcltk2
 #' @keywords internal
-gui <- function(root)
+gui <- function(root, tabs = c("Test parameters", "Boundaries"))
 {
     # Init
     version <- utils::packageVersion(utils::packageName())
@@ -36,24 +36,8 @@ gui <- function(root)
            padx = 2, pady = 5)
 
     # Notebook
-    nb <- tk2notebook(parent = fr.main, tabs = c("Test parameters", "Boundaries"),
-                      padding = 5)
-
-    ## Test parameters
-    tab.test <- tk2notetab(nb, "Test parameters")
-    #tkadd(nb, tab.test, text = "Test parameters", padding = 5)
-    fr.lab <- tkframe(tab.test, padx = 10)
-    add_label <- function(x) {
-        tkgrid(.tklabel(fr.lab, text = x, justify = "left"), sticky = "w")
-    }
-    labs <- c("Test Type", "Type I Error", "Power", "Sample Size (n)")
-    sapply(labs, add_label)
-    tkgrid(fr.lab, sticky = "w")
-
-    ## Boundaries
-    #tab.bounds <- tkframe(root)
-    tab.bounds <- tk2notetab(nb, "Boundaries")
-    #tkadd(nb, tab.bounds, text = "Boundaries", padding = 5)
+    nb <- tk2notebook(parent = fr.main, tabs = tabs, padding = 5)
+    pack_tabs(nb, tabs)
 
     tkgrid(fr.looks, sticky = "nw")
     tkgrid(nb, sticky = "w", pady = 2, padx = 3)
