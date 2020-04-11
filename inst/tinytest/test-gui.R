@@ -9,3 +9,12 @@ win <- gui(root)
 expect_true(is.tkwin(win))
 tkdestroy(root)
 
+
+if (F) {
+    test_load <- function() {
+        devtools::load_all()
+        root <- tcltk::tktoplevel()
+        win <- gui(root)
+    }
+    test_load()
+}
