@@ -27,37 +27,37 @@ gui <- function(root)
     tkadd(menu, "cascade", label = "Help", menu = create_help_menu(menu))
 
     # Main part
-    fr.main <- tk2frame(root, relief = "flat", borderwidth = 1)
+    fr.main <- tkframe(root, relief = "flat", borderwidth = 1)
 
     # Number of looks
-    fr.looks <- tk2frame(fr.main, borderwidth = 5)
+    fr.looks <- tkframe(fr.main, borderwidth = 5)
     looks.lab <- tklabel(fr.looks, anchor = "nw", justify = "left",
                          text = "Number of interim looks ")
     tkgrid(looks.lab, create_number_of_looks_combobox(parent = fr.looks))
 
     # Notebook
-    nb <- tk2notebook(parent = fr.main,
-                      tabs = c("Design parameters", "Boundaries"))
+    nb <- ttknotebook(parent = fr.main)
+
+    ## Design parameters
+    tab.design <- tkframe(root, borderwidth = 3)
+    tkadd(nb, tab.design, text = "Design parameters", padding = 3)
+    fr.lab <- tkframe(tab.design)
+    add_label <- function(x) {
+        tkgrid(tklabel(fr.lab, text = x, justify = "left"), sticky = "w")
+    }
+    labs <- c("Test Type", "Type I Error", "Power", "Sample Size (n)",
+              "Allocation Ratio")
+    sapply(labs, add_label)
+    tkgrid(fr.lab, sticky = "w")
+
+    ## Boundaries
+    tab.bounds <- tkframe(root)
+    tkadd(nb, tab.bounds, text = "Boundaries", padding = 3)
+
 
     tkgrid(fr.looks)
     tkgrid(nb, sticky = "nw")
     tkgrid(fr.main)
-
-
-    # Input
-    if (F) {
-
-        g.input <- ggroup(container = gf.input)
-
-        menu = gcombobox(c("Probabilities given drift",
-                           "Drift given power",
-                           "Confidence interval"),
-                         container = g.input);
-
-        gf.out <- gframe("Output", container = grp_main, expand = T)
-        g.out <- ggroup(container = gf.out)
-        addSpace(g.out, val = 30, horizontal = FALSE)
-    }
     invisible(root)
 }
 

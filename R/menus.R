@@ -60,7 +60,7 @@ create_number_of_looks_combobox <- function(parent, nMax = 10)
     combovar <- tclVar("1")
     signal_number_of_looks <- function() on_change_number_of_looks(tclvalue(combovar))
 
-    cb <- tk2combobox(parent, value = choices, textvariable = combovar,
+    cb <- ttkcombobox(parent, value = choices, textvariable = combovar,
                       state = "readonly", width = 2)
     tkbind(cb, "<<ComboboxSelected>>", signal_number_of_looks)
     invisible(cb)
