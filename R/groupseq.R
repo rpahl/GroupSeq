@@ -16,10 +16,12 @@ pkg.env <- new.env(parent = emptyenv())
 pkg.env$taskWindow <- NULL
 pkg.env$scipen.old <- options(scipen=10)[[1]]
 
-
 # Environments used since version 2
 .env <- container::dict()
+get.env <- function() .env
+
 .par <- container::dict()
+get.par <- function() .par
 
 
 #' @title Start GroupSeq

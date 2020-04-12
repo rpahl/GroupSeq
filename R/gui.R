@@ -34,19 +34,20 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     fr.main <- tkframe(root, relief = "flat", borderwidth = 1)
 
     # Number of looks
-    fr.looks <- tkframe(fr.main, padx = 10)
-    nlook.lab <- .tklabel(fr.looks, text = "Number of looks ", justify = "left")
+    fr.looks <- tk2labelframe(fr.main, padding = 4, text = "Number of looks")
+    nlook.lab <- .tklabel(fr.looks, text = "K = ", justify = "left")
     nlook.selector <- create_combobox(parent = fr.looks,
                                       param.name = "nlook",
+                                      width = 4,
                                       choices = as.character(1:10),
                                       state = "readonly")
-    tkgrid(nlook.lab, nlook.selector, padx = 2, pady = 5)
+    tkgrid(nlook.lab, nlook.selector)
 
     # Notebook
     nb <- tk2notebook(parent = fr.main, tabs = tabs, padding = 5, width = 500, height = 200)
     pack_tabs(nb, tabs)
 
-    tkgrid(fr.looks, sticky = "nw")
+    tkgrid(fr.looks, sticky = "nw", padx = 8, pady = 8)
     tkgrid(nb, sticky = "w", pady = 2, padx = 3)
     tkgrid(fr.main)
     invisible(root)

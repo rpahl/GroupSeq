@@ -5,21 +5,24 @@ on_change_nlook <- function(x) {
     #as.integer(tclvalue(tcl(cb, "get")))
 }
 
-#' @title combobox factory
+#' @title [tcltk2::tk2combobox()] wrapper
+#' @description Creates a [tcltk2::tk2combobox()] and adds its textvariable to the
+#' global parameter dictionary.
 #' @keywords internal
-create_combobox <- function(parent, param.name, choices = NULL,
-                             onSelect = function(x) message("selected ", x),
-                             ...)
+create_combobox <- function(parent, param.name, width, choices = NULL,
+                            onSelect = function(x) message("selected ", x),
+                            register = get.par(),
+                            ...)
 {
     param.name.choices <- paste0(param.name, ".choices")
-    choices <- .par$peek(param.name.choices,
-                         default = as.character(choices))
+    choices <- register$peek(param.name.choices,
+                             default = as.character(choices))
+    if (missing(width)) width  <- max(nchar(choices)) + 1
 
-    .par$add(param.name, tclVar(choices[1]))
-    cb.var <- .par$get(param.name)
+    register$add(param.name, tclVar(choices[1]))
+    cb.var <- register$get(param.name)
 
-    width  <- max(nchar(choices)) + 1
-    cb <- ttkcombobox(parent, value = choices, textvariable = cb.var,
+    cb <- tk2combobox(parent, value = choices, textvariable = cb.var,
                       width = width, ...)
 
     signal_selected <- function() onSelect(tclvalue(cb.var))
@@ -28,23 +31,30 @@ create_combobox <- function(parent, param.name, choices = NULL,
 }
 
 
-#' @title entry factory
+#' @title [tcltk2::tk2entry()] wrapper
+#' @description Creates a [tcltk2::tk2entry()] with optional range checks and
+#' adds its textvariable to the global parameter dictionary.
+#' @details As long as the range is violated, the value in the entry field is
+#' colored red.
 #' @keywords internal
 create_numeric_entry <- function(parent, param.name,
                                  value = "",
                                  justify = "right",
                                  min = -Inf, max = Inf,
+                                 cmp.min = `>=`, cmp.max = `<=`,
+                                 register = get.par(),
                                  ...)
 {
-    .par$add(param.name, tclVar(value))
-    e.var <- .par$get(param.name)
+    register$add(param.name, tclVar(value))
+    e.var <- register$get(param.name)
 
     validatecommand <- function() {
         val <- tclvalue(e.var)
-        .par$set(".last.entry", val, add = TRUE)
 
+        # Make entry appear in red if it is outside of min/max range
         num <- suppressWarnings(as.numeric(val))
-        if (isTRUE(num >= min) && isTRUE(num <= max) || nchar(val) == 0) {
+        if (isTRUE(cmp.min(num, min)) && isTRUE(cmp.max(num,max)) ||
+            nchar(val) == 0) {
             tkconfigure(e, foreground = "black")
             tclVar(TRUE)
         } else {
@@ -59,3 +69,21 @@ create_numeric_entry <- function(parent, param.name,
                   ...)
     invisible(e)
 }
+
+
+#' @title [tcltk2::tk2radiobutton()] wrapper
+#' @description Creates a [tcltk2::tk2radiobutton()] with optional range checks and
+#' adds its textvariable to the global parameter dictionary.
+#' @keywords internal
+create_radiobutton <- function(parent, param.name, value,
+                               onSelect = function(x) message("button ", x),
+                               register = get.par(),
+                               ...)
+{
+    rb.var <- register$get(param.name)
+    signal_selected <- function() onSelect(tclvalue(rb.var))
+    rb <- tk2radiobutton(parent, variable = rb.var, value = value,
+                         command = signal_selected, ...)
+    invisible(rb)
+}
+
