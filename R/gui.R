@@ -18,6 +18,10 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     # Init
     version <- utils::packageVersion(utils::packageName())
     tkwm.title(root, paste0("GroupSeq ", version))
+    if (.Platform$OS.type == "windows") {
+        iconfile <- system.file("icons", "gs-logo.ico", package = "GroupSeq")
+        tkwm.iconbitmap(root, iconfile)
+    }
 
     # Menu
     menu <- tkmenu(root)
@@ -39,7 +43,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     tkgrid(nlook.lab, nlook.selector, padx = 2, pady = 5)
 
     # Notebook
-    nb <- tk2notebook(parent = fr.main, tabs = tabs, padding = 5)
+    nb <- tk2notebook(parent = fr.main, tabs = tabs, padding = 5, width = 500, height = 200)
     pack_tabs(nb, tabs)
 
     tkgrid(fr.looks, sticky = "nw")
