@@ -4,11 +4,22 @@ create_file_menu <- function(parent, root)
     menu <- tk2menu(parent, tearoff = FALSE)
 
     # TODO: load, save, save as ...
+    onNew <- function() {
+        tkdestroy(root)
+        get.env()$clear()
+        get.par()$clear()
+        start_gui()
+    }
     onLoad <- function() message("load")
     onSave <- function() message("save")
     onSaveAs <- function() message("save as")
-    onQuit <- function() tkdestroy(root)
-    tkadd(menu, "command", label = "Open config file...", command = onLoad)
+    onQuit <- function() {
+        tkdestroy(root)
+        get.env()$clear()
+        get.par()$clear()
+    }
+    tkadd(menu, "command", label = "New...", command = onNew)
+    tkadd(menu, "command", label = "Load config...", command = onLoad)
     tkadd(menu, "command", label = "Save config...", command = onSave)
     tkadd(menu, "command", label = "Save config as...", command = onSaveAs)
     tkadd(menu, "separator")
