@@ -23,19 +23,26 @@ get.env <- function() .env
 .par <- container::dict()
 get.par <- function() .par
 
+isNew <- function() !get.par()$has("load.par")
+register_if_new <- function(key, value) {
+    if (isNew()) get.par()$add(key, value)
+}
+
 
 #' @title Start GroupSeq
 #' @description Starts the graphical user interface, optionally the legacy
 #'  version of GroupSeq prior to version 2.
 #' @param legacy `logical` if `TRUE`, starts legacy GroupSeq version < 2.
+#' @param loadGUI `logical` if `TRUE`, loads parameters from earlier session
 #' @export
-start_gui <- function(legacy = FALSE)
+start_gui <- function(legacy = FALSE, loadGUI = FALSE)
 {
     if (legacy) {
         guiMode()
     } else {
         .env$add("root", tcltk::tktoplevel())
-        gui(.env$get("root"))
+        if (loadGUI) get.par()$set("load.par", TRUE, add = TRUE)
+        gui(get.env()$get("root"))
     }
     invisible()
 }
