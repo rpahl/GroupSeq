@@ -10,7 +10,7 @@ create_file_menu <- function(parent, root)
     }
     onLoad <- function() {
         fn <- tclvalue(tkgetOpenFile(filetypes = "{{Config Files} {.rds}}",
-                                     parent = get.root()))
+                                     parent = .env$get("root")))
         if (nchar(fn) > 0) {
             param_list <- readRDS(fn)
             update_tcl_parameters_from_list(get.par(), param_list)
@@ -19,7 +19,7 @@ create_file_menu <- function(parent, root)
     }
     onSave <- function() {
         fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
-                                     parent = get.root()))
+                                     parent = .env$get("root")))
         if (nchar(fn) > 0) {
             param_list <- parameters_to_list(get.par())
             saveRDS(param_list, file = fn)
@@ -28,7 +28,7 @@ create_file_menu <- function(parent, root)
     }
     onSaveAs <- function() {
         fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
-                                     parent = get.root()))
+                                     parent = .env$get("root")))
         if (nchar(fn) > 0) {
             param_list <- parameters_to_list(get.par())
             saveRDS(param_list, file = fn)

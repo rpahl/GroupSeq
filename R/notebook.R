@@ -39,7 +39,7 @@
         create_radiobutton(fr.field, "test.param.radiobutton",
                            onSelect = onRadioSelect, ...)
     }
-    register_if_new("test.param.radiobutton", tclVar("1"))
+    get.par()$add("test.param.radiobutton", tclVar("1"))
     rb.power <- create_rb(value = 1)
     rb.sample.size <- create_rb(value = 2)
     grid(e.power, rb.power)

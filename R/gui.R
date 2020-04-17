@@ -17,6 +17,10 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
 {
     # Init
     version <- utils::packageVersion(utils::packageName())
+
+    # Make sure cleanup takes place also when user closes window via "X" button
+    tkwm.protocol(root, "WM_DELETE_WINDOW", onQuit)
+
     tkwm.title(root, paste0("GroupSeq ", version))
     if (.Platform$OS.type == "windows") {
         iconfile <- system.file("icons", "gs-logo.ico", package = "GroupSeq")

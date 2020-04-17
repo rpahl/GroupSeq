@@ -15,17 +15,10 @@ NULL
 pkg.env <- new.env(parent = emptyenv())
 
 # Environments used since version 2
-.env <- new.env()
-get.env <- function() .env
-get.root <- function() get("root", envir = get.env())
+.env <- container::dict()
 
-get.par <- function() get("par", envir = get.env())
-get.par.last <- function() get("par.last", envir = get.env())
-
-isNew <- function() !get.par()$has("load.par")
-register_if_new <- function(key, value) {
-    if (isNew()) get.par()$add(key, value)
-}
+get.par <- function() .env$get("par")
+get.par.last <- function() .env$get("par.last")
 
 
 #' @title Start GroupSeq
@@ -35,17 +28,16 @@ register_if_new <- function(key, value) {
 #' @export
 start_gui <- function(legacy = FALSE)
 {
-    assign("legacy", legacy, envir = get.env())
     if (legacy) {
         pkg.env$taskWindow <- NULL
         pkg.env$scipen.old <- options(scipen=10)[[1]]
         guiMode()
     } else {
-        assign("par", container::dict(), envir = get.env())
-        assign("par.last", container::dict(), envir = get.env())
+        .env$add("par", container::dict())
+        .env$add("par.last", container::dict())
 
-        assign("root", tcltk::tktoplevel(), envir = get.env())
-        gui(get.root())
+        .env$add("root", tcltk::tktoplevel())
+        gui(.env$get("root"))
     }
     invisible()
 }
@@ -65,7 +57,7 @@ start_gui <- function(legacy = FALSE)
 
 #' @keywords internal
 onQuit <- function() {
-    isLegacy <- get0("legacy", envir = get.env(), ifnotfound = TRUE)
+    isLegacy <- .env$empty()
     if (isLegacy) {
         if (!is.null(pkg.env$taskWindow)) {
             tkdestroy(pkg.env$taskWindow)
@@ -73,8 +65,8 @@ onQuit <- function() {
             options(scipen=pkg.env$scipen.old)
         }
     } else {
-        tkdestroy(get.root())
-        remove(list = ls(get.env()), envir = get.env())
+        tkdestroy(.env$get("root"))
+        .env$clear()
     }
     invisible()
 }

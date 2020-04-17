@@ -19,7 +19,7 @@ create_combobox <- function(parent, param.name, width, choices = NULL,
                              default = as.character(choices))
     if (missing(width)) width  <- max(nchar(choices)) + 1
 
-    register_if_new(param.name, tclVar(choices[1]))
+    get.par()$add(param.name, tclVar(choices[1]))
     cb.var <- register$get(param.name)
 
     cb <- tk2combobox(parent, value = choices, textvariable = cb.var,
@@ -45,7 +45,7 @@ create_numeric_entry <- function(parent, param.name,
                                  register = get.par(),
                                  ...)
 {
-    register_if_new(param.name, tclVar(value))
+    get.par()$add(param.name, tclVar(value))
     e.var <- register$get(param.name)
 
     validatecommand <- function() {
@@ -80,7 +80,6 @@ create_radiobutton <- function(parent, param.name, value,
                                register = get.par(),
                                ...)
 {
-    #register_if_new(param.name, tclVar(value))
     rb.var <- register$get(param.name)
     signal_selected <- function() onSelect(tclvalue(rb.var))
     rb <- tk2radiobutton(parent, variable = rb.var, value = value,
