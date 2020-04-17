@@ -3,16 +3,38 @@ create_file_menu <- function(parent, root)
 {
     menu <- tk2menu(parent, tearoff = FALSE)
 
-    # TODO: load, save, save as ...
     onNew <- function() {
         tkdestroy(root)
-        get.env()$clear()
         get.par()$clear()
         start_gui()
     }
-    onLoad <- function() message("load")
-    onSave <- function() message("save")
-    onSaveAs <- function() message("save as")
+    onLoad <- function() {
+        fn <- tclvalue(tkgetOpenFile(filetypes = "{{Config Files} {.rds}}",
+                                     parent = get.root()))
+        if (nchar(fn) > 0) {
+            param_list <- readRDS(fn)
+            update_tcl_parameters_from_list(get.par(), param_list)
+        }
+        invisible()
+    }
+    onSave <- function() {
+        fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
+                                     parent = get.root()))
+        if (nchar(fn) > 0) {
+            param_list <- parameters_to_list(get.par())
+            saveRDS(param_list, file = fn)
+        }
+        invisible()
+    }
+    onSaveAs <- function() {
+        fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
+                                     parent = get.root()))
+        if (nchar(fn) > 0) {
+            param_list <- parameters_to_list(get.par())
+            saveRDS(param_list, file = fn)
+        }
+        invisible()
+    }
     onQuit <- function() {
         tkdestroy(root)
         get.env()$clear()

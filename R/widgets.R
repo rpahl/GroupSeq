@@ -88,3 +88,15 @@ create_radiobutton <- function(parent, param.name, value,
     invisible(rb)
 }
 
+
+#' @title `tklabel` wrapper with some changed default parameters
+#' @param bg 'character' background color.
+#' @param justify `character` alignment of the text.
+#' @return [tcltk::tklabel()] object
+#' @keywords internal
+.tklabel <- function(..., bg = "grey95", justify = c("left", "center", "right"))
+{
+    arg.just <- match.arg(justify)
+    tcltk::tklabel(..., bg = bg, justify = arg.just)
+}
+

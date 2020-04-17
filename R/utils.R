@@ -5,6 +5,7 @@
 #' @param lenOp `character` operator used for length comparison.
 #' @param len `integer` expected length of argument.
 #' @return returns invisibly `TRUE` if verification succeeds
+#' @keywords internal
 verify_arg <- function(x,
                        type = "character",
                        lenOp = c("==", ">", "<", ">=", "<=", "!="),
@@ -29,15 +30,28 @@ verify_arg <- function(x,
 }
 
 
-
-#' @title `tklabel` wrapper with some changed default parameters
-#' @param bg 'character' background color.
-#' @param justify `character` alignment of the text.
-#' @return [tcltk::tklabel()] object
 #' @keywords internal
-.tklabel <- function(..., bg = "grey95", justify = c("left", "center", "right"))
+parameters_to_list <- function(dict)
 {
-    arg.just <- match.arg(justify)
-    tcltk::tklabel(..., bg = bg, justify = arg.just)
+    stopifnot(inherits(dict, "Dict"))
+    param_list <- as.list(dict)
+    values <- lapply(param_list, tclvalue)
+    values
+}
+
+
+#' @keywords internal
+update_tcl_parameters_from_list <- function(dict, param_list)
+{
+    stopifnot(is.list(param_list))
+    for (key in names(param_list)) {
+        elem <- param_list[[key]]
+        if (dict$has(key)) {
+            tcl.var <- dict$get(key)
+            tclvalue(tcl.var) <- elem
+        } else {
+            dict$add(key, tclVar(elem))
+        }
+    }
 }
 

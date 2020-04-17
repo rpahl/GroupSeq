@@ -17,11 +17,12 @@ pkg.env$taskWindow <- NULL
 pkg.env$scipen.old <- options(scipen=10)[[1]]
 
 # Environments used since version 2
-.env <- container::dict()
+.env <- new.env()
 get.env <- function() .env
+get.root <- function() get("root", envir = get.env())
 
-.par <- container::dict()
-get.par <- function() .par
+assign("par", container::dict(), envir = get.env())
+get.par <- function() get("par", envir = get.env())
 
 isNew <- function() !get.par()$has("load.par")
 register_if_new <- function(key, value) {
@@ -33,16 +34,18 @@ register_if_new <- function(key, value) {
 #' @description Starts the graphical user interface, optionally the legacy
 #'  version of GroupSeq prior to version 2.
 #' @param legacy `logical` if `TRUE`, starts legacy GroupSeq version < 2.
-#' @param loadGUI `logical` if `TRUE`, loads parameters from earlier session
+#' @param isLoading `logical` if `TRUE`, loads parameters from earlier session
 #' @export
-start_gui <- function(legacy = FALSE, loadGUI = FALSE)
+start_gui <- function(legacy = FALSE, isLoading = FALSE)
 {
     if (legacy) {
         guiMode()
     } else {
-        .env$add("root", tcltk::tktoplevel())
-        if (loadGUI) get.par()$set("load.par", TRUE, add = TRUE)
-        gui(get.env()$get("root"))
+        if (isLoading) {
+            get.par()$set("load.par", TRUE, add = TRUE)
+        }
+        assign("root", tcltk::tktoplevel(), envir = get.env())
+        gui(get.root())
     }
     invisible()
 }

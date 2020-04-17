@@ -24,5 +24,7 @@ if (F) {
 
     test_gui()
 
+    start_gui()
+
 }
 
