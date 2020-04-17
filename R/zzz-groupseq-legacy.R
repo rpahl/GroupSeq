@@ -6457,7 +6457,7 @@ guiMode <- function()
   }
 
   OK.button <-tkbutton(taskWindow,text="   Perform Selected Task   ",command=OnOKtaskWindow)
-  Quit.buttton <- tkbutton(taskWindow,text="  QUIT GroupSeq  ",command=quitGroupSeq)
+  Quit.buttton <- tkbutton(taskWindow,text="  QUIT GroupSeq  ",command=onQuit)
 
   # place buttons
   tkgrid(OK.button)

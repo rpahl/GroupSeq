@@ -35,11 +35,6 @@ create_file_menu <- function(parent, root)
         }
         invisible()
     }
-    onQuit <- function() {
-        tkdestroy(root)
-        get.env()$clear()
-        get.par()$clear()
-    }
     tkadd(menu, "command", label = "New...", command = onNew)
     tkadd(menu, "command", label = "Load config...", command = onLoad)
     tkadd(menu, "command", label = "Save config...", command = onSave)
