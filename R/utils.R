@@ -30,15 +30,6 @@ verify_arg <- function(x,
 }
 
 
-#' @keywords internal
-parameters_to_list <- function(dict)
-{
-    stopifnot(inherits(dict, "Dict"))
-    param_list <- as.list(dict)
-    values <- lapply(param_list, tclvalue)
-    values
-}
-
 
 #' @keywords internal
 update_tcl_parameters_from_list <- function(dict, param_list)
@@ -54,4 +45,5 @@ update_tcl_parameters_from_list <- function(dict, param_list)
         }
     }
 }
+
 

@@ -34,6 +34,7 @@
                    tip = "The power is going to be computed")
             config(e.sample.size, state = "active", tip = "")
         }
+        update.par("test.param.radiobutton")
     }
     create_rb <- function(...) {
         create_radiobutton(fr.field, "test.param.radiobutton",

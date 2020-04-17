@@ -19,6 +19,32 @@ pkg.env <- new.env(parent = emptyenv())
 
 get.par <- function() .env$get("par")
 get.par.last <- function() .env$get("par.last")
+add.par <- function(key, value) {
+    get.par$add(key, value)
+    get.par.last$add(key, value)
+}
+
+update.par <- function(key) {
+    param_list <- as.list(get.par())
+    current <- lapply(as.list(param_list), tclvalue)
+    last <- as.list(get.par.last())
+    if (length(last) != length(current)) stop("length mismatch")
+    last <- last[names(current)]
+
+    hasChanges <- !identical(current, last)
+    .env$set("hasChanges", value = hasChanges)
+    update.title()
+}
+
+update.title <- function()
+{
+    name <- .env$get("name")
+    isNew <- nchar(name) == 0
+    hasChanges <- .env$get("hasChanges") && !isNew
+    if (isNew) name <- "[New]"
+    title <- paste0(name, ifelse(hasChanges, " + ", ""), " - GroupSeq")
+    tkwm.title(.env$get("root"), title)
+}
 
 
 #' @title Start GroupSeq
@@ -34,10 +60,13 @@ start_gui <- function(legacy = FALSE)
         guiMode()
     } else {
         .env$add("par", container::dict())
-        .env$add("par.last", container::dict())
-
         .env$add("root", tcltk::tktoplevel())
+        .env$add("name", "")
         gui(.env$get("root"))
+        param_list <- lapply(as.list(.env$get("par")), FUN = tclvalue)
+        .env$add("par.last", container::dict(param_list))
+        .env$add("hasChanges", FALSE)
+        update.title()
     }
     invisible()
 }
