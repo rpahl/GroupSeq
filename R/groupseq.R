@@ -22,18 +22,20 @@ init_env <- function(legacy = FALSE)
     if (legacy) {
         pkg.env$taskWindow <- NULL
         pkg.env$scipen.old <- options(scipen=10)[[1]]
-
+        pkg.env
     } else {
-        .env$add("root", tcltk::tktoplevel())
         .env$add("par", container::dict())
         .env$add("par.last", container::dict())
         .env$add("name", "")
+        .env$add("root", tcltk::tktoplevel())
+        .env
     }
 }
 
 
 #' @keywords internal
 get.par <- function() .env$get("par")
+
 
 #' @keywords internal
 get.par.last <- function() .env$get("par.last")

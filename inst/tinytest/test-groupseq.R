@@ -1,7 +1,7 @@
 
 start_gui()
 expect_true(inherits(.env, "Dict"))
-expect_equal(.env$keys(), c("root", "par", "par.last", "name"))
+expect_equal(.env$keys(), c("par", "par.last", "name", "root"))
 
 expect_true(inherits(.env$get("root"), "tkwin"))
 expect_true(inherits(.env$get("par"), "Dict"))

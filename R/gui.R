@@ -55,7 +55,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     tkgrid(fr.main)
 
     update_changed_parameters()
-    invisible(root)
+    root
 }
 
 show_about <- function(...)

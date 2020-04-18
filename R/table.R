@@ -21,27 +21,35 @@ fill_table <- function(tab, data)
                 rows = nrow(data) + 1,
                 cols = ncol(data),
                 titlerows = 1)
+    tcl(tab, "clear", "cache")
     invisible(tab)
 }
 
 
 #' @keywords internal
-get_cell_value <- function(tab, i, j)
+get_cell_value2 <- function(tab, i, j)
 {
     tclvalue(tcl(tab, "get", paste0(i, ", ", j)))
 }
 
 
 #' @keywords internal
-set_cell_value <- function(tab, i, j, value)
+set_cell_value2 <- function(tab, r, c, value)
 {
-    tcl(tab, "set", paste0(i, ", ", j), as.character(value))
+    as.tclVar <- function(x) tclVar(x)
+    # @x,y, or <row>,<col>
+    #tcl(tab, "set", paste0("@", i, ", ", j), as.tclVar(value))
+    tkconfigure(tab,
+                command = as.tclVar,
+                rows = r,
+                cols = c)
+    tcl(tab, "clear", "cache")
     invisible(tab)
 }
 
 
 #' @keywords internal
-create_table <- function(parent, dims)
+create_table2 <- function(parent, dims, name = "myTable")
 {
     # Arg checks
     tclRequire("Tktable")
@@ -51,7 +59,8 @@ create_table <- function(parent, dims)
 
     as.tclVar <- function(x) tclVar(x)
 
-    tab <- tkwidget(parent, "table",
+    tab <- tkwidget(parent, type = "table",
+                    variable = name,
                     rows = dims[1] + 1,
                     cols = dims[2],
                     colorigin = 1,
@@ -72,6 +81,41 @@ create_table <- function(parent, dims)
     #tkpack(scroll.x, fill = "x", expand = FALSE, side = "bottom")
     #tkpack(scroll.y, fill = "y", expand = FALSE, side = "right")
     invisible(tab)
+}
+
+
+#' @keywords internal
+create_table <- function(parent, dims, name = "myTable", ...)
+{
+    tk2table(parent,
+                    variable = name,
+                    rows = dims[1] + 1,
+                    cols = dims[2],
+                    colorigin = 1,
+                    titlerows = 1,
+                    selecttype = "cell",
+                    selectmode = "extended",
+                    multiline = FALSE,
+                    flashmode = TRUE,
+                    #colwidth = "25",
+                    #background = "white"
+                    invertselected = TRUE,
+                    ...
+    )
+}
+
+
+#' @keywords internal
+set_cell_value <- function(tab, i, j, value)
+{
+    tcl(tab, "set", paste0(i, ",", j), as.character(value))
+}
+
+
+#' @keywords internal
+get_cell_value <- function(tab, i, j)
+{
+    tclvalue(tcl(tab, "get", paste0(i, ", ", j)))
 }
 
 

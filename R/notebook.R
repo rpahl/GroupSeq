@@ -87,8 +87,8 @@
     # Input table
     fr.table <- tk2frame(fr.tab)
     data <- as.data.frame(matrix(1:40, ncol = 4))
-    table <- create_table(fr.table)
-    fill_table(table, data)
+    table <- create_table(fr.table, dims = dim(data))
+    #fill_table(table, data)
     tkgrid(table)
 
     # Put it all together

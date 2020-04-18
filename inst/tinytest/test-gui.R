@@ -4,12 +4,12 @@ win <- start_gui(legacy = TRUE)
 expect_true(is.tkwin(pkg.env$taskWindow))
 onQuit()
 
-root <- tcltk::tktoplevel()
-init_env()
-win <- gui(root)
+e <- init_env()
+win <- gui(e$get("root"))
 expect_true(is.tkwin(win))
 onQuit()
-
+expect_true(e$empty())
+rm(e)
 
 if (F) {
     test_gui <- function() {
