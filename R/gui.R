@@ -53,6 +53,8 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     tkgrid(fr.looks, sticky = "nw", padx = 8, pady = 8)
     tkgrid(nb, sticky = "w", pady = 2, padx = 3)
     tkgrid(fr.main)
+
+    update_changed_parameters()
     invisible(root)
 }
 

@@ -17,33 +17,68 @@ pkg.env <- new.env(parent = emptyenv())
 # Environments used since version 2
 .env <- container::dict()
 
+init_env <- function(legacy = FALSE)
+{
+    if (legacy) {
+        pkg.env$taskWindow <- NULL
+        pkg.env$scipen.old <- options(scipen=10)[[1]]
+
+    } else {
+        .env$add("root", tcltk::tktoplevel())
+        .env$add("par", container::dict())
+        .env$add("par.last", container::dict())
+        .env$add("name", "")
+    }
+}
+
+
+#' @keywords internal
 get.par <- function() .env$get("par")
+
+#' @keywords internal
 get.par.last <- function() .env$get("par.last")
+
+
+#' @keywords internal
 add.par <- function(key, value) {
     get.par$add(key, value)
     get.par.last$add(key, value)
 }
 
-update.par <- function(key) {
+
+#' @keywords internal
+has_changed_parameters <- function()
+{
     param_list <- as.list(get.par())
     current <- lapply(as.list(param_list), tclvalue)
     last <- as.list(get.par.last())
     if (length(last) != length(current)) stop("length mismatch")
     last <- last[names(current)]
-
     hasChanges <- !identical(current, last)
-    .env$set("hasChanges", value = hasChanges)
-    update.title()
+    hasChanges
 }
 
-update.title <- function()
+
+#' @keywords internal
+isNew <- function() nchar(.env$get("name")) == 0
+
+
+#' @keywords internal
+update_title <- function()
 {
-    name <- .env$get("name")
-    isNew <- nchar(name) == 0
-    hasChanges <- .env$get("hasChanges") && !isNew
-    if (isNew) name <- "[New]"
-    title <- paste0(name, ifelse(hasChanges, " + ", ""), " - GroupSeq")
+    name <- if (isNew()) "[New]" else .env$get("name")
+    plus <- if (has_changed_parameters()) " + " else ""
+    title <- paste0(name, plus, " - GroupSeq")
     tkwm.title(.env$get("root"), title)
+}
+
+
+#' @keywords internal
+update_changed_parameters <- function()
+{
+    param_list <- lapply(as.list(.env$get("par")), FUN = tclvalue)
+    .env$set("par.last", container::dict(param_list))
+    update_title()
 }
 
 
@@ -54,19 +89,11 @@ update.title <- function()
 #' @export
 start_gui <- function(legacy = FALSE)
 {
+    init_env(legacy)
     if (legacy) {
-        pkg.env$taskWindow <- NULL
-        pkg.env$scipen.old <- options(scipen=10)[[1]]
         guiMode()
     } else {
-        .env$add("par", container::dict())
-        .env$add("root", tcltk::tktoplevel())
-        .env$add("name", "")
         gui(.env$get("root"))
-        param_list <- lapply(as.list(.env$get("par")), FUN = tclvalue)
-        .env$add("par.last", container::dict(param_list))
-        .env$add("hasChanges", FALSE)
-        update.title()
     }
     invisible()
 }

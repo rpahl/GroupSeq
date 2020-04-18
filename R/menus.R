@@ -4,6 +4,9 @@ create_file_menu <- function(parent, root)
     menu <- tk2menu(parent, tearoff = FALSE)
 
     onNew <- function() {
+        hasName <- nchar(.env$get("name")) > 0
+        if (.env$get("hasChanges") && 0)
+
         tkdestroy(root)
         get.par()$clear()
         start_gui()
@@ -14,25 +17,30 @@ create_file_menu <- function(parent, root)
         if (nchar(fn) > 0) {
             param_list <- readRDS(fn)
             update_tcl_parameters_from_list(get.par(), param_list)
+            .env$set("name", fn)
+            update_changed_parameters()
         }
         invisible()
     }
     onSave <- function() {
-        fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
-                                     parent = .env$get("root")))
+        fn <- .env$get("name")
+
         if (nchar(fn) > 0) {
-            param_list <- parameters_to_list(get.par())
-            saveRDS(param_list, file = fn)
+            param_list <- as.list(get.par())
+            values <- lapply(param_list, tclvalue)
+            saveRDS(values, file = fn)
+            .env$set("name", fn)
+            update_changed_parameters()
+        } else {
+            onSaveAs()
         }
         invisible()
     }
     onSaveAs <- function() {
         fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
                                      parent = .env$get("root")))
-        if (nchar(fn) > 0) {
-            param_list <- parameters_to_list(get.par())
-            saveRDS(param_list, file = fn)
-        }
+        .env$set("name", fn)
+        onSave()
         invisible()
     }
     tkadd(menu, "command", label = "New...", command = onNew)
@@ -70,30 +78,6 @@ create_help_menu <- function(parent)
     onAbout <- function() message("about")
     tkadd(menu, "command", label = "About", command = onAbout)
     menu
-}
-
-
-#' @keywords internal
-on_change_nlook <- function(x)
-{
-    # TODO: implement
-    message("selecting ", x, " looks")
-    #as.integer(tclvalue(tcl(cb, "get")))
-    #.par$set("nlook", default = tclVar("1"))
-}
-
-#' @keywords internal
-create_number_of_looks_combobox <- function(parent, nMax = 10)
-{
-    choices <- as.character(seq_len(nMax))
-    if (!.par$has("nlook")) .par$add("nlook", tclVar("1"))
-    cb.var <- .par$get("nlook")
-    signal_number_of_looks <- function() on_change_nlook(tclvalue(cb.var))
-
-    cb <- ttkcombobox(parent, value = choices, textvariable = cb.var,
-                      state = "readonly", width = 2)
-    tkbind(cb, "<<ComboboxSelected>>", signal_number_of_looks)
-    invisible(cb)
 }
 
 

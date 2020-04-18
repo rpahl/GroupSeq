@@ -34,7 +34,7 @@
                    tip = "The power is going to be computed")
             config(e.sample.size, state = "active", tip = "")
         }
-        update.par("test.param.radiobutton")
+        update_title()
     }
     create_rb <- function(...) {
         create_radiobutton(fr.field, "test.param.radiobutton",
@@ -54,7 +54,7 @@
     tip.drift <- paste0("Drift is the expected test statistic\n",
                   "for the full sample, that is, when time = 1.")
     grid(create_numeric_entry(fr.field2, "drift", "0", width = 7, tip = tip.drift))
-    grid(create_numeric_entry(fr.field2, "sd", "1", width = 7, min = 0, cmp.min = ">"))
+    grid(create_numeric_entry(fr.field2, "sd", "1", width = 7, min = 0, cmp.min = `>`))
     tkgrid(fr.lab2, fr.field2, padx = 5)
 
     # Put it all together
