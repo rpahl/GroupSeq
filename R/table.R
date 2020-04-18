@@ -97,8 +97,7 @@ create_table <- function(parent, dims, name = "myTable", ...)
                     selectmode = "extended",
                     multiline = FALSE,
                     flashmode = TRUE,
-                    #colwidth = "25",
-                    #background = "white"
+                    background = "white",
                     invertselected = TRUE,
                     ...
     )
@@ -118,4 +117,15 @@ get_cell_value <- function(tab, i, j)
     tclvalue(tcl(tab, "get", paste0(i, ", ", j)))
 }
 
+
+#' @keywords internal
+configure_cell <- function(tab, i, j, ...) {
+    # Note: configuration of state of entire table shadows state configuration
+    # of individual cells.
+    str.tag <- paste0(i, j)
+    str.pos <- paste0(i, ",", j)
+    tcl(tab, "tag", "celltag", str.tag, str.pos)
+    tcl(tab, "tag", "configure", str.tag, ...)
+    invisible(tab)
+}
 
