@@ -5,10 +5,10 @@ expect_true(is.tkwin(pkg.env$taskWindow))
 onQuit()
 
 e <- init_env()
-win <- gui(e$get("root"))
+win <- gui(e$at2("root"))
 expect_true(is.tkwin(win))
 onQuit()
-expect_true(e$empty())
+expect_true(e$is_empty())
 rm(e)
 
 if (F) {

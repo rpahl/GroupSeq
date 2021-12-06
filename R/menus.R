@@ -4,8 +4,8 @@ create_file_menu <- function(parent, root)
     menu <- tk2menu(parent, tearoff = FALSE)
 
     onNew <- function() {
-        hasName <- nchar(.env$get("name")) > 0
-        if (.env$get("hasChanges") && 0)
+        hasName <- nchar(.env$at2("name")) > 0
+        if (.env$at2("hasChanges") && 0)
 
         tkdestroy(root)
         get.par()$clear()
@@ -17,19 +17,19 @@ create_file_menu <- function(parent, root)
         if (nchar(fn) > 0) {
             param_list <- readRDS(fn)
             update_tcl_parameters_from_list(get.par(), param_list)
-            .env$set("name", fn)
+            .env$replace_at("name", fn)
             update_changed_parameters()
         }
         invisible()
     }
     onSave <- function() {
-        fn <- .env$get("name")
+        fn <- .env$at2("name")
 
         if (nchar(fn) > 0) {
             param_list <- as.list(get.par())
             values <- lapply(param_list, tclvalue)
             saveRDS(values, file = fn)
-            .env$set("name", fn)
+            .env$replace_at("name", fn)
             update_changed_parameters()
         } else {
             onSaveAs()
@@ -39,7 +39,7 @@ create_file_menu <- function(parent, root)
     onSaveAs <- function() {
         fn <- tclvalue(tkgetSaveFile(filetypes = "{{Config Files} {.rds}}",
                                      parent = root))
-        .env$set("name", fn)
+        .env$replace_at("name", fn)
         onSave()
         invisible()
     }

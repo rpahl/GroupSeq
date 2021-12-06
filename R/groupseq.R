@@ -33,22 +33,18 @@ init_env <- function(legacy = FALSE)
 }
 
 
-#' @keywords internal
-get.par <- function() .env$get("par")
+get.par <- function() .env$at2("par")
 
 
-#' @keywords internal
-get.par.last <- function() .env$get("par.last")
+get.par.last <- function() .env$at2("par.last")
 
 
-#' @keywords internal
 add.par <- function(key, value) {
     get.par$add(key, value)
     get.par.last$add(key, value)
 }
 
 
-#' @keywords internal
 has_changed_parameters <- function()
 {
     param_list <- as.list(get.par())
@@ -61,25 +57,22 @@ has_changed_parameters <- function()
 }
 
 
-#' @keywords internal
-isNew <- function() nchar(.env$get("name")) == 0
+isNew <- function() nchar(.env$at2("name")) == 0
 
 
-#' @keywords internal
 update_title <- function()
 {
-    name <- if (isNew()) "[New]" else .env$get("name")
+    name <- if (isNew()) "[New]" else .env$at2("name")
     plus <- if (has_changed_parameters()) " + " else ""
     title <- paste0(name, plus, " - GroupSeq")
-    tkwm.title(.env$get("root"), title)
+    tkwm.title(.env$at2("root"), title)
 }
 
 
-#' @keywords internal
 update_changed_parameters <- function()
 {
-    param_list <- lapply(as.list(.env$get("par")), FUN = tclvalue)
-    .env$set("par.last", container::dict(param_list))
+    param_list <- lapply(as.list(.env$at2("par")), FUN = tclvalue)
+    .env$replace_at("par.last", container::as.dict(param_list))
     update_title()
 }
 
@@ -95,13 +88,12 @@ start_gui <- function(legacy = FALSE)
     if (legacy) {
         guiMode()
     } else {
-        gui(.env$get("root"))
+        gui(.env$at2("root"))
     }
     invisible()
 }
 
 
-#' @keywords internal
 .onLoad <- function(libname, pkgname)
 {
     doStart <- getOption("AutostartGroupSeq", default = FALSE)
@@ -113,9 +105,8 @@ start_gui <- function(legacy = FALSE)
 }
 
 
-#' @keywords internal
 onQuit <- function() {
-    isLegacy <- .env$empty()
+    isLegacy <- .env$is_empty()
     if (isLegacy) {
         if (!is.null(pkg.env$taskWindow)) {
             tkdestroy(pkg.env$taskWindow)
@@ -123,19 +114,17 @@ onQuit <- function() {
             options(scipen=pkg.env$scipen.old)
         }
     } else {
-        tkdestroy(.env$get("root"))
+        tkdestroy(.env$at2("root"))
         .env$clear()
     }
     invisible()
 }
 
 
-#' @keywords internal
 .onUnload <- function(libpath) {
     onQuit()
 }
 
-#' @keywords internal
 .onDetach <- function(libpath) {
     onQuit()
 }
