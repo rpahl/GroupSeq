@@ -6,3 +6,5 @@ last.vim
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+
+tags

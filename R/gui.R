@@ -66,8 +66,8 @@ show_about <- function(...)
                   "Enables to derive critical boundaries, power, drift, ",
                   "and confidence intervals of such designs. Supports the ",
                   "alpha spending approach by Lan-DeMets as well as the ",
-                  "conditional rejection probability principle by Müller ",
-                  "and Schäfer.")
+                  "conditional rejection probability principle by Mueller ",
+                  "and Schaefer.")
     gmessage(title = "About", message = msg, icon = "info")
 }
 
