@@ -1,4 +1,4 @@
-#' @keywords internal
+
 `pack Test parameters tab` <- function(nb)
 {
     tab <- tk2notetab(nb, "Test parameters")
@@ -64,7 +64,6 @@
 }
 
 
-#' @keywords internal
 `pack Boundaries tab` <- function(nb)
 {
     tab <- tk2notetab(nb, "Boundaries")
@@ -100,7 +99,6 @@
 }
 
 
-#' @keywords internal
 pack_tabs <- function(nb, tabs)
 {
     for (tab in tabs) {

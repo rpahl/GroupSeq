@@ -15,7 +15,9 @@ NULL
 pkg.env <- new.env(parent = emptyenv())
 
 # Environments used since version 2
-.env <- container::dict()
+.env <- function() {
+    container::dict()
+}()
 
 init_env <- function(legacy = FALSE)
 {
@@ -111,7 +113,7 @@ onQuit <- function() {
         if (!is.null(pkg.env$taskWindow)) {
             tkdestroy(pkg.env$taskWindow)
             pkg.env$taskWindow <- NULL
-            options(scipen=pkg.env$scipen.old)
+            options(scipen = pkg.env$scipen.old)
         }
     } else {
         tkdestroy(.env$at2("root"))

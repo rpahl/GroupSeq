@@ -1,4 +1,4 @@
-#' @keywords internal
+
 fill_table <- function(tab, data)
 {
     # Arg checks
@@ -26,14 +26,12 @@ fill_table <- function(tab, data)
 }
 
 
-#' @keywords internal
 get_cell_value2 <- function(tab, i, j)
 {
     tclvalue(tcl(tab, "get", paste0(i, ", ", j)))
 }
 
 
-#' @keywords internal
 set_cell_value2 <- function(tab, r, c, value)
 {
     as.tclVar <- function(x) tclVar(x)
@@ -48,7 +46,6 @@ set_cell_value2 <- function(tab, r, c, value)
 }
 
 
-#' @keywords internal
 create_table2 <- function(parent, dims, name = "myTable")
 {
     # Arg checks
@@ -84,7 +81,6 @@ create_table2 <- function(parent, dims, name = "myTable")
 }
 
 
-#' @keywords internal
 create_table <- function(parent, dims, name = "myTable", ...)
 {
     tk2table(parent,
@@ -104,21 +100,18 @@ create_table <- function(parent, dims, name = "myTable", ...)
 }
 
 
-#' @keywords internal
 set_cell_value <- function(tab, i, j, value)
 {
     tcl(tab, "set", paste0(i, ",", j), as.character(value))
 }
 
 
-#' @keywords internal
 get_cell_value <- function(tab, i, j)
 {
     tclvalue(tcl(tab, "get", paste0(i, ", ", j)))
 }
 
 
-#' @keywords internal
 configure_cell <- function(tab, i, j, ...) {
     # Note: configuration of state of entire table shadows state configuration
     # of individual cells.

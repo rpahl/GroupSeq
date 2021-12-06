@@ -1,4 +1,4 @@
-#' @keywords internal
+
 add_custom_icons <- function()
 {
     path <- system.file("icons", package = "GroupSeq")
@@ -7,12 +7,12 @@ add_custom_icons <- function()
     addStockIcons(iconNames, iconFiles)
 }
 
-#' @title Create graphical user interface.
-#' @description This function builds the main GUI that appears when [GroupSeq]
-#'  is started.
+#' Graphical user interface.
+#'
+#' This function builds the main GUI that appears when `GroupSeq` is started.
 #' @return Invoked for its side effects.
 #' @import tcltk tcltk2
-#' @keywords internal
+#' @noRd
 gui <- function(root, tabs = c("Test parameters", "Boundaries"))
 {
     # Init
@@ -57,6 +57,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     update_changed_parameters()
     root
 }
+
 
 show_about <- function(...)
 {

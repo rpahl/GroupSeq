@@ -1,14 +1,14 @@
-#' @keywords internal
 on_change_nlook <- function(x) {
     # TODO: implement
     message("selecting ", x, " looks")
     #as.integer(tclvalue(tcl(cb, "get")))
 }
 
-#' @title [tcltk2::tk2combobox()] wrapper
-#' @description Creates a [tcltk2::tk2combobox()] and adds its textvariable to the
+#' Combo box wrapper
+#'
+#' Creates a [tcltk2::tk2combobox()] and adds its textvariable to the
 #' global parameter dictionary.
-#' @keywords internal
+#' @noRd
 create_combobox <- function(parent, param.name, width, choices = NULL,
                             onSelect = function(x) message("selected ", x),
                             register = get.par(),
@@ -31,12 +31,13 @@ create_combobox <- function(parent, param.name, width, choices = NULL,
 }
 
 
-#' @title [tcltk2::tk2entry()] wrapper
-#' @description Creates a [tcltk2::tk2entry()] with optional range checks and
+#' Numeric entry wrapper
+#'
+#' Creates a [tcltk2::tk2entry()] with optional range checks and
 #' adds its textvariable to the global parameter dictionary.
 #' @details As long as the range is violated, the value in the entry field is
 #' colored red.
-#' @keywords internal
+#' @noRd
 create_numeric_entry <- function(parent, param.name,
                                  value = "",
                                  justify = "right",
@@ -71,10 +72,11 @@ create_numeric_entry <- function(parent, param.name,
 }
 
 
-#' @title [tcltk2::tk2radiobutton()] wrapper
-#' @description Creates a [tcltk2::tk2radiobutton()] with optional range checks and
+#' Radio button wrapper
+#'
+#' Creates a [tcltk2::tk2radiobutton()] with optional range checks and
 #' adds its textvariable to the global parameter dictionary.
-#' @keywords internal
+#' @noRd
 create_radiobutton <- function(parent, param.name, value,
                                onSelect = function(x) message("button ", x),
                                register = get.par(),
@@ -88,11 +90,13 @@ create_radiobutton <- function(parent, param.name, value,
 }
 
 
-#' @title `tklabel` wrapper with some changed default parameters
+#' tklabel wrapper
+#'
+#' `tklabel` wrapper with some changed default parameters
 #' @param bg 'character' background color.
 #' @param justify `character` alignment of the text.
 #' @return [tcltk::tklabel()] object
-#' @keywords internal
+#' @noRd
 .tklabel <- function(..., bg = "grey95", justify = c("left", "center", "right"))
 {
     arg.just <- match.arg(justify)

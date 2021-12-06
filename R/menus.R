@@ -1,6 +1,7 @@
-#' @keywords internal
+
 create_file_menu <- function(parent, root)
 {
+    stop("here")
     menu <- tk2menu(parent, tearoff = FALSE)
 
     onNew <- function() {
@@ -53,7 +54,6 @@ create_file_menu <- function(parent, root)
 }
 
 
-#' @keywords internal
 create_design_menu <- function(parent)
 {
     menu <- tk2menu(parent, tearoff = FALSE)
@@ -70,7 +70,6 @@ create_design_menu <- function(parent)
 }
 
 
-#' @keywords internal
 create_help_menu <- function(parent)
 {
     menu <- tk2menu(parent, tearoff = FALSE)
