@@ -1,7 +1,5 @@
-
 create_file_menu <- function(parent, root)
 {
-    stop("here")
     menu <- tk2menu(parent, tearoff = FALSE)
 
     onNew <- function() {
