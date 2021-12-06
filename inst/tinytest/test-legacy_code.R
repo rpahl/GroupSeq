@@ -1,3 +1,5 @@
+exit_file("Internal functions of legacy code")
+
 # calculateEqualBounds
 n <- 1
 t2 <- (1:n)/n

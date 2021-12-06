@@ -15,9 +15,7 @@ NULL
 pkg.env <- new.env(parent = emptyenv())
 
 # Environments used since version 2
-.env <- function() {
-    container::dict()
-}()
+.env <- NULL
 
 init_env <- function(legacy = FALSE)
 {
@@ -98,6 +96,8 @@ start_gui <- function(legacy = FALSE)
 
 .onLoad <- function(libname, pkgname)
 {
+    .env <<- container::dict()
+
     doStart <- getOption("AutostartGroupSeq", default = FALSE)
     if (interactive() && doStart) {
         start_gui()

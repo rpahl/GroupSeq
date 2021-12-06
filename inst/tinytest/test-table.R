@@ -1,4 +1,6 @@
 
+exit_file("Internal functions only tested interactively")
+
 t <- tktoplevel()
 frame <- tkframe(t)
 data <- as.data.frame(matrix(1:9, nrow = 3, ncol = 3))

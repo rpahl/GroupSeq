@@ -1,4 +1,6 @@
 
+exit_file("Internal gui functions - only tested interactively")
+
 start_gui()
 expect_true(inherits(.env, "Dict"))
 expect_equal(names(.env), c("name", "par", "par.last", "root"))
