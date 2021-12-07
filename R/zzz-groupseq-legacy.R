@@ -8,13 +8,11 @@
 
 
 "asOBF" <- function( alpha, tk, oneOrTwoSided ) {
-  # additonalParameters are not used here
-  2 * (1 - pnorm ((qnorm(1 - (alpha / oneOrTwoSided)/2)) / sqrt(tk)))
+  2 * (1 - stats::pnorm ((stats::qnorm(1 - (alpha / oneOrTwoSided)/2)) / sqrt(tk)))
 }
 
 
 "asPocock" <- function( alpha, tk, oneOrTwoSided ) {
-  # additonalParameters are not used here
   (alpha/oneOrTwoSided) * log(1 + ( exp(1) - 1 ) * tk)
 }
 
@@ -648,6 +646,7 @@ function(n, t, t2, lowerBounds, upperBounds, drift, nMax)
     # Calculate probabilities
     # -----------------------
     # One-dimensional probs at t[1] are calculated using standard stats::pnorm
+    pnorm = stats::pnorm
     ndrift <- drift*t[1]/sd.inc[1]  # normalized drift
     p.stop <- 1 - (pnorm(upperBounds[1] - ndrift) - pnorm(lowerBounds[1] - ndrift))
     p.exit.upper <- 1 - pnorm(upperBounds[1] - ndrift)
@@ -701,8 +700,8 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
   upperIntegrationLimit<-0 # the vector of upper integration limits.
   noError<-TRUE
 
-  # qnorm is the inverse standard normal cdf
-  # pnorm is the standard normal cdf
+  pnorm <- stats::pnorm
+  qnorm <- stats::qnorm
 
 
 
@@ -998,7 +997,7 @@ function(confidenceLevel, Zvalue, n, t, t2, lowerBounds, upperBounds,nMax)
   upperBounds[n] <- Zvalue
 
   ##Use naive limits as starting values
-  zcrit <- qnorm(1-(1-confidenceLevel)/2)
+  zcrit <- stats::qnorm(1-(1-confidenceLevel)/2)
   confidenceLimit[1] <- (upperBounds[n]-zcrit)/sqrt(t[n])
   confidenceLimit[2] <- (upperBounds[n]+zcrit)/sqrt(t[n])
 
@@ -1049,8 +1048,8 @@ function( lastGrid, numberOfIntegrationIntervalls, lowerIntegrationLimit, upperI
   ##Function values to be passed to numerical integration
   ##routine are calculated.
   grid <- seq(lowerIntegrationLimit[i-1],upperIntegrationLimit[i-1],length=numberOfIntegrationIntervalls[i-1]+1)
-  valProbExceedingUpper <- ( 1 - pnorm( (upperIntegrationLimit[i]-grid) / standardDeviation ) ) * lastGrid
-  valProbExceedingLower <- (     pnorm( (lowerIntegrationLimit[i]-grid) / standardDeviation ) ) * lastGrid
+  valProbExceedingUpper <- ( 1 - stats::pnorm( (upperIntegrationLimit[i]-grid) / standardDeviation ) ) * lastGrid
+  valProbExceedingLower <- (     stats::pnorm( (lowerIntegrationLimit[i]-grid) / standardDeviation ) ) * lastGrid
 
   ##--Calls to numerical integration routine.--##
 
@@ -1308,7 +1307,7 @@ function(n,t,t2,lowerBounds,upperBounds,confidenceLevel,drift, nMax)
   drift<-0
 
   ## Starting value for drift: there may be better choices.
-  drift[1] <- ( upperBounds[n]+qnorm(confidenceLevel) ) / sqrt(t[n])
+  drift[1] <- ( upperBounds[n]+stats::qnorm(confidenceLevel) ) / sqrt(t[n])
   drift <- computeDrift(n,t,t2,lowerBounds,upperBounds,confidenceLevel,drift[1],nMax)
 
   return(drift)
@@ -6571,6 +6570,8 @@ function(K,alpha,phi,t,lowerBounds,upperBounds,probDifference,probExit,
   ###########################################################################
   onShowGraph <- function()
   {
+    lines = graphics::lines
+
     ## if one-Sided-Test we won't see negative Z-Values
       if(BoundsSymmetry==1)
       {
@@ -6878,6 +6879,7 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   ###########################################################################
   onShowGraph <- function()
   {
+    lines = graphics::lines
 
     if(enterBoundsManually)
     {
@@ -7259,6 +7261,8 @@ function(K,probTotal,drift,expectedStoppingTime,secondTimeScaleIsUsed,t,t2,t2max
   ###########################################################################
   onShowGraph <- function()
   {
+    lines = graphics::lines
+
     if(enterBoundsManually)
     {
       ## if one-Sided-Test we won't see negative Z-Values
@@ -7579,6 +7583,7 @@ function(K,confidenceLevel,secondTimeScaleIsUsed,t,t2,t2max,lowerBounds,upperBou
   ###########################################################################
   onShowGraph <- function()
   {
+    lines = graphics::lines
     if(enterBoundsManually)
     {
       ## if one-Sided-Test we won't see negative Z-Values
@@ -7832,7 +7837,7 @@ function (i, lowerIntegrationLimit, upperIntegrationLimit,standardDeviation, num
     ##Evaluate function (normal density) at grid points
     ##lastGrid <- seq(lowerIntegrationLimit,upperIntegrationLimit,by=currentGridSize)
     lastGrid <- seq(lowerIntegrationLimit,upperIntegrationLimit,length=numberOfIntegrationIntervalls[1]+1)
-    lastGrid <- dnorm( lastGrid/standardDeviation ) / standardDeviation
+    lastGrid <- stats::dnorm( lastGrid/standardDeviation ) / standardDeviation
 
   }
 
@@ -7858,7 +7863,7 @@ function (i, lowerIntegrationLimit, upperIntegrationLimit,standardDeviation, num
     for ( j in 1 : (numberOfIntegrationIntervalls[i]+1) )
     {
       grid <- lowerIntegrationLimit[i] + ( currentGridSize * (j-1) )
-      f <- lastGrid * (dnorm((grid-lastlast)/standardDeviation) / standardDeviation )
+      f <- lastGrid * (stats::dnorm((grid-lastlast)/standardDeviation) / standardDeviation )
       lastCopy[j] <- integrateByTrapez ( f, numberOfIntegrationIntervalls[i-1], previousGridSize )
     }
 
@@ -8151,7 +8156,7 @@ function(upperBound, previousDensity, numberOfIntegrationIntervalls,lowerIntegra
 
   ##Compute function grid points##
   tempValue <- seq(lowerIntegrationLimit,upperIntegrationLimit,length=numberOfIntegrationIntervalls+1)
-  tempValue <- previousDensity * ( 1 - pnorm( (upperBound-tempValue)/standardDeviation ) )
+  tempValue <- previousDensity * ( 1 - stats::pnorm( (upperBound-tempValue)/standardDeviation ) )
 
 
   #Numerical integration

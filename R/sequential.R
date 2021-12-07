@@ -226,7 +226,7 @@ seqDesign <- function(crit,
     # The expected sample size at stage k+1 is the proportion of ongoing
     # subjects at stage k (i.e., P(within) at k) times the planned sample size
     # at stage k+1 (i.e. n_(k+1))
-    nkExp <- nk * c(1, head(withinP, n = -1L))
+    nkExp <- nk * c(1, utils::head(withinP, n = -1L))
 
     list(p = list(exit = exitProbs, undecided = withinP, cumFutStop = stopped),
          n = list(nk = nk, nkExp = nkExp))

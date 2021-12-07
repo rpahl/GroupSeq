@@ -1,10 +1,12 @@
 
+# not used atm
 add_custom_icons <- function()
 {
     path <- system.file("icons", package = "GroupSeq")
     iconFiles <- list.files(path, full.names = TRUE, pattern = "*.png")
     iconNames <- tools::file_path_sans_ext(basename(iconFiles))
-    addStockIcons(iconNames, iconFiles)
+
+    #gWidgets2::addStockIcons(iconNames, iconFiles)
 }
 
 #' Graphical user interface.
@@ -59,6 +61,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
 }
 
 
+# not used atm
 show_about <- function(...)
 {
     msg <- paste0("Computes probabilities related to group sequential ",
@@ -68,6 +71,6 @@ show_about <- function(...)
                   "alpha spending approach by Lan-DeMets as well as the ",
                   "conditional rejection probability principle by Mueller ",
                   "and Schaefer.")
-    gmessage(title = "About", message = msg, icon = "info")
+    #gWidgets2::gmessage(title = "About", message = msg, icon = "info")
 }
 
