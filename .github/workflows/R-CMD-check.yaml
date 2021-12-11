@@ -45,8 +45,7 @@ jobs:
 
       - name: Set DISPLAY variable on Linux
         if: runner.os == 'Linux'
-        run: |
-            sudo apt-get install libnetcdf-dev udunits-bin libudunits2-dev netcdf-bin tcl8.5-dev tk8.5-dev
+        run: sudo apt-get install xorg
 
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
