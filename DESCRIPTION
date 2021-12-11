@@ -7,21 +7,21 @@ Authors@R:
 Description: Computes probabilities related to group sequential designs for
     normally distributed test statistics. Enables to derive critical
     boundaries, power, drift, and confidence intervals of such designs.
-    Supports the alpha spending approach by Lan-DeMets as well as the
-    conditional rejection probability principle by M"uller and Sch"afer.
+    Supports the alpha spending approach by Lan-DeMets.
 Imports:
     tcltk,
     tcltk2,
     mvtnorm,
     container (>= 1.0.0)
-Suggests: tinytest
-License: GPL (>= 2)
+Suggests: knitr, tinytest, rmarkdown
+VignetteBuilder: knitr
+License: GPL-3
 URL: https://github.com/rpahl/GroupSeq
 BugReports: https://github.com/rpahl/GroupSeq/issues
 NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
-Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

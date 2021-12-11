@@ -18,11 +18,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Group Sequential Design Probabilities - With Graphical User Interface">
-<meta property="og:description" content='Computes probabilities related to group sequential designs for
+<meta property="og:description" content="Computes probabilities related to group sequential designs for
     normally distributed test statistics. Enables to derive critical
     boundaries, power, drift, and confidence intervals of such designs.
-    Supports the alpha spending approach by Lan-DeMets as well as the
-    conditional rejection probability principle by M"uller and Sch"afer.'>
+    Supports the alpha spending approach by Lan-DeMets.">
 <meta property="og:image" content="https://github.com/rpahl/GroupSeq/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -55,7 +54,7 @@
   </a>
 </li>
 <li>
-  <a href="articles/groupseq.html">Get started</a>
+  <a href="articles/GroupSeq.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -74,7 +73,7 @@
       <a href="https://rpahl.github.io/container/">container</a>
     </li>
     <li>
-      <a href="https://CRAN.R-project.org/package=GroupSeq">GroupSeq</a>
+      <a href="https://rpahl.github.io/GroupSeq/">GroupSeq</a>
     </li>
   </ul>
 </li>
@@ -121,9 +120,9 @@
 <!-- badges: end -->
 <div id="groupseq-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#groupseq-" class="anchor"></a>GroupSeq <img src="reference/figures/logo.png" align="right" width="123" height="140">
+<a href="#groupseq-" class="anchor"></a>GroupSeq <img src="reference/figures/logo3D.png" align="right" width="200" height="250">
 </h1></div>
-<p>Computes probabilities related to group sequential designs for normally distributed test statistics. Enables to derive critical boundaries, power, drift, and confidence intervals of such designs. Supports the alpha spending approach by Lan-DeMets as well as the conditional rejection probability principle by M”uller and Sch”afer.</p>
+<p>GroupSeq computes probabilities related to group sequential designs for normally distributed test statistics. It enables to derive critical boundaries, power, drift, and confidence intervals of such designs and supports the alpha spending approach by Lan-DeMets.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
@@ -134,13 +133,23 @@
 <span class="co"># Install development version from GitHub</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rpahl/GroupSeq"</span><span class="op">)</span></code></pre></div>
 </div>
+<div id="installation-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation-1" class="anchor"></a>Installation</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Install release version from CRAN</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"GroupSeq"</span><span class="op">)</span>
+
+<span class="co"># Install development version from GitHub</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"rpahl/GroupSeq"</span><span class="op">)</span></code></pre></div>
+</div>
 <div id="usage" class="section level3">
 <h3 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h3>
-</div>
-<div id="getting-started" class="section level3">
-<h3 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting Started</h3>
+<p>Load the library to start the graphical user interface.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rpahl/GroupSeq">"GroupSeq"</a></span><span class="op">)</span></code></pre></div>
+<p><img src="reference/figures/menu-after-load.png" align="left"></p>
 </div>
 </div>
 
@@ -161,7 +170,7 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>GPL (&gt;= 2)</li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
 </ul>
 </div>
 <div class="developers">
