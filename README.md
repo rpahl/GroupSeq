@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
@@ -10,7 +11,7 @@
 
 <!-- badges: end -->
 
-# GroupSeq <img src="man/figures/logo.png" align="right" width="123" height="140"/>
+# GroupSeq <img src="man/figures/logo.png" align="right" width="100" height="150"/>
 
 Computes probabilities related to group sequential designs for normally
 distributed test statistics. Enables to derive critical boundaries,
@@ -31,4 +32,3 @@ devtools::install_github("rpahl/GroupSeq")
 ### Usage
 
 ### Getting Started
-
