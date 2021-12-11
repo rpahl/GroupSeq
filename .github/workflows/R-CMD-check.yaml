@@ -43,6 +43,10 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
+      - name: Install X11 dependencies on MacOS
+        if: runner.os == 'macOS-latest'
+        run: brew --cask install xquartz
+
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
