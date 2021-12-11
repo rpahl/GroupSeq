@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
 
@@ -32,3 +31,4 @@ devtools::install_github("rpahl/GroupSeq")
 ### Usage
 
 ### Getting Started
+
