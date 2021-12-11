@@ -1,11 +1,10 @@
-.last.vim
-
-*.html
 .Rproj.user
-.RData
 .Rhistory
+.RData
 *.Rproj
 
+vignettes/*.html
 tags
 
-docs
+/doc/
+/Meta/
