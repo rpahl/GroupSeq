@@ -34,7 +34,7 @@
      inkscape:window-x="866"
      inkscape:window-y="36"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer4"
      inkscape:snap-page="false">
     <inkscape:grid
        type="xygrid"
@@ -255,35 +255,6 @@
     </meshgradient>
     <meshgradient
        inkscape:collect="always"
-       id="meshgradient4946"
-       gradientUnits="userSpaceOnUse"
-       x="10"
-       y="151.39999">
-      <meshrow
-         id="meshrow4948">
-        <meshpatch
-           id="meshpatch4950">
-          <stop
-             path="c 64.3333,0  128.667,0  193,0"
-             style="stop-color:#ffffff;stop-opacity:1"
-             id="stop4952" />
-          <stop
-             path="c 0,30.2  0,60.4  0,90.6"
-             style="stop-color:#56b4e9;stop-opacity:1"
-             id="stop4954" />
-          <stop
-             path="c -64.3333,0  -128.667,0  -193,0"
-             style="stop-color:#ffffff;stop-opacity:1"
-             id="stop4956" />
-          <stop
-             path="c 0,-30.2  0,-60.4  0,-90.6"
-             style="stop-color:#56b4e9;stop-opacity:1"
-             id="stop4958" />
-        </meshpatch>
-      </meshrow>
-    </meshgradient>
-    <meshgradient
-       inkscape:collect="always"
        id="meshgradient5162"
        gradientUnits="userSpaceOnUse"
        x="70.560455"
@@ -311,6 +282,35 @@
         </meshpatch>
       </meshrow>
     </meshgradient>
+    <meshgradient
+       inkscape:collect="always"
+       id="meshgradient6199"
+       gradientUnits="userSpaceOnUse"
+       x="10"
+       y="151.4">
+      <meshrow
+         id="meshrow6201">
+        <meshpatch
+           id="meshpatch6203">
+          <stop
+             path="c 64.3333,0  128.667,0  193,0"
+             style="stop-color:#ffffff;stop-opacity:1"
+             id="stop6205" />
+          <stop
+             path="c 0,30.2  0,60.4  0,90.6"
+             style="stop-color:#56b4e9;stop-opacity:1"
+             id="stop6207" />
+          <stop
+             path="c -64.3333,0  -128.667,0  -193,0"
+             style="stop-color:#ffffff;stop-opacity:1"
+             id="stop6209" />
+          <stop
+             path="c 0,-30.2  0,-60.4  0,-90.6"
+             style="stop-color:#56b4e9;stop-opacity:1"
+             id="stop6211" />
+        </meshpatch>
+      </meshrow>
+    </meshgradient>
   </defs>
   <g
      inkscape:groupmode="layer"
@@ -318,7 +318,7 @@
      inkscape:label="exit-low">
     <path
        id="rect6072-5"
-       style="fill:url(#meshgradient4946);fill-opacity:1;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers"
+       style="mix-blend-mode:soft-light;fill:url(#meshgradient6199);fill-opacity:1;stroke:#808080;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;paint-order:stroke fill markers;fill-rule:evenodd"
        d="M 10,242 H 203 V 151.4 L 10,224 Z"
        sodipodi:nodetypes="ccccc" />
   </g>
