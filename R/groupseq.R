@@ -1,16 +1,3 @@
-#' @title Group sequential design probabilities - with graphical user interface.
-#'
-#' @description Computes probabilities related to group sequential designs for
-#'  normally distributed test statistics. Enables to derive critical
-#'  boundaries, power, drift, and confidence intervals of such designs.
-#'  Supports the alpha spending approach by Lan-DeMets as well as the
-#'  conditional rejection probability principle by Müller and Schäfer.
-#'
-#' @author Roman Pahl, \email{roman.pahl@gmail.com}
-#' @docType package
-#' @name groupseq.pkg
-NULL
-
 # Environment used by legacy version < 2
 pkg.env <- new.env(parent = emptyenv())
 

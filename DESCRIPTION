@@ -24,3 +24,4 @@ Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
