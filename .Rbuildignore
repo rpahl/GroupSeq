@@ -1,11 +1,16 @@
 .git
-last.vim
 .gitignore
+TODO
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.github$
+tags
+^pkgdown$
 ^_pkgdown\.yml$
 ^docs$
-^pkgdown$
+^doc$
+^README\.Rmd$
+^doc$
+^Meta$
 
-tags
-^\.github$
+^images$
