@@ -43,10 +43,6 @@ jobs:
         if: runner.os == 'macOS'
         run: brew install xquartz --cask
 
-      - name: Set DISPLAY variable on Linux
-        if: runner.os == 'Linux'
-        run: sudo apt-get install xorg
-
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
@@ -54,6 +50,7 @@ jobs:
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_: false
+          DISPLAY: :99.0
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
