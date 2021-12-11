@@ -43,6 +43,10 @@ jobs:
         if: runner.os == 'macOS'
         run: brew install xquartz --cask
 
+      - name: Set DISPLAY variable on Linux
+        if: runner.os == 'Linux'
+        run: export DISPLAY=:99.0
+
       - uses: r-lib/actions/setup-r-dependencies@v1
         with:
           extra-packages: rcmdcheck
