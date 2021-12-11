@@ -1,0 +1,34 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
+
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![R-CMD-check](https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/GroupSeq/actions)
+[![codecov.io](https://codecov.io/github/rpahl/GroupSeq/coverage.svg?branch=master)](https://codecov.io/github/rpahl/GroupSeq?branch=master)
+[![dependencies](https://tinyverse.netlify.com/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
+[![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=GroupSeq)
+[![downloads](https://cranlogs.r-pkg.org/badges/GroupSeq)](https://www.r-pkg.org:443/pkg/GroupSeq)
+
+<!-- badges: end -->
+
+# GroupSeq <img src="man/figures/logo.png" align="right" width="123" height="140"/>
+
+Computes probabilities related to group sequential designs for normally
+distributed test statistics. Enables to derive critical boundaries,
+power, drift, and confidence intervals of such designs. Supports the
+alpha spending approach by Lan-DeMets as well as the conditional
+rejection probability principle by M”uller and Sch”afer.
+
+### Installation
+
+``` r
+# Install release version from CRAN
+install.packages("GroupSeq")
+
+# Install development version from GitHub
+devtools::install_github("rpahl/GroupSeq")
+```
+
+### Usage
+
+### Getting Started
