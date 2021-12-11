@@ -1,0 +1,38 @@
+url: https://github.com/rpahl/GroupSeq
+
+
+template:
+  params:
+    bootswatch: sandstone
+
+authors:
+  Roman Pahl:
+    href: https://rpahl.github.io/r-some-blog/about.html
+
+
+navbar:
+  title: "container"
+  left:
+    - icon: fa-home fa-lg
+      href: index.html
+    - text: "Get started"
+      href: articles/groupseq.html
+    - text: "Reference"
+      href: reference/index.html
+    - text: "Changelog"
+      href: news/index.html
+    - text: "All Packages"
+      menu:
+        - text: "container"
+          href: https://rpahl.github.io/container/
+        - text: "GroupSeq"
+          href: https://CRAN.R-project.org/package=GroupSeq
+  right:
+    - icon: fab fa-github
+      href: https://github.com/rpahl/GroupSeq/
+    - icon: fab fa-stack-overflow
+      href: https://stackoverflow.com/users/8120617/rpahl
+    - icon: fab fa-twitter
+      href: https://twitter.com/romanpahl
+    - icon: fas fa-blog
+      href: https://rpahl.github.io/r-some-blog/
