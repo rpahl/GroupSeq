@@ -11,12 +11,12 @@ authors:
 
 
 navbar:
-  title: "container"
+  title: "GroupSeq"
   left:
     - icon: fa-home fa-lg
       href: index.html
     - text: "Get started"
-      href: articles/groupseq.html
+      href: articles/GroupSeq.html
     - text: "Reference"
       href: reference/index.html
     - text: "Changelog"
@@ -26,7 +26,7 @@ navbar:
         - text: "container"
           href: https://rpahl.github.io/container/
         - text: "GroupSeq"
-          href: https://CRAN.R-project.org/package=GroupSeq
+          href: https://rpahl.github.io/GroupSeq/
   right:
     - icon: fab fa-github
       href: https://github.com/rpahl/GroupSeq/

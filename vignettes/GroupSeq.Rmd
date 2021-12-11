@@ -1,0 +1,29 @@
+---
+title: "Introduction to GroupSeq"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+description: >
+  Start here if this is your first time using GroupSeq. This vignette
+  gives a brief introduction on how to compute group sequential designs using
+  GroupSeq.
+vignette: >
+  %\VignetteIndexEntry{Introduction to GroupSeq}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+knitr::opts_chunk$set(
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
+)
+
+options(width = 100L)
+```
+
+

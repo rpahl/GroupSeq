@@ -32,11 +32,21 @@ options(width = 100L)
 
 # GroupSeq <img src="man/figures/logo3D.png" align="right" width="200" height="250"/>
 
-Computes probabilities related to group sequential designs for normally
-distributed test statistics. Enables to derive critical boundaries, power,
-drift, and confidence intervals of such designs. Supports the alpha
-spending approach by Lan-DeMets as well as the conditional rejection
-probability principle by M"uller and Sch"afer.
+GroupSeq computes probabilities related to group sequential designs for normally
+distributed test statistics. It enables to derive critical boundaries, power,
+drift, and confidence intervals of such designs and supports the alpha
+spending approach by Lan-DeMets.
+
+
+### Installation
+
+```{r, eval = FALSE}
+# Install release version from CRAN
+install.packages("GroupSeq")
+
+# Install development version from GitHub
+devtools::install_github("rpahl/GroupSeq")
+```
 
 
 ### Installation
@@ -52,7 +62,10 @@ devtools::install_github("rpahl/GroupSeq")
 
 ### Usage
 
+Load the library to start the graphical user interface.
+```{r, eval = FALSE}
+library("GroupSeq")
+```
 
-### Getting Started
-
+<img src="man/figures/menu-after-load.png" align="left"/>
 
