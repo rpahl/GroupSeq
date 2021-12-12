@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   GroupSeq: GroupSeq.html
-last_built: 2021-12-11T18:09Z
+last_built: 2021-12-12T18:20Z
 urls:
   reference: https://github.com/rpahl/GroupSeq/reference
   article: https://github.com/rpahl/GroupSeq/articles
