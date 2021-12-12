@@ -7,7 +7,9 @@
 [![codecov.io](https://codecov.io/github/rpahl/GroupSeq/coverage.svg?branch=master)](https://codecov.io/github/rpahl/GroupSeq?branch=master)
 [![dependencies](https://tinyverse.netlify.com/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
 [![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=GroupSeq)
-[![downloads](https://cranlogs.r-pkg.org/badges/GroupSeq)](https://www.r-pkg.org:443/pkg/GroupSeq)
+[![downloads](https://cranlogs.r-pkg.org/badges/GroupSeq?color=3aa9e8)](https://www.r-pkg.org:443/pkg/GroupSeq)
+[![total-downloads](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![last-commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
 
 <!-- badges: end -->
 
