@@ -24,7 +24,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     tkwm.protocol(root, "WM_DELETE_WINDOW", onQuit)
     tkwm.title(root, paste0("[New] - GroupSeq"))
 
-    logofile <- system.file("img", "logo.gif", package = "GroupSeq")
+    logofile <- system.file("img", "logo32.gif", package = "GroupSeq")
     tkimage.create("photo", "::image::logoIcon", file = logofile)
     tcl("wm", "iconphoto", root, "-default", "::image::logoIcon")
 

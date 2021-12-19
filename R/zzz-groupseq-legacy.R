@@ -6428,7 +6428,7 @@ guiMode <- function()
   pkg.env$taskWindow <- tcltk::tktoplevel()
   taskWindow <- pkg.env$taskWindow
 
-  logofile <- system.file("img", "logo.gif", package = "GroupSeq")
+  logofile <- system.file("img", "logo32.gif", package = "GroupSeq")
   tkimage.create("photo", "::image::logoIcon", file = logofile)
   tcl("wm", "iconphoto", taskWindow, "-default", "::image::logoIcon")
 
