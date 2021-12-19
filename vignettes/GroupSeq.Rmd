@@ -21,11 +21,105 @@ knitr::opts_chunk$set(
   prompt = F,
   tidy = FALSE,
   cache = FALSE,
-  collapse = T
+  collapse = T,
+  echo = FALSE,
+  fig.width = 5, fig.height = 5
 )
 
 options(width = 100L)
 ```
+
+
+```{r, echo = FALSE}
+mu = 0
+Mean = c(mu, mu)
+Sigma = matrix(c(1, rep(sqrt(.5), 2), 1), 2)
+
+width = 6
+x = seq(from = mu - width/2, to = mu + width/2, by = 0.2)
+
+fx1x2 = function(x1, x2) {
+    mvtnorm::dmvnorm(x = c(x1, x2), mean = Mean, sigma = Sigma)
+}
+
+z = outer(x, x, Vectorize(fx1x2))
+```
+
+
+```{r, out.width = "50%"}
+persp(x, x, z, 
+      theta = 0, phi = 20, col = "white", expand = 0.5,
+      ltheta = 111,
+      xlab = "x1", ylab = "x2\n", zlab = "\nf(x1, x2)",
+      shade = 0.1,
+      ticktype = "detailed")
+```
+
+```{r, out.width = "50%"}
+persp(x, x, z, 
+      theta = 0, phi = 70, col = "white", expand = 0.5,
+      xlab = "x1", ylab = "x2\n", zlab = "\nf(x1, x2)",
+      shade = 0.1,
+      ticktype = "detailed")
+```
+
+
+
+```{r, echo = FALSE, include = F}
+library(ggplot2)
+
+contourData = expand.grid(x, x)
+colnames(contourData) = c("x1", "x2")
+
+fx = function(x) {
+    mvtnorm::dmvnorm(x = c(x[1], x[2]), mean = Mean, sigma = Sigma)
+}
+
+contourData[, "z"] = apply(contourData, 1, fx)
+
+xyContour = ggplot(contourData, aes(x1, x2, z = z, fill = z)) + 
+    geom_contour(color = "black") +
+    theme_minimal() +
+    lims(x = range(contourData[, "x1"]), y = range(contourData[, "x2"])) +
+    theme(panel.grid.minor = element_line()) +
+    scale_x_continuous(minor_breaks = sort(unique(x))) +
+    scale_y_continuous(minor_breaks = sort(unique(x)))
+
+
+xdensity = ggplot(data.frame(x = x), aes(x = x)) +
+    stat_function(fun = dnorm, args = list(mean = 0, sd = 1)) +
+    lims(x = range(contourData[, "x1"])) +
+    labs(x = "x1", y = "x2") +
+    theme_minimal() +
+    theme(axis.title = element_text(colour = "white"),
+          axis.text = element_text(colour = "white"),
+          panel.grid = element_blank(),
+          panel.border = element_blank(),
+          panel.background = element_blank()
+    )
+
+ydensity = xdensity + coord_flip()
+blank = grid::grid.rect(gp = grid::gpar(col="white"))
+
+xdensity = xdensity + theme(axis.title.x = element_blank(),
+                            axis.text.x = element_blank())
+ydensity = ydensity + theme(axis.title.y = element_blank(),
+                            axis.text.y = element_blank())
+
+```
+
+
+```{r, out.width = "50%"}
+gridExtra::grid.arrange(xdensity, 
+                        blank, xyContour, 
+                        ydensity, 
+                        ncol=2, nrow=2, widths=c(4, 1), heights=c(1, 4),
+                        respect = TRUE,
+                        padding = unit(0, "points"))
+```
+
+
+
 
 
 ## Basic usage
