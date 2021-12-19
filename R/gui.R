@@ -24,7 +24,7 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     tkwm.protocol(root, "WM_DELETE_WINDOW", onQuit)
     tkwm.title(root, paste0("[New] - GroupSeq"))
     if (.Platform$OS.type == "windows") {
-        iconfile <- system.file("icons", "gs-logo.ico", package = "GroupSeq")
+        iconfile <- system.file("img", "logo.ico", package = "GroupSeq")
         tkwm.iconbitmap(root, iconfile)
     }
 
