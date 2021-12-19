@@ -29,16 +29,6 @@ install.packages("GroupSeq")
 devtools::install_github("rpahl/GroupSeq")
 ```
 
-### Installation
-
-``` r
-# Install release version from CRAN
-install.packages("GroupSeq")
-
-# Install development version from GitHub
-devtools::install_github("rpahl/GroupSeq")
-```
-
 ### Usage
 
 Load the library to start the graphical user interface.

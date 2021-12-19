@@ -5,6 +5,8 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
+library(knitr)
+
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#",
@@ -12,6 +14,7 @@ knitr::opts_chunk$set(
   fig.path = "images/README-",
   tidy = FALSE,
   cache = FALSE,
+  dpi = 300,
   out.width = "100%"
 )
 
