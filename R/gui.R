@@ -23,10 +23,10 @@ gui <- function(root, tabs = c("Test parameters", "Boundaries"))
     # Make sure cleanup takes place also when user closes window via "X" button
     tkwm.protocol(root, "WM_DELETE_WINDOW", onQuit)
     tkwm.title(root, paste0("[New] - GroupSeq"))
-    if (.Platform$OS.type == "windows") {
-        iconfile <- system.file("img", "logo.ico", package = "GroupSeq")
-        tkwm.iconbitmap(root, iconfile)
-    }
+
+    logofile <- system.file("img", "logo.gif", package = "GroupSeq")
+    tkimage.create("photo", "::image::logoIcon", file = logofile)
+    tcl("wm", "iconphoto", root, "-default", "::image::logoIcon")
 
     # Menu
     menu <- tkmenu(root)
