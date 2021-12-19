@@ -122,7 +122,8 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#groupseq-" class="anchor"></a>GroupSeq <img src="reference/figures/logo3D.png" align="right" width="200" height="250">
 </h1></div>
-<p>GroupSeq computes probabilities related to group sequential designs for normally distributed test statistics. It enables to derive critical boundaries, power, drift, and confidence intervals of such designs and supports the alpha spending approach by Lan-DeMets.</p>
+<p>GroupSeq computes probabilities related to group sequential designs for normally distributed test statistics. It enables to derive critical boundaries, power, drift, and confidence intervals of such designs, most of all being based on the alpha spending approach of <a href="#ref-pmid7973215">DeMets and Lan</a> (<a href="#ref-pmid7973215">1994</a>).</p>
+<p>All functionality is provided by a graphical user interface.</p>
 <div id="installation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h3>
@@ -139,7 +140,33 @@
 <p>Load the library to start the graphical user interface.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rpahl/GroupSeq">"GroupSeq"</a></span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/menu-after-load.png" align="left"></p>
+<p><img src="reference/figures/menu-after-load.png" width="25%"></p>
+<p><br></p>
+<p>For more information please see the <a href="https://rpahl.github.io/GroupSeq/articles/GroupSeq.html">Get Started</a> page.</p>
+</div>
+<div id="alternative-tools" class="section level3">
+<h3 class="hasAnchor">
+<a href="#alternative-tools" class="anchor"></a>Alternative tools</h3>
+<p>Since the package was written back in 2005, the graphical user interface may appear a bit outdated. Still, it does it’s job and at least has stood the test of time<a href="#refs"><sup>1</sup></a>. Luckily in recent years others have started to develop R-based tools with graphical user interface and similar (and more) statistical functionality:</p>
+<ul>
+<li>
+<a href="https://CRAN.R-project.org/package=gsDesign">gsDesign</a> with a free <a href="https://gsdesign.shinyapps.io/prod/">shiny web interface</a> including tutorials.</li>
+<li>
+<a href="https://CRAN.R-project.org/package=rpact">rpact</a> also with a free <a href="https://rpact.shinyapps.io/public">shiny web interface</a> and lots of <a href="https://www.rpact.com/vignettes">vignettes</a>.</li>
+</ul>
+</div>
+<div id="references" class="section level3">
+<h3 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-pmid7973215" class="csl-entry">
+DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim analysis: the alpha spending function approach</span>.” <em>Stat Med</em> 13 (13-14): 1341–52. <a href="https://doi.org/10.1002/sim.4780131308" class="uri">https://doi.org/10.1002/sim.4780131308</a>.
+</div>
+</div>
+<hr>
+<ol>
+<li>The package author is considering to work on a second version with more functionality and a revised user interface in the near future. Feel free to request new features <a href="https://github.com/rpahl/GroupSeq/issues">here</a>.</li>
+</ol>
 </div>
 </div>
 

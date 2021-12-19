@@ -1,0 +1,28 @@
+---
+title: "3. Compute Probabilities given Bounds and Drift"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+description: >
+  TODO
+vignette: >
+  %\VignetteIndexEntry{3. Compute Probabilities given Bounds and Drift}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
+)
+
+options(width = 100L)
+```
+
+

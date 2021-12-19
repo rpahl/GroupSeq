@@ -1,0 +1,28 @@
+---
+title: "2. Compute Drift given Power and Bounds"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    toc_depth: 4
+description: >
+  TODO
+vignette: >
+  %\VignetteIndexEntry{2. Compute Drift given Power and Bounds}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r knitr-setup, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(
+  comment = "#",
+  prompt = F,
+  tidy = FALSE,
+  cache = FALSE,
+  collapse = T
+)
+
+options(width = 100L)
+```
+
+

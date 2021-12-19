@@ -6,8 +6,7 @@ output:
     toc_depth: 4
 description: >
   Start here if this is your first time using GroupSeq. This vignette
-  gives a brief introduction on how to compute group sequential designs using
-  GroupSeq.
+  gives a brief overview on *what* and *what not* can be done with GroupSeq.
 vignette: >
   %\VignetteIndexEntry{Introduction to GroupSeq}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,6 +14,8 @@ vignette: >
 ---
 
 ```{r knitr-setup, include = FALSE}
+library(knitr)
+
 knitr::opts_chunk$set(
   comment = "#",
   prompt = F,
@@ -27,3 +28,24 @@ options(width = 100L)
 ```
 
 
+## Basic usage
+
+Load the library to start the graphical user interface.
+```{r, eval = FALSE}
+library("GroupSeq")
+```
+
+```{r, out.width = "25%", echo = FALSE}
+include_graphics("figures/menu-after-load.png")
+```
+
+<br>
+
+Now the application splits into four possible tasks.
+
+1. [Compute Bounds](https://rpahl.github.io/GroupSeq/articles/1-compute-bounds-H0.html)
+2. [Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html)
+3. [Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html)
+4. [Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html)
+
+To select a task, you have to hit the `Perform Selected Task` button.

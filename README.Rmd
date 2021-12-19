@@ -1,5 +1,8 @@
 ---
 output: github_document
+
+bibliography: vignettes/references.bib
+link-citations: yes
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -37,8 +40,10 @@ options(width = 100L)
 
 GroupSeq computes probabilities related to group sequential designs for normally
 distributed test statistics. It enables to derive critical boundaries, power,
-drift, and confidence intervals of such designs and supports the alpha
-spending approach by Lan-DeMets.
+drift, and confidence intervals of such designs, most of all being based on the
+alpha spending approach of @pmid7973215.
+
+All functionality is provided by a graphical user interface.
 
 
 ### Installation
@@ -59,5 +64,39 @@ Load the library to start the graphical user interface.
 library("GroupSeq")
 ```
 
-<img src="man/figures/menu-after-load.png" align="left"/>
+```{r, out.width = "25%", echo = FALSE}
+include_graphics("man/figures/menu-after-load.png")
+```
 
+<br>
+
+For more information please see the [Get
+Started](https://rpahl.github.io/GroupSeq/articles/GroupSeq.html) page.
+
+
+### Alternative tools
+
+Since the package was written back in 2005, the
+graphical user interface may appear a bit outdated. Still, it does it's job and
+at least has stood the test of time[$^1$](#refs).
+Luckily in recent years others have started to
+develop R-based tools with graphical user interface and similar (and more)
+statistical functionality:
+
+* [gsDesign](https://CRAN.R-project.org/package=gsDesign) with a free
+    [shiny web interface](https://gsdesign.shinyapps.io/prod/) including tutorials.
+* [rpact](https://CRAN.R-project.org/package=rpact) also with a free
+    [shiny web interface](https://rpact.shinyapps.io/public) and lots of
+    [vignettes](https://www.rpact.com/vignettes).
+
+
+### References {#refs}
+
+<div id="refs"></div>
+
+---
+
+1. The package author is considering to
+work on a second version with more functionality and a revised user interface
+in the near future. Feel free to request new features
+[here](https://github.com/rpahl/GroupSeq/issues).
