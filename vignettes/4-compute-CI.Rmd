@@ -1,5 +1,5 @@
 ---
-title: "4. Compute Confidence Interval"
+title: "-4- Compute Confidence Interval"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
 description: >
   TODO
 vignette: >
-  %\VignetteIndexEntry{4. Compute Confidence Interval}
+  %\VignetteIndexEntry{-4- Compute Confidence Interval}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

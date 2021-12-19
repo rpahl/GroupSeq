@@ -1,5 +1,5 @@
 ---
-title: "2. Compute Drift given Power and Bounds"
+title: "-2- Compute Drift given Power and Bounds"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
 description: >
   TODO
 vignette: >
-  %\VignetteIndexEntry{2. Compute Drift given Power and Bounds}
+  %\VignetteIndexEntry{-2- Compute Drift given Power and Bounds}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

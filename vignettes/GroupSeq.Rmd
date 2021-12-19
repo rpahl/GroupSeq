@@ -35,7 +35,7 @@ Load the library to start the graphical user interface.
 library("GroupSeq")
 ```
 
-```{r, out.width = "25%", echo = FALSE}
+```{r, out.width = "30%", echo = FALSE}
 include_graphics("figures/menu-after-load.png")
 ```
 

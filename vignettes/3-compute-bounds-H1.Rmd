@@ -1,5 +1,5 @@
 ---
-title: "3. Compute Probabilities given Bounds and Drift"
+title: "-3- Compute Probabilities given Bounds and Drift"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
 description: >
   TODO
 vignette: >
-  %\VignetteIndexEntry{3. Compute Probabilities given Bounds and Drift}
+  %\VignetteIndexEntry{-3- Compute Probabilities given Bounds and Drift}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

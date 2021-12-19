@@ -40,12 +40,13 @@ Load the library to start the graphical user interface.
 library("GroupSeq")
 ```
 
-<img src="man/figures/menu-after-load.png" width="25%" />
+<img src="man/figures/menu-after-load.png" width="30%" />
 
 <br>
 
-For more information please see the [Get
-Started](https://rpahl.github.io/GroupSeq/articles/GroupSeq.html) page.
+To get started see the [General
+Introduction](https://rpahl.github.io/GroupSeq/articles/GroupSeq.html)
+page.
 
 ### Alternative tools
 

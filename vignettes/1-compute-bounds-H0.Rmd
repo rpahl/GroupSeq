@@ -1,5 +1,5 @@
 ---
-title: "1. Compute Bounds"
+title: "-1- Compute Bounds"
 output:
   rmarkdown::html_vignette:
     toc: true
@@ -7,7 +7,7 @@ output:
 description: >
   TODO
 vignette: >
-  %\VignetteIndexEntry{1. Compute Bounds}
+  %\VignetteIndexEntry{-1- Compute Bounds}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
