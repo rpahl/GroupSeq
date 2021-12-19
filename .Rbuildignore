@@ -1,6 +1,7 @@
 .git
 .gitignore
 TODO
+.Rprofile
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
