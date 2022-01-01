@@ -75,7 +75,10 @@
     </li>
     <li class="divider">
     <li>
-      <a href="../articles/GroupSeq.html">General Introduction</a>
+      <a href="../articles/understanding-gs-designs.html">Understanding group sequential designs</a>
+    </li>
+    <li>
+      <a href="../articles/GroupSeq.html">Introduction to GroupSeq</a>
     </li>
     <li>
       <a href="../articles/1-compute-bounds-H0.html">-1- Compute Bounds</a>
@@ -160,93 +163,6 @@
 
     
     
-<div id="note-this-vignette-is-still-under-construction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#note-this-vignette-is-still-under-construction" class="anchor"></a>Note: this vignette is still under construction</h1>
-<div id="how-to-calculate-group-sequential-design-probabilities" class="section level2">
-<h2 class="hasAnchor">
-<a href="#how-to-calculate-group-sequential-design-probabilities" class="anchor"></a>How to calculate group sequential design probabilities</h2>
-<p>While calculating probabilities of group sequential designs can be considered somewhat complex, it may be less difficult than most people think. This vignette provides a visual explanation of the underlying method to help forming an intuitive understanding of this topic. The author is convinced that gaining an intuitive understanding of these calculations helps when applying and interpreting such designs in practice.</p>
-<div id="one-sample-study" class="section level3">
-<h3 class="hasAnchor">
-<a href="#one-sample-study" class="anchor"></a>One-sample study</h3>
-<p>Following the easy-to-hard principle, we start with conventional non-sequential study designs and gradually progress to the group sequential case.</p>
-<p>Consider you have a sample of data, let’s call it <code>X1</code>.</p>
-<p><img src="GroupSeq_files/figure-html/unnamed-chunk-2-1.png" width="35%" style="display: block; margin: auto;"><br> Next you calculate a standardized test statistic. Assuming a standard normal distribution, the density distribution under the null hypothesis forms the well-known bell-shaped curve.</p>
-<div class="figure">
-<img src="GroupSeq_files/figure-html/unnamed-chunk-3-1.png" alt="Standard Normal Density with critial bounds marking 5% significance level." width="65%"><p class="caption">
-Standard Normal Density with critial bounds marking 5% significance level.
-</p>
-</div>
-<p><br> If a two-sided test is planned with a significance level of <span class="math inline">\(\alpha = 5\%\)</span>, the critical bounds are set as visualized in the above figure. In the days before computers these bounds had to be looked up in tables in some book, but these days of course you just plug-in the numbers in your favorite statistics program. In R its</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">)</span>
-<span class="co"># [1] -1.959963985</span></code></pre></div>
-<p>Now what do these bounds mean? Basically, if the null hypothesis (<span class="math inline">\(H_0\)</span>) was true, the probability of obtaining a test statistic at or beyond these bounds is <span class="math inline">\(2\cdot 0.025 = 0.05\)</span>, which therefore limits the so-called type I error (rejecting <span class="math inline">\(H_0\)</span> although its true) at 5%.</p>
-<p>Going forward the key thing to notice is that calculating this probability basically means <em>calculating the (blue) area under the density curve</em> (see above figure). Again, these days it’s easy to derive the area using computer’s numerical integration.</p>
-</div>
-<div id="combining-two-studies" class="section level3">
-<h3 class="hasAnchor">
-<a href="#combining-two-studies" class="anchor"></a>Combining two studies</h3>
-<p>Now lets consider another sample <code>X2</code> that was collected independently from <code>X1</code>.</p>
-<p><img src="GroupSeq_files/figure-html/unnamed-chunk-5-1.png" width="35%" style="display: block; margin: auto;"></p>
-<p><br> If we construct a distribution similar to the one above, we have the following.</p>
-<p><img src="GroupSeq_files/figure-html/unnamed-chunk-6-1.png" width="85%"></p>
-<p><br> A statistical test on both samples now would control the type I error for each of these studies at the 5% level, but, of course, things are more complicated if you consider both samples at the same time, because now you have two chances of conducting the error.</p>
-<p>So if we assume our samples <code>X1</code> and <code>X2</code> were sampled from the same population and we are interested to test the same outcome, to control the <em>overall</em> type I error at 5% we need to down-adjust alpha. The simplest and most common approach is to use the Bonferroni correction, which means we are allowed to spend <span class="math inline">\(\alpha_B = \alpha/2 = 0.025\)</span>. The corresponding critical bound is</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>
-<span class="co"># [1] -2.241402728</span></code></pre></div>
-<p>and we have</p>
-<p><img src="GroupSeq_files/figure-html/unnamed-chunk-9-1.png" width="85%"></p>
-<p>So if we calculate the overall type I error probability, we sum up all the areas and get <span class="math inline">\(p = 1.25\% + 1.25\%+ 1.25\% + 1.25\% = 5\%\)</span>. So we are good, are we? Well, the devil is in the details.</p>
-<p>Remember, the goal was to make sure that we don’t conduct a type I error. The probability to conduct no type I at either <code>X1</code> or <code>X2</code> is <span class="math inline">\(1-\alpha_B = 1-0.025 = 0.975\)</span>.</p>
-<p>From this it follows that the probability to conduct no error at both <code>X1</code> and <code>X2</code> is <span class="math inline">\((1-\alpha_B)^2 = 0.950625\)</span>.</p>
-<p>Now we can calculate the complementary probability of conducting <em>at least one</em> type I error* as <span class="math inline">\(1 - (1-\alpha_B)^2 = 0.049375 = 4.9\%\)</span>. Wait, why is this not 5%? The reason is that we don’t care if one or both studies produce a type I error, as one error is already enough for the overall setup to fail. For this reason the Bonferroni correction is not optimal, as it “wastes” 0.1% of alpha.</p>
-<p><br> Of course, this is well-known and a precise alpha adjustment can be derived via the so-called <a href="https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction">Sidak correction</a>: <span class="math inline">\(\alpha_S* = 1 - (1-\alpha)^{1/2} = 0.02532057 &gt; \alpha_B\)</span>.</p>
-<p>Plugging this into the above formula, we get <span class="math inline">\(1 - (1-\alpha_S)^2 = 0.05 = 5\%\)</span>. If you are interested, you can find the derivation of <a href="https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction">Sidak’s</a> formula under the link, but I have promised you to provide intuitive explanations, so let’s move to the key concept that will help to understand group sequential probabilities.</p>
-</div>
-<div id="combining-two-distributions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#combining-two-distributions" class="anchor"></a>Combining two distributions</h3>
-<p>Remember that determining the probability of distributions is all about calculating areas under the curve. Fortunately, two normal distributions can be combined into a bivariate normal distribution, which then looks like this.</p>
-<p><img src="GroupSeq_files/figure-html/unnamed-chunk-11-1.png" width="55%"></p>
-<p>Now to derive the overall type I error, we again just have to compute the area under the blue grid. To do this, we are using the <a href="https://CRAN.R-project.org/package=mvtnorm">mvtnorm</a>. To keep matters simple, we just discuss the results. For further details you can see the source code of this vignette.</p>
-<p>Now if we plug in the Bonferoni bounds, the calculation of the blue area, results in p = 0.049375 while the Sidak bounds yield p = 0.05, which therefore confirms the above results.</p>
-<p>However, we now also have a graphical intuitive interpretation to explain the results. For this, have a look at the next graph.</p>
-<p><img src="GroupSeq_files/figure-html/unnamed-chunk-13-1.png" width="55%"></p>
-<p>The grey areas mark those scenarios where both type I errors fall together. The intuitive explanation now goes like this: when calculating the overall area, the grey areas are only counted once whereas in the Bonferroni case you count them twice. To see this, we can calculate the area of one of these edges, which results in p = 0.00016 and if we subtract them from the overall alpha we get <span class="math inline">\(0.05 - 4\cdot 0.00016 = 0.04936\)</span>, which corresponds to the overall probability under Bonferroni correction.</p>
-<p>So when using the bivariate normal distribution, we naturally derive at the optimal solution for the alpha adjustment. The same is true for group sequential designs, which further optimize the calculation by taking into account the dependency of the staged samples.</p>
-</div>
-<div id="two-stage-designs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#two-stage-designs" class="anchor"></a>Two-stage designs</h3>
-<div class="figure">
-<img src="GroupSeq_files/figure-html/unnamed-chunk-14-1.png" alt="Group sequential 2-stage design with one interim look at 0.5 and O'Brien-Fleming type alpha spending." width="50%"><p class="caption">
-Group sequential 2-stage design with one interim look at 0.5 and O’Brien-Fleming type alpha spending.
-</p>
-</div>
-<div class="figure">
-<img src="GroupSeq_files/figure-html/unnamed-chunk-15-1.png" alt="Bivariate normal density of two-stage design." width="75%"><p class="caption">
-Bivariate normal density of two-stage design.
-</p>
-</div>
-<div class="figure">
-<img src="GroupSeq_files/figure-html/unnamed-chunk-16-1.png" alt="Bivariate normal density of two-stage design." width="30%"><img src="GroupSeq_files/figure-html/unnamed-chunk-16-2.png" alt="Bivariate normal density of two-stage design." width="30%"><img src="GroupSeq_files/figure-html/unnamed-chunk-16-3.png" alt="Bivariate normal density of two-stage design." width="30%"><p class="caption">
-Bivariate normal density of two-stage design.
-</p>
-</div>
-</div>
-<div id="probability-distribution-of-group-sequential-designs" class="section level3">
-<h3 class="hasAnchor">
-<a href="#probability-distribution-of-group-sequential-designs" class="anchor"></a>Probability distribution of group sequential designs</h3>
-<div class="figure">
-<img src="GroupSeq_files/figure-html/unnamed-chunk-18-1.png" alt="Bivariate normal density of two-stage design." width="45%"><img src="GroupSeq_files/figure-html/unnamed-chunk-18-2.png" alt="Bivariate normal density of two-stage design." width="45%"><p class="caption">
-Bivariate normal density of two-stage design.
-</p>
-</div>
-</div>
-</div>
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic usage</h2>
@@ -261,7 +177,6 @@ Bivariate normal density of two-stage design.
 <li><a href="https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html">Compute Confidence Interval</a></li>
 </ol>
 <p>To select a task, you have to hit the <code>Perform Selected Task</code> button.</p>
-</div>
 </div>
   </div>
 

@@ -40,9 +40,10 @@ navbar:
         - title: "Overview"
         - text: "Overview"
           href: articles/index.html
-
         - text: "---"
-        - text: "General Introduction"
+        - text: "Understanding group sequential designs"
+          href: articles/understanding-gs-designs.html
+        - text: "Introduction to GroupSeq"
           href: articles/GroupSeq.html
         - text: "-1- Compute Bounds"
           href: articles/1-compute-bounds-H0.html
@@ -52,7 +53,6 @@ navbar:
           href: articles/3-compute-bounds-H1.html
         - text: "-4- Compute Confidence Interval"
           href: articles/4-compute-CI.html
-
         - text: "---"
         - text: "Other"
         - text: "GroupSeq article in R News 2006"
