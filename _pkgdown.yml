@@ -13,6 +13,7 @@ authors:
 articles:
   - title: "Overview"
     contents:
+    - "understanding-gs-designs"
     - "GroupSeq"
     - "1-compute-bounds-H0"
     - "2-compute-drift"
