@@ -16,11 +16,14 @@
 
 GroupSeq computes probabilities related to group sequential designs for
 normally distributed test statistics. It enables to derive critical
-boundaries, power, drift, and confidence intervals of such designs, most
-of all being based on the alpha spending approach of [DeMets and
+boundaries, power, drift, and confidence intervals of such designs,
+mostly using the alpha spending approach of [DeMets and
 Lan](#ref-pmid7973215) ([1994](#ref-pmid7973215)).
 
-All functionality is provided by a graphical user interface.
+The main motivation for the development of this package was to make this
+area of statistics freely available for a broad audience, which is one
+of the reasons why all functionality is provided by a graphical user
+interface.
 
 ### Installation
 

@@ -163,7 +163,79 @@
 
     
     
-
+<p>The option -1- menu initially looks as follows.</p>
+<p><img src="figures/task1-menu.png" width="35%"></p>
+<div id="single-stage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#single-stage" class="anchor"></a>Single stage</h3>
+<p>As a first example, let’s hit the <code>CALCULATE</code> button, which should open a new window with the following results.</p>
+<p><img src="figures/task1-1stage-result.png" width="50%"></p>
+<p>Since the number stages was set to <span class="math inline">\(K = 1\)</span>, we just calculated one-sided bounds for a simple 1-stage design, which is equivalent to</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">alpha</span> <span class="op">=</span> <span class="fl">0.05</span>
+<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">qnorm</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">alpha</span><span class="op">)</span>
+<span class="co"># [1] 1.644854</span></code></pre></div>
+</div>
+<div id="obrien-fleming-3-stage-design" class="section level3">
+<h3 class="hasAnchor">
+<a href="#obrien-fleming-3-stage-design" class="anchor"></a>O’Brien-Fleming 3-stage design</h3>
+<p>To obtain a true group sequential design, we have to select <span class="math inline">\(K &gt; 1\)</span> stages. The number of stages is chosen at the top of the window. Note that in GroupSeq this is called <code>#Interim Times</code>, which means that the final analysis also is treated as an ‘interim time’. Thus, for a 3-stage design, we select <span class="math inline">\(K = 3\)</span>.</p>
+<p><img src="figures/task1-select-K3.png" width="50%"><br></p>
+<p>Hit <code>CALCULATE</code> to compute the 3-stage design.</p>
+<p><img src="figures/task1-3stage-result.png" width="50%"></p>
+<p><br></p>
+<p>In the second to last column, you see how much alpha is spent at each stage, while in the last column you see the cumulative alpha, which should sum up to the overall significance level (here 5%).</p>
+<p>Obviously, there are infinitely many ways to split the 5% over the three stages. The default alpha spending strategy in GroupSeq is the O’Brien-Fleming type, which is probably the most popular group sequential design in clinical trials.</p>
+<p>As you see, the O’Brien-Fleming is very conservative at the early stages of the study so that only 0.069% of alpha is spent at stage 1. This means, that the effect would have to be very large in order to exceed the critical upper bound of 3.2 having collected 33% of the total sample.</p>
+<p>To get a visual impression, you can click the <code>Show Graph</code> button in the result window, which provides the following plot.</p>
+<p><img src="figures/task1-3stage-result-graph.png" width="50%"></p>
+<p><br> The advantage of this conservative strategy is that you still leave enough alpha for the final analysis to reject <code>H0</code> for significant but moderate effects.</p>
+</div>
+<div id="pocock-3-stage-design" class="section level3">
+<h3 class="hasAnchor">
+<a href="#pocock-3-stage-design" class="anchor"></a>Pocock 3-stage design</h3>
+<p>Another popular design, which actually had a significant positive impact on the general popularity of group sequential designs in clinical research is the design by Pocock, which is constructed such the bounds are identical at each stage. Let’s select <code>(5) Exact Pocock Bounds</code> and hit <code>CONFIRM FUNCTION</code>.</p>
+<p><img src="figures/task1-3stage-pocock.png" width="35%"></p>
+<p><br> When hitting the <code>CALCULATE</code> button, this time we get the following.</p>
+<p><img src="figures/task1-3stage-pocock-result.png" width="55%"><img src="figures/task1-3stage-pocock-result-graph.png" width="40%"></p>
+<p><br> As you see the resulting upper bounds are set constant over all stages at 1.99. Obviously this design is more aggressive than the O’Brien-Fleming design in trying to abort early as 0.023% of alpha is already spent at the first stage (see second to last column in above figure).</p>
+<p>While the critical bounds are constant over all stages, the spent alpha is not. Rather it is decreasing with each stage. This is “caused” by the sample size, which is increasing on later stages, so that, roughly speaking, it gets less likely under <code>H0</code> to produce a type I error.</p>
+</div>
+<div id="obrien-fleming-vs-pocock" class="section level3">
+<h3 class="hasAnchor">
+<a href="#obrien-fleming-vs-pocock" class="anchor"></a>O’Brien-Fleming vs Pocock</h3>
+<p>When comparing the final stage of both designs, the spent alpha in the O’Brien-Fleming design (0.034%) is roughly three times higher than in the Pocock design (0.011%), which means that if the study is not aborted at one of the interim analysis, once you reach the final stage the effect needs to be much higher in the Pocock design to reject <code>H0</code> at the final stage.</p>
+<p>Beside the statistical power there are other aspects such as the expected sample size that can be taken into consideration when comparing designs which however goes beyond the scope of this vignette. This is also true with respect to the other available designs<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, and it is recommended to consult the literature to study the properties of the different designs.</p>
+<p>You may have also noted that among the available design functions there is <code>(2) Pocock type</code>, which is is very similar to option <code>(5) Exact Pocock Bounds</code>. The <code>(2) Pocock type</code> is based on the alpha spending approach, which always produces monotonously decreasing bounds and therefore does not yield exact Pocock bounds by definition. Since the Pocock design is very popular, the option of exact Pocock bounds, which are slightly harder to compute, was added to GroupSeq.</p>
+</div>
+<div id="non-equidistant-interim-times" class="section level3">
+<h3 class="hasAnchor">
+<a href="#non-equidistant-interim-times" class="anchor"></a>Non-equidistant interim times</h3>
+<p>To adjust interim times, which by default are equally spaced, the correspondin checkmark has to be deselected. <img src="figures/task1-3stage-pocock-custom-times.png" width="35%"></p>
+<p><br> The times are entered manually, for example, lets start a bit later with the first interim look.</p>
+<p><img src="figures/task1-3stage-pocock-custom-times-entered.png" width="35%"></p>
+<p><br> and <code>CALCULATE</code>.</p>
+<p><img src="figures/task1-3stage-pocock-custom-times-result.png" width="50%"></p>
+<p><br> We see that this leads to slightly lower bounds, which seems about right as this design is less aggressive to abort the study early.</p>
+</div>
+<div id="two-sided-bounds" class="section level3">
+<h3 class="hasAnchor">
+<a href="#two-sided-bounds" class="anchor"></a>Two-Sided bounds</h3>
+<p>Last but not least, the designs can be calculated for the two-sided symmetric</p>
+<p><img src="figures/task1-3stage-pocock-two-side.png" width="35%"></p>
+<p><br> as well as the two-sided asymmetric case.</p>
+<p><img src="figures/task1-3stage-pocock-two-side-asym.png" width="35%"></p>
+<p><br> Naturally, the alpha is split up symmetrically, but can be customized if needed. Also, the alpha spending function has to be set separately for each side. As an example, lets go with O’Brien-Fleming and Pocock again (don’t forget to hit the <code>CONFIRM FUNCTION</code> buttons).</p>
+<p><img src="figures/task1-3stage-pocock-two-side-asym-result.png" width="55%"><img src="figures/task1-3stage-pocock-two-side-asym-graph.png" width="40%"></p>
+<p><br> Looking at the stage-wise alpha spending, we literally end up with a mixture of both designs as there is some alpha spend on the early stages but still saved some for the last stage.</p>
+<p>So this is mainly what can be done with GroupSeq to construct designs under <code>H0</code>. Next, lets see how to calculate probabilities under <code>H1</code> and specifically to determine the effect size that is required to achieve a certain probability (i.e. power) to detect an existing effect, which can be done via the second menu option: <a href="https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html">-2- Compute Drift given Power and Bounds</a></p>
+</div>
+<div class="footnotes">
+<hr>
+<ol>
+<li id="fn1"><p>To be exact, these are alpha spending functions, which lead to certain types of designs.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
