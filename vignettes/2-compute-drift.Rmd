@@ -39,6 +39,8 @@ The option -2- menu initially looks as follows.
 include_graphics("figures/task2-menu.png")
 ```
 
+### O'Brien-Fleming 3-stage design
+
 <br>
 For a start lets set `K=3` stages and `CALCULATE`.
 
@@ -58,6 +60,8 @@ remaining 20% of cases `H0` will be accepted and the effect stays undetected.
 These probabilities are all valid if the true drift (i.e. true standardized 
 effect size) is 2.51.
 
+### Pocock 3-stage design
+
 Next lets see the required drift if we use a Pocock design.
 
 ```{r, out.width = "50%"}
@@ -72,5 +76,56 @@ Comparing the power of both designs for a specific drift, is discussed in
 With the Pocock design on the other hand you will be able to abort the study
 at the first interim look in about 33% of the cases, so if you are optimistic
 about your expected effect, the Pocock design might be the better choice as
-it will result in lower required samples on average and faster study conclusion.
+it will result in lower required samples on average and thereby 
+a faster study conclusion.
+
+To change the desired power, just edit the value in the input window.
+
+```{r, out.width = "25%"}
+include_graphics("figures/task2-set-power.png")
+```
+
+<br>
+If we re-`CALCULATE`, we get
+
+```{r, out.width = "50%"}
+include_graphics("figures/task2-3stage-Pocock-result-power90.png")
+```
+
+<br>
+As expected the required drift has increased to now 3.16, but there is also
+something interesting to the resulting exit probabilities as basically the 
+10% increase in power was "added" to the first interim look, which now has a 
+probability of 43% to succeed. Also the exit probability at the final stage
+even has been decreased slightly. 
+
+First of all, this is good news, of course, because it means that it has become
+less likely that the full sample is required to come to a conclusion. 
+Intuitively, this also makes sense, because a stronger effect indicated by
+the higher drift (on average) will be detected earlier than a weaker effect.
+
+### Manual bounds
+
+In order to enable the computation of drift for arbitrary designs, you can
+enter bounds manually.
+
+```{r, out.width = "35%", echo = FALSE}
+include_graphics("figures/task2-set-manual-bounds.png")
+```
+
+<br>
+Hitting `CALCULATE` for the default bounds 1, 2, 3, we get
+
+```{r, out.width = "50%"}
+include_graphics("figures/task2-3stage-Pocock-result-manual-bounds.png")
+```
+
+<br>
+This design maintains the specified power, if the drift was
+3.355, but it does not maintain the 5% alpha level under 
+`H0` (drift = 0).
+
+To see this, check out the next vignette
+[-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html)
+
 

@@ -61,7 +61,7 @@ Note that in GroupSeq this is called
 `#Interim Times`, which means that the final analysis also is treated as an
 'interim time'. Thus, for a 3-stage design, we select $K = 3$.
 
-```{r, out.width = "50%"}
+```{r, out.width = "25%"}
 include_graphics("figures/task1-select-K3.png")
 ```
 <br>
@@ -83,12 +83,13 @@ The default alpha spending strategy in GroupSeq is the O'Brien-Fleming type,
 which is probably the most popular group sequential design in clinical trials.
 
 As you see, the O'Brien-Fleming is very conservative at the early stages
-of the study so that only 0.069% of alpha is spent at stage 1. This means,
-that the effect would have to be very large in order to exceed the critical
-upper bound of 3.2 having collected 33% of the total sample.
+of the study so that only 0.069% of alpha is spent at stage 1. The effect 
+therefore would have to be very large in order to exceed the critical
+upper bound of 3.2 at stage 1 when 33% of the total sample will have been
+collected.
 
-To get a visual impression, you can click the `Show Graph` button in the result
-window, which provides the following plot.
+To get a visual impression you can click the `Show Graph` button in the result
+window which provides the following plot.
 
 ```{r, out.width = "50%"}
 include_graphics("figures/task1-3stage-result-graph.png")
@@ -101,7 +102,7 @@ alpha for the final analysis to reject `H0` for significant but moderate effects
 ### Pocock 3-stage design
 
 Another popular design, which actually had a significant positive impact on 
-the general popularity of group sequential designs in clinical research 
+the general popularity of group sequential designs in clinical research, 
 is the design by Pocock, which is constructed such the bounds are identical
 at each stage. Let's select `(5) Exact Pocock Bounds` and hit `CONFIRM FUNCTION`.
 
@@ -118,7 +119,7 @@ include_graphics("figures/task1-3stage-pocock-result-graph.png")
 ```
 
 <br>
-As you see the resulting upper bounds are set constant over all stages at
+The resulting upper bounds are set constant over all stages at
 1.99. Obviously this design is more aggressive than the O'Brien-Fleming design
 in trying to abort early as 0.023% of alpha is already spent at the first 
 stage (see second to last column in above figure).
@@ -199,7 +200,7 @@ include_graphics("figures/task1-3stage-pocock-two-side-asym.png")
 
 <br>
 Naturally, the alpha is split up symmetrically, but can be customized if needed.
-Also, the alpha spending function has to be set separately for each side.
+Also the alpha spending function has to be set separately for each side.
 As an example, lets go with O'Brien-Fleming and Pocock again (don't forget to 
 hit the `CONFIRM FUNCTION` buttons).
 
@@ -215,7 +216,7 @@ of both designs as there is some alpha spend on the early stages but still
 saved some for the last stage.
 
 So this is mainly what can be done with GroupSeq to construct designs under `H0`.
-Next, lets see how to calculate probabilities under `H1` and specifically
+Next lets see how to calculate probabilities under `H1` and specifically
 to determine the effect size that is required to achieve a certain probability
 (i.e. power) to detect an existing effect, which can be done via the second
 menu option:
