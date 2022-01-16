@@ -396,6 +396,29 @@ In a (group) sequential study design, samples are analyzed in a sequence
 where at each stage all the data from earlier stages are combined with the
 data of the current stage.
 
+For example, in the first stage we collect a sample `X1` and in a second 
+stage we combine the sample `X1` with a new sample `X2`.
+
+```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"}
+dat = data[1:20, ]
+dat[11:20, "x"] = 11:20
+dat = rbind(data.frame(x = 1:10, y = 1.5, Sample = "X1"), dat)
+ggplot(dat, aes(x = x, y = y)) +
+    geom_point(size = 10, shape = 21, aes(fill = Sample)) +
+    scale_fill_manual(values = fill_colors[1:2]) +
+    lims(x = c(0.5, 20.5), y = c(1.2, 2.2)) +
+    theme_void() +
+    theme(legend.position = "bottom")
+
+```
+
+The crucial difference when combining the samples in this way is that now they
+are inherently dependent, that is, the statistic of sample `X1 + X2` will be 
+correlated to the that of sample `X1`.
+
+With this in mind, the graphical presentation below is more precise to
+visualize the data sample setup.
+
 ```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of group sequential two-stage study."}
 dat = data[c(1:10, 21:40), ]
 
@@ -407,10 +430,6 @@ ggplot(dat, aes(x = x, y = y)) +
     theme(legend.position = "bottom")
 
 ```
-
-The crucial difference when combining the samples in this way is that now they
-are inherently dependent, that is, the statistic of sample `X1 + X2` will be 
-correlated to the that of sample `X1`.
 
 The naive approach for the alpha adjustment again would be to treat both
 density distributions as independent and apply the Bonferroni correction.

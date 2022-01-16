@@ -224,21 +224,24 @@ Standard Normal Density with critial bounds marking 5% significance level.
 <h3 class="hasAnchor">
 <a href="#group-sequential-study" class="anchor"></a>Group sequential study</h3>
 <p>In a (group) sequential study design, samples are analyzed in a sequence where at each stage all the data from earlier stages are combined with the data of the current stage.</p>
+<p>For example, in the first stage we collect a sample <code>X1</code> and in a second stage we combine the sample <code>X1</code> with a new sample <code>X2</code>.</p>
+<p><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-14-1.png" width="35%" style="display: block; margin: auto;"></p>
+<p>The crucial difference when combining the samples in this way is that now they are inherently dependent, that is, the statistic of sample <code>X1 + X2</code> will be correlated to the that of sample <code>X1</code>.</p>
+<p>With this in mind, the graphical presentation below is more precise to visualize the data sample setup.</p>
 <div class="figure" style="text-align: center">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-14-1.png" alt="Schematic view of group sequential two-stage study." width="35%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-15-1.png" alt="Schematic view of group sequential two-stage study." width="35%"><p class="caption">
 Schematic view of group sequential two-stage study.
 </p>
 </div>
-<p>The crucial difference when combining the samples in this way is that now they are inherently dependent, that is, the statistic of sample <code>X1 + X2</code> will be correlated to the that of sample <code>X1</code>.</p>
 <p>The naive approach for the alpha adjustment again would be to treat both density distributions as independent and apply the Bonferroni correction.</p>
 <div class="figure">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-15-1.png" alt="Normal densities for stage 1 and 2 with Bonferroni bounds." width="85%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-16-1.png" alt="Normal densities for stage 1 and 2 with Bonferroni bounds." width="85%"><p class="caption">
 Normal densities for stage 1 and 2 with Bonferroni bounds.
 </p>
 </div>
 <p>Since this completely ignores the correlation, we expect that even more alpha is wasted. To see this let’s now again use the two-dimensional distribution.</p>
 <div class="figure">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-17-1.png" alt="Bivariate normal density of two-stage design viewed from different angles." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-17-2.png" alt="Bivariate normal density of two-stage design viewed from different angles." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-17-3.png" alt="Bivariate normal density of two-stage design viewed from different angles." width="30%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-18-1.png" alt="Bivariate normal density of two-stage design viewed from different angles." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-18-2.png" alt="Bivariate normal density of two-stage design viewed from different angles." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-18-3.png" alt="Bivariate normal density of two-stage design viewed from different angles." width="30%"><p class="caption">
 Bivariate normal density of two-stage design viewed from different angles.
 </p>
 </div>
@@ -255,7 +258,7 @@ Bivariate normal density of two-stage design viewed from different angles.
 <p>Inspecting the probabilities stage by stage, 2.93% of alpha is spent at the first and 2.04% at the second stage, respectively. That is, although the nominal bounds are identical at both stages, due to the asymmetric shape of the two-dimensional distribution, the resulting probabilities are different.</p>
 <p>The graphical presentation of group sequential designs normally is done with a graph showing at the x-axis the “Information Rate”, which marks the relative sample size of the respective stages, and the nominal bounds at the y-axis. The above Pocock design thus looks something like this.</p>
 <div class="figure">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-22-1.png" alt="Group sequential 2-stage Pocock design with one interim look at half of the total samples." width="50%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-23-1.png" alt="Group sequential 2-stage Pocock design with one interim look at half of the total samples." width="50%"><p class="caption">
 Group sequential 2-stage Pocock design with one interim look at half of the total samples.
 </p>
 </div>
@@ -265,7 +268,7 @@ Group sequential 2-stage Pocock design with one interim look at half of the tota
 <a href="#obrien-fleming-design" class="anchor"></a>O’Brien-Fleming design</h4>
 <p>Probably the most popular group sequential design is the O’Brien-Fleming design. For our two-stage scenario with half of the sample used in each stage, it looks like this.</p>
 <div class="figure">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-23-1.png" alt="Group sequential 2-stage O'Brien-Fleming design with one interim look at 0.5." width="50%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-24-1.png" alt="Group sequential 2-stage O'Brien-Fleming design with one interim look at 0.5." width="50%"><p class="caption">
 Group sequential 2-stage O’Brien-Fleming design with one interim look at 0.5.
 </p>
 </div>
@@ -280,13 +283,13 @@ Group sequential 2-stage O’Brien-Fleming design with one interim look at 0.5.
 <a href="#design-comparisons" class="anchor"></a>Design comparisons</h4>
 <p>To strengthen our intuitive understanding, let’s compare the Pocock and O’Brien-Fleming design in the two-dimensional density view.</p>
 <div class="figure">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-25-1.png" alt="Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample." width="45%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-25-2.png" alt="Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample." width="45%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-26-1.png" alt="Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample." width="45%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-26-2.png" alt="Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample." width="45%"><p class="caption">
 Bivariate normal density with critical bounds of Pocock (left) and O’Brien-Fleming design (right) both with interim analysis after 50% of the sample.
 </p>
 </div>
 <p>The figure below shows how the time point of the stage 1 analysis affects the correlation of the stages and with that shapes the design probabilities.</p>
 <div class="figure">
-<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-26-1.png" alt="Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-26-2.png" alt="Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-26-3.png" alt="Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples." width="30%"><p class="caption">
+<img src="understanding-gs-designs_files/figure-html/unnamed-chunk-27-1.png" alt="Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-27-2.png" alt="Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples." width="30%"><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-27-3.png" alt="Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples." width="30%"><p class="caption">
 Bivariate normal density of two-stage O’Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples.
 </p>
 </div>
