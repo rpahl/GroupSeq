@@ -52,8 +52,9 @@ include_graphics("figures/task2-3stage-OBF-graph.png")
 <br>
 The design maintains the power of 80%. The second to last column
 provides the `Exit Probability` for each stage. As is typical for 
-O'Brien-Fleming designs, the probability to abort the study is very low 
-(here 4%) even under `H1`. Then on the second stage, it's 42% and cumulative 
+O'Brien-Fleming designs, the probability to abort the study 
+at the first interim look is very low (here 4%) 
+even under `H1`. Then on the second stage, it's 42% and cumulative 
 almost a 50% chance of having the study aborted by then and finally in one
 third of the cases the effect is detected at the last stage while in the 
 remaining 20% of cases `H0` will be accepted and the effect stays undetected.
@@ -81,7 +82,7 @@ a faster study conclusion.
 
 To change the desired power, just edit the value in the input window.
 
-```{r, out.width = "25%"}
+```{r, out.width = "35%"}
 include_graphics("figures/task2-set-power.png")
 ```
 
