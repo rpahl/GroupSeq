@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="-3- Compute Probabilities given Bounds and Drift">
-<meta property="og:description" content="TODO
+<meta property="og:description" content="This vignette shows how to use GroupSeq to compute group sequential  probabilities under both H0 or H1.
 ">
 <meta property="og:image" content="https://github.com/rpahl/GroupSeq/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -163,7 +163,25 @@
 
     
     
-
+<p>This vignette builds right on <a href="https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html">-2- Compute Drift given Power and Bounds</a> so if you haven’t seen the vignette it is recommended to visit this one first.</p>
+<p>Taking forward the example from the last vignette, we want three stages of manual bounds and enter a drift of <code>3.3553</code>.</p>
+<p><img src="figures/task3-example-manual-bounds.png" width="35%"></p>
+<p>which <code>CALCULATE</code>s to</p>
+<p><img src="figures/task3-example-manual-bounds-results.png" width="50%"></p>
+<p>yielding about 90% of cumulative exit probability, which corresponds to the study power assuming a standardized effect size of 3.3553. To see the type I error of this design, that is, the probability under H0, we simply set the drift to zero.</p>
+<p><img src="figures/task3-example-manual-bounds-zero-drift.png" width="35%"></p>
+<p>Re<code>CALCULATE</code> gives</p>
+<p><img src="figures/task3-example-manual-bounds-zero-drift-results.png" width="50%"></p>
+<p>thereby resulting in a type I error of about 16.3%, which clearly exceeds the typically allowed level of 5%. As such the design is not valid.</p>
+<p>To get closer to 5% we now could start adjusting the bounds bit by bit. For example, as the design already spends 15.8% of alpha at stage 1, lets increase the first stage bound to two.</p>
+<p><img src="figures/task3-example-manual-bounds-zero-drift-adjusted.png" width="40%"><img src="figures/task3-example-manual-bounds-zero-drift-adjusted-results.png" width="55%"></p>
+<p>The type I error drops to about 3.8% so now we are a bit too conservative and could further adjust. If we set the last bound to 2 as well, we actually end up with a classic Pocock design.</p>
+<p><img src="figures/task3-manual-Pocock.png" width="40%"><img src="figures/task3-manual-Pocock-results.png" width="55%"></p>
+<p>Very close already and of course the easiest way to get a Pocock design with exactly 5% alpha level is to abort manual bounds and revert back to using the corresponding function.</p>
+<p><img src="figures/task3-exact-Pocock.png" width="40%"><img src="figures/task3-exact-Pocock-results.png" width="55%"></p>
+<p>Last but not least lets calculate the power for this design, if the drift is 2,</p>
+<p><img src="figures/task3-exact-Pocock-drift2.png" width="40%"><img src="figures/task3-exact-Pocock-drift2-results.png" width="55%"></p>
+<p>which apparently gives about 56.6%.</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

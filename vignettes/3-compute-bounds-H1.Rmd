@@ -52,7 +52,7 @@ study power assuming a standardized effect size of 3.3553. To see the type
 I error of this design, that is, the probability under H0, we simply set the
 drift to zero.
 
-```{r, out.width = "50%"}
+```{r, out.width = "35%"}
 include_graphics("figures/task3-example-manual-bounds-zero-drift.png")
 ```
 
@@ -94,7 +94,7 @@ include_graphics("figures/task3-exact-Pocock-results.png")
 
 Last but not least lets calculate the power for this design, if the drift is 2,
 
-```{r}
+```{r, out.width = c("40%", "55%"), echo = FALSE, fig.show = "hold"}
 include_graphics("figures/task3-exact-Pocock-drift2.png")
 include_graphics("figures/task3-exact-Pocock-drift2-results.png")
 ```
