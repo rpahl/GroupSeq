@@ -1,6 +1,7 @@
 .git
 .gitignore
 TODO
+.Rprofile
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^\.github$
@@ -10,7 +11,6 @@ tags
 ^docs$
 ^doc$
 ^README\.Rmd$
-^doc$
 ^Meta$
 
 ^images$

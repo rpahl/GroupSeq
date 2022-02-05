@@ -16,18 +16,14 @@
 
 GroupSeq computes probabilities related to group sequential designs for
 normally distributed test statistics. It enables to derive critical
-boundaries, power, drift, and confidence intervals of such designs and
-supports the alpha spending approach by Lan-DeMets.
+boundaries, power, drift, and confidence intervals of such designs,
+mostly using the alpha spending approach of [DeMets and
+Lan](#ref-pmid7973215) ([1994](#ref-pmid7973215)).
 
-### Installation
-
-``` r
-# Install release version from CRAN
-install.packages("GroupSeq")
-
-# Install development version from GitHub
-devtools::install_github("rpahl/GroupSeq")
-```
+The main motivation for the development of this package was to make this
+area of statistics freely available for a broad audience, which is one
+of the reasons why all functionality is provided by a graphical user
+interface.
 
 ### Installation
 
@@ -47,4 +43,46 @@ Load the library to start the graphical user interface.
 library("GroupSeq")
 ```
 
-<img src="man/figures/menu-after-load.png" align="left"/>
+<img src="man/figures/menu-after-load.png" width="30%" />
+
+<br>
+
+To get started see the [General
+Introduction](https://rpahl.github.io/GroupSeq/articles/GroupSeq.html)
+page.
+
+### Alternative tools
+
+Since the package was written back in 2005, the graphical user interface
+may appear a bit outdated. Still, it does it’s job and at least has
+stood the test of time[<sup>1</sup>](#refs). Luckily in recent years
+others have started to develop R-based tools with graphical user
+interface and similar (and more) statistical functionality:
+
+-   [gsDesign](https://CRAN.R-project.org/package=gsDesign) with a free
+    [shiny web interface](https://gsdesign.shinyapps.io/prod/) including
+    tutorials.
+-   [rpact](https://CRAN.R-project.org/package=rpact) also with a free
+    [shiny web interface](https://rpact.shinyapps.io/public) and lots of
+    [vignettes](https://www.rpact.com/vignettes).
+
+### References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-pmid7973215" class="csl-entry">
+
+DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim
+analysis: the alpha spending function approach</span>.” *Stat Med* 13
+(13-14): 1341–52. <https://doi.org/10.1002/sim.4780131308>.
+
+</div>
+
+</div>
+
+------------------------------------------------------------------------
+
+1.  The package author is considering to work on a second version with
+    more functionality and a revised user interface in the near future.
+    Feel free to request new features
+    [here](https://github.com/rpahl/GroupSeq/issues).

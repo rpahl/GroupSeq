@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to GroupSeq">
-<meta property="og:description" content="Start here if this is your first time using GroupSeq. This vignette gives a brief introduction on how to compute group sequential designs using GroupSeq.
+<meta property="og:description" content="Start here if this is your first time using GroupSeq. This vignette gives a brief overview of what can be done with GroupSeq.
 ">
 <meta property="og:image" content="https://github.com/rpahl/GroupSeq/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -62,7 +62,46 @@
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    All Packages
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a></a>
+    </li>
+    <li>
+      <a href="../articles/index.html">Overview</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/understanding-gs-designs.html">Understanding group sequential designs</a>
+    </li>
+    <li>
+      <a href="../articles/GroupSeq.html">Introduction to GroupSeq</a>
+    </li>
+    <li>
+      <a href="../articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a>
+    </li>
+    <li>
+      <a href="../articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a>
+    </li>
+    <li>
+      <a href="../articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>
+    </li>
+    <li>
+      <a href="../articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Other</li>
+    <li>
+      <a href="https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21">GroupSeq article in R News 2006</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    My Packages
      
     <span class="caret"></span>
   </a>
@@ -117,14 +156,138 @@
       <h1 data-toc-skip>Introduction to GroupSeq</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/master/vignettes/GroupSeq.Rmd"><code>vignettes/GroupSeq.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/master/R/vignettes/GroupSeq.Rmd"><code>R/vignettes/GroupSeq.Rmd</code></a></small>
       <div class="hidden name"><code>GroupSeq.Rmd</code></div>
 
     </div>
 
     
     
-
+<p>Group sequential designs in essence allow to lower the sample size of clinical or other studies. To be clear - if a group sequentially designed study is conducted until the final analysis, that is, without aborting at one of the interim looks, the required sample will be larger compared to a simple single stage study, because you have to “pay” for the added interim analyses to prevent <a href="https://en.wikipedia.org/wiki/Multiple_comparisons_problem">alpha inflation</a>.</p>
+<p>But, from time to time, especially if the underlying effect is strong (e.g. you have a very potent medicine), you will abort the study early and this on average leads to lower sample sizes, or in other words, the expected sample size of group sequential designs is lower than the sample size of comparable studies with just one final analysis.</p>
+<p>If you want to get an intuitive understanding on how probabilities of group sequential designs are calculated, please see the vignette <a href="https://rpahl.github.io/GroupSeq/articles/understanding-gs-designs.html">Understanding group sequential designs</a>.</p>
+<p>The GroupSeq package can be used to perform basic calculations related to group sequential designs. At this point, the functionality is mainly provided via a graphical user interface. The interface was designed such that each calculation can be opened in separate windows allowing to compute and compare arbitrary many designs in parallel.</p>
+<p>The following section gives a brief overview of all the available options with links to further details.</p>
+<div id="groupseq-menu" class="section level3">
+<h3 class="hasAnchor">
+<a href="#groupseq-menu" class="anchor"></a>GroupSeq menu</h3>
+<p>Loading the library opens the main GroupSeq window.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/rpahl/GroupSeq">"GroupSeq"</a></span><span class="op">)</span></code></pre></div>
+<p><img src="figures/menu-after-load.png" width="35%"></p>
+<p><br></p>
+<p>The menu lists four possible tasks. To select a task, you have to select a row and hit the <code>Perform Selected Task</code> button. Each task opens in a new window and it’s also possible to open multiple windows of the same task in parallel. For a detailed description of the respective task follow one of the links below:</p>
+<div id="compute-bounds" class="section level4">
+<h4 class="hasAnchor">
+<a href="#compute-bounds" class="anchor"></a><a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a>
+</h4>
+<p>Use this to compute the boundaries of group sequential designs under the null hypothesis (<code>H0</code>), that is, under a given significance level alpha (usually 5%).</p>
+<table class="table"><tr>
+<td>
+<a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html"><img src="figures/task1-menu.png" alt="1- Compute Bounds" style="width:80%"></a>
+</td>
+<td>
+<ul>
+<li>
+Computes group sequential bounds under the null hypothesis for given overall significance level.
+</li>
+<li>
+Bounds can be one- or two-sided or completely asymmetric.
+</li>
+<li>
+User chooses number of stages and some alpha spending function.
+</li>
+</ul>
+</td>
+</tr></table>
+<p><br></p>
+</div>
+<div id="compute-drift-given-power-and-bounds" class="section level4">
+<h4 class="hasAnchor">
+<a href="#compute-drift-given-power-and-bounds" class="anchor"></a><a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a>
+</h4>
+<p>Use this to compute the target effect size of a group sequential design, which maintains a certain power (e.g. power = 80%).</p>
+<table class="table"><tr>
+<td>
+<a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html"><img src="figures/task2-menu.png" alt="-2- Compute Drift given Power and Bounds" style="width:80%"></a>
+</td>
+<td>
+<ul>
+<li>
+Computes drift (i.e. standardized effect size) required to achieve desired power of a given group sequential design.
+</li>
+<li>
+The group sequential design is defined via alpha spending functions or custom critical bounds.
+</li>
+<li>
+Bounds can be one- or two-sided or completely asymmetric.
+</li>
+<li>
+User chooses number of stages.
+</li>
+</ul>
+</td>
+</tr></table>
+<p><br></p>
+</div>
+<div id="compute-probabilities-given-bounds-and-drift" class="section level4">
+<h4 class="hasAnchor">
+<a href="#compute-probabilities-given-bounds-and-drift" class="anchor"></a><a href="https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>
+</h4>
+<p>Use this to compute the power of a group sequential design.</p>
+<table class="table"><tr>
+<td>
+<a href="https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html"><img src="figures/task3-menu.png" alt="-3- Compute Probabilities given Bounds and Drift" style="width:80%"></a>
+</td>
+<td>
+<ul>
+<li>
+Computes power that is achieved by a group sequential design given some drift (i.e. standardized effect size).
+</li>
+<li>
+The group sequential design is defined via alpha spending functions or custom critical bounds.
+</li>
+<li>
+Bounds can be one- or two-sided or completely asymmetric.
+</li>
+<li>
+User chooses number of stages.
+</li>
+</ul>
+</td>
+</tr></table>
+<p><br></p>
+</div>
+<div id="compute-confidence-interval" class="section level4">
+<h4 class="hasAnchor">
+<a href="#compute-confidence-interval" class="anchor"></a><a href="https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a>
+</h4>
+<p>Use this to compute the confidence intervals for the target outcome at the final analysis, which can be the last stage as planned or at an earlier stage exceeding the critical bounds and therefore stopping early.</p>
+<table class="table"><tr>
+<td>
+<a href="https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html"><img src="figures/task4-menu.png" alt="-4- Compute Confidence Interval" style="width:80%"></a>
+</td>
+<td>
+<ul>
+<li>
+Compute confidence interval at final analysis stage for given expected effect size.
+</li>
+<li>
+The group sequential design is defined via alpha spending functions or custom critical bounds.
+</li>
+<li>
+Bounds can be one- or two-sided or completely asymmetric.
+</li>
+<li>
+User chooses number of stages and confidence level.
+</li>
+</ul>
+</td>
+</tr></table>
+<p><br></p>
+<p>To close the application and, with it, all open windows, just close the main window or hit the <code>QUIT GroupSeq</code> button.</p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

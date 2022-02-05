@@ -1,6 +1,7 @@
 # GroupSeq 1.4.0
 
 * Create package site
+* Set new GroupSeq logo in GUI
 
 
 # GroupSeq 1.3.3

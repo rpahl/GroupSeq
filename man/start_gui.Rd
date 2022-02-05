@@ -4,12 +4,8 @@
 \alias{start_gui}
 \title{Start GroupSeq}
 \usage{
-start_gui(legacy = FALSE)
-}
-\arguments{
-\item{legacy}{\code{logical} if \code{TRUE}, starts legacy GroupSeq version < 2.}
+start_gui()
 }
 \description{
-Starts the graphical user interface, optionally the legacy
-version of GroupSeq prior to version 2.
+Starts the graphical user interface.
 }

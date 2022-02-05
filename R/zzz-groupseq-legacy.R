@@ -6428,6 +6428,10 @@ guiMode <- function()
   pkg.env$taskWindow <- tcltk::tktoplevel()
   taskWindow <- pkg.env$taskWindow
 
+  logofile <- system.file("img", "logo32.gif", package = "GroupSeq")
+  tkimage.create("photo", "::image::logoIcon", file = logofile)
+  tcl("wm", "iconphoto", taskWindow, "-default", "::image::logoIcon")
+
   tkwm.title(taskWindow,"Choose a Task")
   listBoxTasks<-tklistbox(taskWindow,height=4,width=40,selectmode="single",background="white")
   tkgrid(tklabel(taskWindow,text="Select a Task!"))
