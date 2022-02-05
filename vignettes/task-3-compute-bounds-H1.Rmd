@@ -31,7 +31,7 @@ options(width = 100L)
 
 
 This vignette builds right on 
-[-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html)
+[-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html)
 so if you haven't seen the vignette it is recommended to visit this one first.
 
 Taking forward the example from the last vignette, we want three stages of
@@ -102,7 +102,7 @@ include_graphics("figures/task3-exact-Pocock-drift2-results.png")
 which apparently gives about 56.6%.
 
 In the last vignette of this series we will see how to
-[-4- Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html)s
+[-4- Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html)s
 at the final stage of a group sequential study.
 
 

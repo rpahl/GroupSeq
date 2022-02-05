@@ -81,16 +81,16 @@
       <a href="../articles/GroupSeq.html">Introduction to GroupSeq</a>
     </li>
     <li>
-      <a href="../articles/1-compute-bounds-H0.html">-1- Compute Bounds</a>
+      <a href="../articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a>
     </li>
     <li>
-      <a href="../articles/2-compute-drift.html">-2- Compute Drift given Power and Bounds</a>
+      <a href="../articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a>
     </li>
     <li>
-      <a href="../articles/3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>
+      <a href="../articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>
     </li>
     <li>
-      <a href="../articles/4-compute-CI.html">-4- Compute Confidence Interval</a>
+      <a href="../articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Other</li>
@@ -150,20 +150,20 @@
 
       
 
-      </header><script src="2-compute-drift_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="task-2-compute-drift_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>-2- Compute Drift given Power and Bounds</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/master/R/vignettes/2-compute-drift.Rmd"><code>R/vignettes/2-compute-drift.Rmd</code></a></small>
-      <div class="hidden name"><code>2-compute-drift.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/master/R/vignettes/task-2-compute-drift.Rmd"><code>R/vignettes/task-2-compute-drift.Rmd</code></a></small>
+      <div class="hidden name"><code>task-2-compute-drift.Rmd</code></div>
 
     </div>
 
     
     
-<p>If you haven’t seen the vignette <a href="https://rpahl.github.io/GroupSeq/articles/1-compute-bounds-H0.html">-1- Compute Bounds</a>, it is recommended to visit this one first.</p>
+<p>If you haven’t seen the vignette <a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a>, it is recommended to visit this one first.</p>
 <p>The option -2- menu initially looks as follows.</p>
 <p><img src="figures/task2-menu.png" width="35%"></p>
 <div id="obrien-fleming-3-stage-design" class="section level3">
@@ -178,7 +178,7 @@
 <a href="#pocock-3-stage-design" class="anchor"></a>Pocock 3-stage design</h3>
 <p>Next lets see the required drift if we use a Pocock design.</p>
 <p><img src="figures/task2-3stage-Pocock-result.png" width="50%"></p>
-<p>Apparently, to achieve a power of 80%, this design requires an effect of 2.71, which is 8% higher than that of the O’Brien-Fleming designs. Comparing the power of both designs for a specific drift, is discussed in <a href="https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>.</p>
+<p>Apparently, to achieve a power of 80%, this design requires an effect of 2.71, which is 8% higher than that of the O’Brien-Fleming designs. Comparing the power of both designs for a specific drift, is discussed in <a href="https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>.</p>
 <p>With the Pocock design on the other hand you will be able to abort the study at the first interim look in about 33% of the cases, so if you are optimistic about your expected effect, the Pocock design might be the better choice as it will result in lower required samples on average and thereby a faster study conclusion.</p>
 <p>To change the desired power, just edit the value in the input window.</p>
 <p><img src="figures/task2-set-power.png" width="35%"></p>
@@ -195,7 +195,7 @@
 <p><br> Hitting <code>CALCULATE</code> for the default bounds 1, 2, 3, we get</p>
 <p><img src="figures/task2-3stage-Pocock-result-manual-bounds.png" width="50%"></p>
 <p><br> This design maintains the specified power, if the drift was 3.355, but it does not maintain the 5% alpha level under <code>H0</code> (drift = 0).</p>
-<p>To see this, check out the next vignette <a href="https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a></p>
+<p>To see this, check out the next vignette <a href="https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a></p>
 </div>
   </div>
 

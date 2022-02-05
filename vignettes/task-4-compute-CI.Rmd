@@ -5,7 +5,8 @@ output:
     toc: true
     toc_depth: 4
 description: >
-  TODO
+  This vignette shows how to use GroupSeq to compute confidence intervals 
+  at the final stage of a group sequential analysis.
 vignette: >
   %\VignetteIndexEntry{-4- Compute Confidence Interval}
   %\VignetteEngine{knitr::rmarkdown}

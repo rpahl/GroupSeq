@@ -15,10 +15,10 @@ articles:
     contents:
     - "understanding-gs-designs"
     - "GroupSeq"
-    - "1-compute-bounds-H0"
-    - "2-compute-drift"
-    - "3-compute-bounds-H1"
-    - "4-compute-CI"
+    - "task-1-compute-bounds-H0"
+    - "task-2-compute-drift"
+    - "task-3-compute-bounds-H1"
+    - "task-4-compute-CI"
 
 home:
   links:
@@ -47,13 +47,13 @@ navbar:
         - text: "Introduction to GroupSeq"
           href: articles/GroupSeq.html
         - text: "-1- Compute Bounds"
-          href: articles/1-compute-bounds-H0.html
+          href: articles/task-1-compute-bounds-H0.html
         - text: "-2- Compute Drift given Power and Bounds"
-          href: articles/2-compute-drift.html
+          href: articles/task-2-compute-drift.html
         - text: "-3- Compute Probabilities given Bounds and Drift"
-          href: articles/3-compute-bounds-H1.html
+          href: articles/task-3-compute-bounds-H1.html
         - text: "-4- Compute Confidence Interval"
-          href: articles/4-compute-CI.html
+          href: articles/task-4-compute-CI.html
         - text: "---"
         - text: "Other"
         - text: "GroupSeq article in R News 2006"

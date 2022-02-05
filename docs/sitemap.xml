@@ -13,19 +13,19 @@
     <loc>https://github.com/rpahl/GroupSeq/reference/start_gui.html</loc>
   </url>
   <url>
-    <loc>https://github.com/rpahl/GroupSeq/articles/1-compute-bounds-H0.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/GroupSeq/articles/2-compute-drift.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/GroupSeq/articles/3-compute-bounds-H1.html</loc>
-  </url>
-  <url>
-    <loc>https://github.com/rpahl/GroupSeq/articles/4-compute-CI.html</loc>
-  </url>
-  <url>
     <loc>https://github.com/rpahl/GroupSeq/articles/GroupSeq.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-1-compute-bounds-H0.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-2-compute-drift.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-3-compute-bounds-H1.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-4-compute-CI.html</loc>
   </url>
   <url>
     <loc>https://github.com/rpahl/GroupSeq/articles/understanding-gs-designs.html</loc>

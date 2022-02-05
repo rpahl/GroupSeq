@@ -30,7 +30,7 @@ options(width = 100L)
 ```
 
 If you haven't seen the vignette 
-[-1- Compute Bounds](https://rpahl.github.io/GroupSeq/articles/1-compute-bounds-H0.html),
+[-1- Compute Bounds](https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html),
 it is recommended to visit this one first.
 
 The option -2- menu initially looks as follows.
@@ -72,7 +72,7 @@ include_graphics("figures/task2-3stage-Pocock-result.png")
 Apparently, to achieve a power of 80%, this design requires an effect of 2.71,
 which is 8% higher than that of the O'Brien-Fleming designs.
 Comparing the power of both designs for a specific drift, is discussed in
-[-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html).
+[-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html).
 
 With the Pocock design on the other hand you will be able to abort the study
 at the first interim look in about 33% of the cases, so if you are optimistic
@@ -127,6 +127,6 @@ This design maintains the specified power, if the drift was
 `H0` (drift = 0).
 
 To see this, check out the next vignette
-[-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html)
+[-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html)
 
 

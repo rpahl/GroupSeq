@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>-3- Compute Probabilities given Bounds and Drift • GroupSeq</title>
+<title>-4- Compute Confidence Interval • GroupSeq</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,8 +17,8 @@
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="-3- Compute Probabilities given Bounds and Drift">
-<meta property="og:description" content="This vignette shows how to use GroupSeq to compute group sequential  probabilities under both H0 or H1.
+<script src="../pkgdown.js"></script><meta property="og:title" content="-4- Compute Confidence Interval">
+<meta property="og:description" content="This vignette shows how to use GroupSeq to compute confidence intervals  at the final stage of a group sequential analysis.
 ">
 <meta property="og:image" content="https://github.com/rpahl/GroupSeq/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -81,16 +81,16 @@
       <a href="../articles/GroupSeq.html">Introduction to GroupSeq</a>
     </li>
     <li>
-      <a href="../articles/1-compute-bounds-H0.html">-1- Compute Bounds</a>
+      <a href="../articles/task-1-compute-bounds-H0.html">-1- Compute Bounds</a>
     </li>
     <li>
-      <a href="../articles/2-compute-drift.html">-2- Compute Drift given Power and Bounds</a>
+      <a href="../articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a>
     </li>
     <li>
-      <a href="../articles/3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>
+      <a href="../articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a>
     </li>
     <li>
-      <a href="../articles/4-compute-CI.html">-4- Compute Confidence Interval</a>
+      <a href="../articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a>
     </li>
     <li class="divider">
     <li class="dropdown-header">Other</li>
@@ -150,39 +150,30 @@
 
       
 
-      </header><script src="3-compute-bounds-H1_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="task-4-compute-CI_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>-3- Compute Probabilities given Bounds and Drift</h1>
+      <h1 data-toc-skip>-4- Compute Confidence Interval</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/master/R/vignettes/3-compute-bounds-H1.Rmd"><code>R/vignettes/3-compute-bounds-H1.Rmd</code></a></small>
-      <div class="hidden name"><code>3-compute-bounds-H1.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/master/R/vignettes/task-4-compute-CI.Rmd"><code>R/vignettes/task-4-compute-CI.Rmd</code></a></small>
+      <div class="hidden name"><code>task-4-compute-CI.Rmd</code></div>
 
     </div>
 
     
     
-<p>This vignette builds right on <a href="https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html">-2- Compute Drift given Power and Bounds</a> so if you haven’t seen the vignette it is recommended to visit this one first.</p>
-<p>Taking forward the example from the last vignette, we want three stages of manual bounds and enter a drift of <code>3.3553</code>.</p>
-<p><img src="figures/task3-example-manual-bounds.png" width="35%"></p>
-<p>which <code>CALCULATE</code>s to</p>
-<p><img src="figures/task3-example-manual-bounds-results.png" width="50%"></p>
-<p>yielding about 90% of cumulative exit probability, which corresponds to the study power assuming a standardized effect size of 3.3553. To see the type I error of this design, that is, the probability under H0, we simply set the drift to zero.</p>
-<p><img src="figures/task3-example-manual-bounds-zero-drift.png" width="35%"></p>
-<p>Re<code>CALCULATE</code> gives</p>
-<p><img src="figures/task3-example-manual-bounds-zero-drift-results.png" width="50%"></p>
-<p>thereby resulting in a type I error of about 16.3%, which clearly exceeds the typically allowed level of 5%. As such the design is not valid.</p>
-<p>To get closer to 5% we now could start adjusting the bounds bit by bit. For example, as the design already spends 15.8% of alpha at stage 1, lets increase the first stage bound to two.</p>
-<p><img src="figures/task3-example-manual-bounds-zero-drift-adjusted.png" width="40%"><img src="figures/task3-example-manual-bounds-zero-drift-adjusted-results.png" width="55%"></p>
-<p>The type I error drops to about 3.8% so now we are a bit too conservative and could further adjust. If we set the last bound to 2 as well, we actually end up with a classic Pocock design.</p>
-<p><img src="figures/task3-manual-Pocock.png" width="40%"><img src="figures/task3-manual-Pocock-results.png" width="55%"></p>
-<p>Very close already and of course the easiest way to get a Pocock design with exactly 5% alpha level is to abort manual bounds and revert back to using the corresponding function.</p>
-<p><img src="figures/task3-exact-Pocock.png" width="40%"><img src="figures/task3-exact-Pocock-results.png" width="55%"></p>
-<p>Last but not least lets calculate the power for this design, if the drift is 2,</p>
-<p><img src="figures/task3-exact-Pocock-drift2.png" width="40%"><img src="figures/task3-exact-Pocock-drift2-results.png" width="55%"></p>
-<p>which apparently gives about 56.6%.</p>
-<p>In the last vignette of this series we will see how to <a href="https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html">-4- Compute Confidence Interval</a>s at the final stage of a group sequential study.</p>
+<p>Let’s assume you have planned a two-sided 3-stage Pocock design with 80% power.</p>
+<p><img src="figures/task4-two-sided-3-stage-Pocock-setup.png" width="35%"></p>
+<p>The resulting design requires a drift of about 3.</p>
+<p><img src="figures/task4-two-sided-3-stage-Pocock.png" width="55%"><img src="figures/task4-two-sided-3-stage-Pocock-graph.png" width="38%"></p>
+<p>During the study you perform the interim analysis as planned when about 67% of all samples were collected and obtain a standardized effect size of 2.5, exceeding the critical bound (2.2894) so that you can abort the study and reject H0.</p>
+<p>To compute the confidence interval at this point, open option -4- of GroupSeq and enter the values as shown below.</p>
+<p><img src="figures/task4-CI-setup.png" width="45%"></p>
+<p>Hitting <code>CALCULATE</code> yields the following.</p>
+<p><img src="figures/task4-CI-result.png" width="50%"></p>
+<p>So for this study, the resulting confidence interval of the standardized effect is (0.30, 5.38).</p>
+<p>Depending on the underlying data distribution and applied test statistic this will be “back-calculated” to obtain the confidence interval for the value of interest (e.g. mean difference for some normally distributed data or difference in proportions of some binomially distributed data).</p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

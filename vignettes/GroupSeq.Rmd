@@ -86,14 +86,14 @@ Each task opens in a new window and it's also possible to open
 multiple windows of the same task in parallel.
 For a detailed description of the respective task follow one of the links below:
 
-#### [-1- Compute Bounds](https://rpahl.github.io/GroupSeq/articles/1-compute-bounds-H0.html)
+#### [-1- Compute Bounds](https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html)
 
 Use this to compute the boundaries of group sequential designs under the null
 hypothesis (`H0`), that is, under a given significance level alpha (usually 5%).
 
 <table style="border: 0px solid white; border-collapse: collapse; text-align:left">
     <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/1-compute-bounds-H0.html"><img src="figures/task1-menu.png" alt="1- Compute Bounds" style="width:80%"></a></td>
+        <td><a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html"><img src="figures/task1-menu.png" alt="1- Compute Bounds" style="width:80%"></a></td>
         <td>
             <ul>
                 <li>Computes group sequential bounds under the null hypothesis for given overall significance level.</li>
@@ -106,14 +106,14 @@ hypothesis (`H0`), that is, under a given significance level alpha (usually 5%).
 
 <br>
 
-#### [-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html)
+#### [-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html)
 
 Use this to compute the target effect size of a group sequential design,
 which maintains a certain power (e.g. power = 80%).
 
 <table style="border: 0px solid white; border-collapse: collapse; text-align:left">
     <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html"><img src="figures/task2-menu.png" alt="-2- Compute Drift given Power and Bounds" style="width:80%"></a></td>
+        <td><a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html"><img src="figures/task2-menu.png" alt="-2- Compute Drift given Power and Bounds" style="width:80%"></a></td>
         <td>
             <ul>
                 <li>Computes drift (i.e. standardized effect size) required to achieve desired power of 
@@ -128,7 +128,7 @@ which maintains a certain power (e.g. power = 80%).
 
 <br>
 
-#### [-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html)
+#### [-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html)
 
 Use this to compute the power of a group sequential design.
 
@@ -150,7 +150,7 @@ Use this to compute the power of a group sequential design.
 <br>
 
 
-#### [-4- Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html)
+#### [-4- Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html)
 
 Use this to compute the confidence intervals for the target outcome
 at the final analysis, which can be the last stage as planned or at an earlier
@@ -158,7 +158,7 @@ stage exceeding the critical bounds and therefore stopping early.
 
 <table style="border: 0px solid white; border-collapse: collapse; text-align:left">
     <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html"><img src="figures/task4-menu.png" alt="-4- Compute Confidence Interval" style="width:80%"></a></td>
+        <td><a href="https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html"><img src="figures/task4-menu.png" alt="-4- Compute Confidence Interval" style="width:80%"></a></td>
         <td>
             <ul>
                 <li>Compute confidence interval at final analysis stage for given expected effect size.</li>

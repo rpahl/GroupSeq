@@ -220,7 +220,7 @@ Next lets see how to calculate probabilities under `H1` and specifically
 to determine the effect size that is required to achieve a certain probability
 (i.e. power) to detect an existing effect, which can be done via the second
 menu option:
-[-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/2-compute-drift.html)
+[-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html)
 
 
 
