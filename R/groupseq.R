@@ -85,7 +85,7 @@ start_gui <- function()
 {
     .env <<- container::dict()
 
-    doStart <- getOption("AutostartGroupSeq", default = FALSE)
+    doStart <- getOption("AutostartGroupSeq", default = TRUE)
     if (interactive() && doStart) {
         start_gui()
     } else {

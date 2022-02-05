@@ -16,7 +16,7 @@ Imports:
 Suggests: knitr, tinytest, rmarkdown, ggplot2, gridExtra
 VignetteBuilder: knitr
 License: GPL-3
-URL: https://github.com/rpahl/GroupSeq
+URL: https://rpahl.github.io/GroupSeq/
 BugReports: https://github.com/rpahl/GroupSeq/issues
 NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
