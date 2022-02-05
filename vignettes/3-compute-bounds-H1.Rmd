@@ -101,7 +101,9 @@ include_graphics("figures/task3-exact-Pocock-drift2-results.png")
 
 which apparently gives about 56.6%.
 
-
+In the last vignette of this series we will see how to
+[-4- Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/4-compute-CI.html)s
+at the final stage of a group sequential study.
 
 
 
