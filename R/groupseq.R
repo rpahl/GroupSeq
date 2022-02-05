@@ -65,13 +65,13 @@ update_changed_parameters <- function()
 
 
 #' @title Start GroupSeq
-#' @description Starts the graphical user interface, optionally the legacy
-#'  version of GroupSeq prior to version 2.
-#' @param legacy `logical` if `TRUE`, starts legacy GroupSeq version < 2.
+#' @description Starts the graphical user interface.
 #' @export
-start_gui <- function(legacy = FALSE)
+start_gui <- function()
 {
+    legacy = TRUE
     init_env(legacy)
+
     if (legacy) {
         guiMode()
     } else {

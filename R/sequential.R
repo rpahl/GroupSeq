@@ -39,7 +39,7 @@
 #' p <- seqProb(c(2, 1), mean=0)
 #' seqProb(c(2, 1), mean=0, tau=c(.25, 0.5)) == p         # TRUE
 #' seqProb(c(2, 1), mean=0, tau=c(.25, 1)) == p           # FALSE
-#' @export
+#' @noRd
 seqProb <- function(up,
                     lo = rep(-Inf, length(up)),
                     tau = seq_along(up) / length(up),
@@ -148,6 +148,7 @@ seqProb <- function(up,
 #'   provide the total expected sample size.
 #'
 #' @examples
+#' library(GroupSeq)
 #' # 1-stage
 #' # #######
 #' alpha <- 0.05
@@ -184,7 +185,7 @@ seqProb <- function(up,
 #' # Increasing max sample size to 98, yields expected n = 69 and power 87.8%
 #' res <- seqDesign(pocock, mu=.3, n=98)
 #' lapply(unlist(res, recursive=FALSE)[c("n.nkExp", "p.exit")], sum)
-#' @export
+#' @noRd
 seqDesign <- function(crit,
                       mu = 0, sd = 1,
                       tau = seq_along(crit) / length(crit),
