@@ -1,3 +1,5 @@
+exit_file("Internal functions not yet exported")
+
 # seqProb
 # Invalid calls
 expect_error(seqProb(), info='argument "up" is missing, with no default')
