@@ -99,7 +99,8 @@ start_gui <- function()
 
 
 onQuit <- function() {
-    isLegacy <- .env$is_empty()
+    #isLegacy <- .env$is_empty()
+    isLegacy <- TRUE
     if (isLegacy) {
         if (!is.null(pkg.env$taskWindow)) {
             tcltk::tkdestroy(pkg.env$taskWindow)
@@ -108,7 +109,7 @@ onQuit <- function() {
         }
     } else {
         tcltk::tkdestroy(.env[["root"]])
-        .env$clear()
+        #.env$clear()
     }
     invisible()
 }
