@@ -1,6 +1,6 @@
 Package: GroupSeq
 Title: Group Sequential Design Probabilities - With Graphical User Interface
-Version: 1.4.0
+Version: 1.4.1
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -21,6 +21,6 @@ NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
 Maintainer: Roman Pahl <roman.pahl@gmail.com>
 Repository: CRAN
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
