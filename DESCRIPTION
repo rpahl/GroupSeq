@@ -11,8 +11,7 @@ Description: Computes probabilities related to group sequential designs for
 Imports:
     tcltk,
     tcltk2,
-    mvtnorm,
-    container (>= 1.0.0)
+    mvtnorm
 Suggests: knitr, tinytest, rmarkdown, ggplot2, gridExtra
 VignetteBuilder: knitr
 License: GPL-3
