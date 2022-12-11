@@ -7,7 +7,8 @@ Authors@R:
 Description: Computes probabilities related to group sequential designs for
     normally distributed test statistics. Enables to derive critical
     boundaries, power, drift, and confidence intervals of such designs.
-    Supports the alpha spending approach by Lan-DeMets.
+    Supports the alpha spending approach by Lan-DeMets (1994)
+    <doi:10.1002/sim.4780131308>
 Imports:
     tcltk,
     tcltk2,
