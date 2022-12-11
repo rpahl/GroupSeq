@@ -129,7 +129,7 @@ function(targetAlpha, provisionallyBounds, n, t2)
     for (j in 1:20) {
         xkPlusOne <- xk - ( (xk - xkMinusOne)/(fxk - fxkMinusOne) * fxk )
         if(is.nan(xkPlusOne) || is.infinite(xkPlusOne)) {
-            cat(error.msg)
+            message(error.msg)
             return(FALSE)
         }
 
@@ -155,7 +155,7 @@ function(targetAlpha, provisionallyBounds, n, t2)
     }
 
     # If we end up here, iteration did not converge
-    cat(error.msg)
+    message(error.msg)
     return(FALSE)
 }
 
@@ -738,22 +738,19 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
     {
       probDifference[i]<-min(1,probDifference[i])
       probDifference[i]<-max(0,probDifference[i])
-      cat("\n")
-      cat(" Error in spending function at interim time:",i,"\n")
-      cat(" Calculated probabilites are:",probExit,"\n")
-      cat(" Calculated function is not increasing strictly or out of range!","\n")
-      cat(" the differences intype I error spent between analyses","\n")
-      cat(" at this point will be set to:",probDifference[i],"\n")
+      message(" Error in spending function at interim time:",i)
+      message(" Calculated probabilites are:",probExit)
+      message(" Calculated function is not increasing strictly or out of range!")
+      message(" the differences intype I error spent between analyses")
+      message(" at this point will be set to:",probDifference[i])
 
     }
 
     if (probDifference[i]<toleranceProbDiff)
     {
-      cat("\n")
-      cat(" Type I error spent too small at interim time:",i,"\n")
-      cat(" Zero used as approximation for:","\n")
+      message(" Type I error spent too small at interim time:",i)
+      message(" Zero used as approximation for:")
       print(probDifference[i],digits=22)
-      cat("\n")
     }
    }#end <--*for*
 
@@ -823,8 +820,8 @@ function(n,drift,alpha,phi,t,t2,OneOrTwoSidedBounds,whatSpendingFunctionIsUsed,b
            if (n > 1)
            {
              probDifference[2] <- probExit[2] - probExit[1]
-             cat("probExit: ",probExit,"\n")
-             cat("probDifference: ",probDifference[2],"\n")
+             message("probExit: ",probExit)
+             message("probDifference: ",probDifference[2])
            }
          }
          upperIntegrationLimit[1] <- upperBounds[1]*stdDev.inc[1]
@@ -1246,8 +1243,8 @@ function(n, t, t2, lowerBounds, upperBounds, target, drift, nMax)
       else if( abs(drift-prev) <= tol/10 )
            {
              ##drift changes by less than tol/10, stop calculating
-             cat(" Convergence problem in function 'computeDrift' during computing the drift.","\n")
-             cat(" !!!Calculation stopped now!!!","\n")
+             message(" Convergence problem in function 'computeDrift' during computing the drift.")
+             message(" !!!Calculation stopped now!!!")
              break
            }
 
