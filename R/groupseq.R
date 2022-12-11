@@ -72,6 +72,8 @@ update_changed_parameters <- function()
 #' @description Starts the graphical user interface.
 #' @return No return value, called for side effects.
 #' @export
+#' @examples
+#' start_gui()
 start_gui <- function()
 {
     legacy = TRUE
