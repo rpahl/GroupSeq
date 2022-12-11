@@ -74,7 +74,7 @@ interface and similar (and more) statistical functionality:
 
 DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim
 analysis: the alpha spending function approach</span>.” *Stat Med* 13
-(13-14): 1341–52. <https://doi.org/10.1002/sim.4780131308>.
+(13-14): 1341–52. <doi.org/10.1002/sim.4780131308>.
 
 </div>
 

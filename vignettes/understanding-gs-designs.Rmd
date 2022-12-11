@@ -37,15 +37,15 @@ okabe_palette <- c('orange' = "#E69F00",
                    'vermillion' = "#D55E00",
                    'reddish purple' = "#CC79A7")
 
-options(width = 100L, digits = 10)
+old <- options(width = 100L, digits = 10)
 ```
 
 
 While calculating probabilities of group sequential designs can be considered
 somewhat complex, it may be less difficult than most people think. This vignette
-provides a visual explanation of the underlying method to help forming 
+provides a visual explanation of the underlying method to help forming
 an intuitive understanding of this topic.
-The author is convinced that gaining an intuitive understanding of these 
+The author is convinced that gaining an intuitive understanding of these
 calculations helps when applying and interpreting such designs in practice.
 
 ### One-sample study
@@ -77,8 +77,8 @@ ggplot(dat, aes(x = x, y = y)) +
 
 ```
 <br>
-Usually some standardized test statistic is calculated and, 
-assuming standard normally distributed data, the density distribution under the 
+Usually some standardized test statistic is calculated and,
+assuming standard normally distributed data, the density distribution under the
 null hypothesis forms the well-known bell-shaped curve.
 
 ```{r, echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3}
@@ -92,7 +92,7 @@ crit = qnorm(1 - 0.025)
 probLabel = paste0(pnorm(-crit)*100, "%")
 x = seq(-3, 3, by = 0.01)
 
-normalDensPlot = 
+normalDensPlot =
     ggplot(data.frame(x = x), aes(x = x)) +
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(-4, -crit)) +
     stat_function(fun = dnorm, geom = "area", fill = yellow, xlim = c(-crit, crit)) +
@@ -103,7 +103,7 @@ normalDensPlot =
     annotate("text", label = probLabel, x = 2.9, y = 0.09, size = 3.5) +
     annotate("text", label = probLabel, x = -2.9, y = 0.09, size = 3.5) +
     lims(x = range(x)) +
-    labs(x = expression(x[1]), 
+    labs(x = expression(x[1]),
          y = expression(f(x[1]))) +
     theme_minimal() +
     theme(panel.grid.major = element_blank(),
@@ -114,8 +114,8 @@ normalDensPlot
 ```
 
 <br>
-If a two-sided test is planned with a significance level of $\alpha = 5\%$, 
-the critical bounds are set as visualized in the above figure. 
+If a two-sided test is planned with a significance level of $\alpha = 5\%$,
+the critical bounds are set as visualized in the above figure.
 In the days before computers these bounds had to be looked up in tables in some
 book, but these days of course you just plug-in the numbers in your favorite
 statistics program. In R its
@@ -125,12 +125,12 @@ qnorm(0.025)
 
 Now what do these bounds mean? Basically, if the null
 hypothesis ($H_0$) was true, the probability of obtaining a test statistic at or
-beyond these bounds is $2\cdot 0.025 = 0.05$, which therefore 
+beyond these bounds is $2\cdot 0.025 = 0.05$, which therefore
 limits the so-called type I error (rejecting $H_0$ although its true) at 5%.
 
-Going forward the key thing to note here is that calculating this probability 
+Going forward the key thing to note here is that calculating this probability
 basically means *calculating the (blue) area under the density curve* (see above
-figure). Again, these days it's easy to derive the area using computer's 
+figure). Again, these days it's easy to derive the area using computer's
 numerical integration.
 
 
@@ -154,14 +154,14 @@ ggplot(dat, aes(x = x, y = y)) +
 If we construct a distribution similar to the one above, we have the following.
 
 ```{r, fig.width = 8, fig.height = 3, out.width = "85%"}
-normalDensPlotX2 = normalDensPlot + 
+normalDensPlotX2 = normalDensPlot +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
 gridExtra::grid.arrange(normalDensPlot, normalDensPlotX2, nrow = 1)
 ```
 
 <br>
-A statistical test on both samples now would control the type I error for each of 
+A statistical test on both samples now would control the type I error for each of
 these studies at the 5% level, but, of course, things are more complicated
 if you consider both samples at the same time, because now you have two chances
 of conducting the type I error.
@@ -171,7 +171,7 @@ the same population and we are interested to test the same outcome,
 to control the *overall* type I error still at 5% we need to down-adjust alpha.
 The simplest and most common approach is to use the Bonferroni correction,
 which means we are allowed to spend $\alpha_{Bonf} = \alpha/2 = 0.025$.
-The corresponding adjusted critical bound is 
+The corresponding adjusted critical bound is
 ```{r, echo = TRUE}
 qnorm(0.025/2)
 ```
@@ -187,7 +187,7 @@ crit = qnorm(1 - 0.025/2)
 probLabel = paste0(pnorm(-crit)*100, "%")
 x = seq(-3, 3, by = 0.01)
 
-normalDensPlotAdj = 
+normalDensPlotAdj =
     ggplot(data.frame(x = x), aes(x = x)) +
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(-4, -crit)) +
     stat_function(fun = dnorm, geom = "area", fill = yellow, xlim = c(-crit, crit)) +
@@ -198,7 +198,7 @@ normalDensPlotAdj =
     annotate("text", label = probLabel, x = 2.9, y = 0.09, size = 3.5) +
     annotate("text", label = probLabel, x = -2.9, y = 0.09, size = 3.5) +
     lims(x = range(x)) +
-    labs(x = expression(x[1]), 
+    labs(x = expression(x[1]),
          y = expression(f(x[1]))) +
     theme_minimal() +
     theme(panel.grid.major = element_blank(),
@@ -207,7 +207,7 @@ normalDensPlotAdj =
 ```
 
 ```{r, fig.width = 8, fig.height = 3, out.width = "85%"}
-normalDensPlotX2Adj = normalDensPlotAdj + 
+normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
 gridExtra::grid.arrange(normalDensPlotAdj, normalDensPlotX2Adj, nrow = 1)
@@ -224,43 +224,43 @@ crit.Sidak = -rep(qnorm(alpha.Sidak / 2), 2)
 ```
 So if we calculate the overall type I error probability, we sum up all the areas
 and get $p = 1.25\% + 1.25\%+ 1.25\% + 1.25\% = 5\%$.
-So we are good, are we? Well, the devil is in the details. 
+So we are good, are we? Well, the devil is in the details.
 
 Remember, the goal was to make
 sure that we don't conduct a type I error. The probability to conduct *no*
-type I at either `X1` or `X2` is $p = 1-\alpha_{Bonf} = 1-0.025 = 0.975$. 
+type I at either `X1` or `X2` is $p = 1-\alpha_{Bonf} = 1-0.025 = 0.975$.
 
 From this it
 follows that the probability to conduct no error at both `X1` and `X2` is
-$(1-\alpha_{Bonf})^2 = 0.950625$. 
+$(1-\alpha_{Bonf})^2 = 0.950625$.
 
 Now we can calculate the complementary probability
-of conducting *at least one* type I error as 
-$p = 1 - (1-\alpha_{Bonf})^2 = 0.049375 = 4.9\%$. Wait, why is it not 5%? 
+of conducting *at least one* type I error as
+$p = 1 - (1-\alpha_{Bonf})^2 = 0.049375 = 4.9\%$. Wait, why is it not 5%?
 Well, the reason
 is that we don't care if one or both studies produce a type I error, as one
 error is already enough for the overall setup to fail. As a result, the
-Bonferroni correction is not optimal, as it "wastes" 0.1% of alpha. 
+Bonferroni correction is not optimal, as it "wastes" 0.1% of alpha.
 
 <br>
-Of course, this is well-known and a precise alpha adjustment can be derived via 
+Of course, this is well-known and a precise alpha adjustment can be derived via
 the so-called
 [Sidak correction](https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction):
 $\alpha_{Sidak} = 1 - (1-\alpha)^{1/2} = 0.02532057 > \alpha_{Bonf}$.
 
 Plugging this into the above formula, we get
-$p = 1 - (1-\alpha_{Sidak})^2 = 0.05 = 5\%$. 
+$p = 1 - (1-\alpha_{Sidak})^2 = 0.05 = 5\%$.
 If you are interested, you can find the
 derivation of [Sidak's](https://en.wikipedia.org/wiki/%C5%A0id%C3%A1k_correction) formula
 under the link, but I have promised you to provide intuitive explanations,
-so let's move to the key concept that will also help to understand group 
+so let's move to the key concept that will also help to understand group
 sequential probabilities.
 
 
 ### Combining two distributions
 
 If we want to combine both studies, it makes sense to combine the two
-density distributions into a two-dimensional (aka bivariate) normal distribution, 
+density distributions into a two-dimensional (aka bivariate) normal distribution,
 which then looks like this.
 
 ```{r prepare-2D-normal-density-plot, echo = FALSE, include = FALSE}
@@ -309,8 +309,8 @@ par(op)
 ```
 
 Remember that determining the probability of distributions is all about
-doing numerical integration under the curve, that is, the overall type I error 
-now is derived by computing the volume under the blue area. To do this, we 
+doing numerical integration under the curve, that is, the overall type I error
+now is derived by computing the volume under the blue area. To do this, we
 are using the
 [mvtnorm](https://CRAN.R-project.org/package=mvtnorm) package.^[To keep matters simple,
 we just discuss the results, but if you want to see the actual R commands,
@@ -328,14 +328,14 @@ calc2Dprob = function(crit, sigma) {
     calc_prob = function(lower, upper) {
         as.numeric(mvtnorm::pmvnorm(lower = lower, upper = upper, sigma = sigma))
     }
-        
+
     left_stripe = calc_prob(lower = c(-Inf, -Inf), upper = c(-crit[1], Inf))
     lower_rectangle = calc_prob(lower = c(-crit[1], -Inf), upper = c(crit[1], -crit[2]))
     2 * left_stripe + 2 * lower_rectangle # return two-sided prob
 }
 
-p.edge = as.numeric(mvtnorm::pmvnorm(lower = c(-Inf, -Inf), 
-                                     upper = c(-crit[1], -crit[2]), 
+p.edge = as.numeric(mvtnorm::pmvnorm(lower = c(-Inf, -Inf),
+                                     upper = c(-crit[1], -crit[2]),
                                      sigma = Sigma0))
 
 
@@ -343,7 +343,7 @@ p2D.Bonf = calc2Dprob(crit.Bonf, sigma = Sigma0)
 p2D.Sidak = calc2Dprob(crit.Sidak, sigma = Sigma0)
 ```
 
-If we plug in the Bonferroni bounds (`r round(crit.Bonf[1], 4)`) in each dimension and 
+If we plug in the Bonferroni bounds (`r round(crit.Bonf[1], 4)`) in each dimension and
 calculate the probability for the blue
 area, we get p = `r p2D.Bonf` while the Sidak bounds (`r round(crit.Sidak[1], 4)`)
 yield p = `r p2D.Sidak`,
@@ -362,7 +362,7 @@ get_color_edges = Vectorize(function(x1, x2) {
         x1 >  crit[1] && x2 < -crit[2] ||
         x1 >  crit[1] && x2 >  crit[2])
         return("grey")
-    
+
     if (x1 < -crit[1] || x1 > crit[1] || x2 < -crit[2] || x2 > crit[2])
         blue else yellow
 })
@@ -375,13 +375,13 @@ par(op)
 
 The grey areas basically mark those scenarios where the type I errors of both
 samples fall together.
-The intuitive explanation now goes like this: when calculating the overall 
-probability using the two-dimensional normal distribution, 
-the grey areas are only counted once whereas in the one-dimensional Bonferroni 
+The intuitive explanation now goes like this: when calculating the overall
+probability using the two-dimensional normal distribution,
+the grey areas are only counted once whereas in the one-dimensional Bonferroni
 case you count them twice. To see this, we can calculate the probability
 for one of these edges,
 which is p = 0.00016, and if we subtract them from the overall alpha
-we get $p = 0.05 - 4\cdot 0.00016 = 0.04936$, which corresponds to the overall 
+we get $p = 0.05 - 4\cdot 0.00016 = 0.04936$, which corresponds to the overall
 probability under Bonferroni correction as we saw above.
 
 So when using the two-dimensional normal distribution, we naturally derive at the
@@ -396,7 +396,7 @@ In a (group) sequential study design, samples are analyzed in a sequence
 where at each stage all the data from earlier stages are combined with the
 data of the current stage.
 
-For example, in the first stage we collect a sample `X1` and in a second 
+For example, in the first stage we collect a sample `X1` and in a second
 stage we combine the sample `X1` with a new sample `X2`.
 
 ```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"}
@@ -413,7 +413,7 @@ ggplot(dat, aes(x = x, y = y)) +
 ```
 
 The crucial difference when combining the samples in this way is that now they
-are inherently dependent, that is, the statistic of sample `X1 + X2` will be 
+are inherently dependent, that is, the statistic of sample `X1 + X2` will be
 correlated to the that of sample `X1`.
 
 With this in mind, the graphical presentation below is more precise to
@@ -435,7 +435,7 @@ The naive approach for the alpha adjustment again would be to treat both
 density distributions as independent and apply the Bonferroni correction.
 
 ```{r, fig.width = 8, fig.height = 3, out.width = "85%", fig.cap = "Normal densities for stage 1 and 2 with Bonferroni bounds."}
-normalDensPlotX2Adj = normalDensPlotAdj + 
+normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = fill_colors[3], size = 1.5)
 gridExtra::grid.arrange(normalDensPlotAdj, normalDensPlotX2Adj, nrow = 1)
@@ -465,7 +465,7 @@ par(op)
 
 We again omit the details on how to derive the distribution, but as you can see,
 the correlation leads to a flattened bell curve, which in the independent case
-before was perfectly symmetrical. Also the amount of correlation is proportional 
+before was perfectly symmetrical. Also the amount of correlation is proportional
 to the data overlap of the stages. For example, if the first stage used 5 instead
 of the 10 data points, the stages would be less correlated and therefore the
 bell curve less flattened.
@@ -479,7 +479,7 @@ now yield p = `r round(p2D.Bonf, 3)` so that for this group sequential study
 `r round((0.05 - p2D.Bonf)*100, 1)`% of alpha would be "wasted".
 
 Intuitively, the flattened curve has pulled some mass into the middle leaving
-less volume under the blue area. 
+less volume under the blue area.
 
 #### Pocock design
 
@@ -502,21 +502,21 @@ crit.Pocock = rep(2.1783, 2)
 p2D.Pocock = calc2Dprob(crit.Pocock, sigma = Sigma)
 ```
 
-So the Pocock bounds are `r crit.Pocock[1]` and thus as expected lower than the 
-Bonferroni bounds. The last entry in the 'cumulative alpha' column shows 
+So the Pocock bounds are `r crit.Pocock[1]` and thus as expected lower than the
+Bonferroni bounds. The last entry in the 'cumulative alpha' column shows
 the overall alpha, which is close to 5%.^[In fact, it is
-closer to 5% (`r p2D.Pocock`) than shown in the GroupSeq application, 
-which stems from the 
+closer to 5% (`r p2D.Pocock`) than shown in the GroupSeq application,
+which stems from the
 fact that the GroupSeq legacy version uses a different more rudimentary
 numerical integration algorithm.]
 
-Inspecting the probabilities stage by stage, 2.93% of alpha is spent at the first 
+Inspecting the probabilities stage by stage, 2.93% of alpha is spent at the first
 and 2.04% at the second stage, respectively. That is, although the nominal bounds
 are identical at both stages, due to the asymmetric shape of the two-dimensional
 distribution, the resulting probabilities are different.
 
 The graphical presentation of group sequential designs normally is done with
-a graph showing at the x-axis the "Information Rate", which marks the relative 
+a graph showing at the x-axis the "Information Rate", which marks the relative
 sample size of the respective stages, and the nominal bounds at the y-axis.
 The above Pocock design thus looks something like this.
 
@@ -610,10 +610,10 @@ The numbers are outlined below.
 include_graphics("figures/two-stage-OBF-bounds-result.png")
 ```
 
-Clearly the critical bounds at stage one are very conservative so that 
+Clearly the critical bounds at stage one are very conservative so that
 only 0.3% of alpha is spent there. With spending 4.7% of alpha at the last
 stage this O'Brien-Fleming design in fact is not
-much different to a standard single stage study, which spends all the 5% on the 
+much different to a standard single stage study, which spends all the 5% on the
 full sample. Basically, the first stage is kind of a shot
 in the dark to allow catching really big effects.
 
@@ -630,7 +630,7 @@ spent at stage 1.
 
 #### Design comparisons
 
-To strengthen our intuitive understanding, let's compare the Pocock and 
+To strengthen our intuitive understanding, let's compare the Pocock and
 O'Brien-Fleming design in the two-dimensional density view.
 
 ```{r, fig.show="hold", out.width = "45%", fig.cap = "Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample."}
@@ -673,3 +673,6 @@ par(op)
 
 
 
+```{r, include = FALSE}
+options(old)
+```

@@ -35,18 +35,18 @@ okabe_palette <- c('orange' = "#E69F00",
                    'vermillion' = "#D55E00",
                    'reddish purple' = "#CC79A7")
 
-options(width = 100L, digits = 10)
+old <- options(width = 100L, digits = 10)
 ```
 
 Group sequential designs in essence allow to lower the sample size of clinical
-or other studies. To be clear - if a group sequentially designed study is 
+or other studies. To be clear - if a group sequentially designed study is
 conducted until the final analysis, that is, without aborting at one
 of the interim looks, the required sample will be larger compared to a simple
 single stage study, because you have to "pay" for the added interim
-analyses to prevent 
+analyses to prevent
 [alpha inflation](https://en.wikipedia.org/wiki/Multiple_comparisons_problem).
 
-But, from time to time, especially if the underlying effect is strong 
+But, from time to time, especially if the underlying effect is strong
 (e.g. you have a very potent medicine),
 you will abort the study early and this on average
 leads to lower sample sizes, or in other words, the expected sample size of
@@ -54,7 +54,7 @@ group sequential designs is lower than the sample size of comparable studies
 with just one final analysis.
 
 If you want to get an intuitive understanding on how probabilities of group
-sequential designs are calculated, please see the vignette 
+sequential designs are calculated, please see the vignette
 [Understanding group sequential designs](https://rpahl.github.io/GroupSeq/articles/understanding-gs-designs.html).
 
 The GroupSeq package can be used to perform basic calculations related
@@ -63,7 +63,7 @@ provided via a graphical user interface. The interface was designed such that
 each calculation can be opened in separate windows allowing to compute
 and compare arbitrary many designs in parallel.
 
-The following section gives a brief overview of all the available options 
+The following section gives a brief overview of all the available options
 with links to further details.
 
 ### GroupSeq menu
@@ -99,7 +99,7 @@ hypothesis (`H0`), that is, under a given significance level alpha (usually 5%).
                 <li>Computes group sequential bounds under the null hypothesis for given overall significance level.</li>
                 <li>Bounds can be one- or two-sided or completely asymmetric.</li>
                 <li>User chooses number of stages and some alpha spending function.</li>
-            </ul>    
+            </ul>
         </td>
     </tr>
 </table>
@@ -116,12 +116,12 @@ which maintains a certain power (e.g. power = 80%).
         <td><a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html"><img src="figures/task2-menu.png" alt="-2- Compute Drift given Power and Bounds" style="width:80%"></a></td>
         <td>
             <ul>
-                <li>Computes drift (i.e. standardized effect size) required to achieve desired power of 
+                <li>Computes drift (i.e. standardized effect size) required to achieve desired power of
                 a given group sequential design.</li>
                 <li>The group sequential design is defined via alpha spending functions or custom critical bounds.</li>
                 <li>Bounds can be one- or two-sided or completely asymmetric.</li>
                 <li>User chooses number of stages.</li>
-            </ul>    
+            </ul>
         </td>
     </tr>
 </table>
@@ -142,7 +142,7 @@ Use this to compute the power of a group sequential design.
                 <li>The group sequential design is defined via alpha spending functions or custom critical bounds.</li>
                 <li>Bounds can be one- or two-sided or completely asymmetric.</li>
                 <li>User chooses number of stages.</li>
-            </ul>    
+            </ul>
         </td>
     </tr>
 </table>
@@ -165,7 +165,7 @@ stage exceeding the critical bounds and therefore stopping early.
                 <li>The group sequential design is defined via alpha spending functions or custom critical bounds.</li>
                 <li>Bounds can be one- or two-sided or completely asymmetric.</li>
                 <li>User chooses number of stages and confidence level.</li>
-            </ul>    
+            </ul>
         </td>
     </tr>
 </table>
@@ -174,7 +174,11 @@ stage exceeding the critical bounds and therefore stopping early.
 
 
 
-To close the application and, with it, all open windows, just close the main 
+To close the application and, with it, all open windows, just close the main
 window or hit the `QUIT GroupSeq` button.
 
 
+
+```{r, include = FALSE}
+options(old)
+```

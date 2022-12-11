@@ -5,7 +5,7 @@ output:
     toc: true
     toc_depth: 4
 description: >
-  This vignette shows how to use GroupSeq to compute confidence intervals 
+  This vignette shows how to use GroupSeq to compute confidence intervals
   at the final stage of a group sequential analysis.
 vignette: >
   %\VignetteIndexEntry{-4- Compute Confidence Interval}
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
   collapse = T
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 ```
 
 Let's assume you have planned a two-sided 3-stage Pocock design with 80% power.
@@ -57,10 +57,14 @@ include_graphics("figures/task4-CI-result.png")
 ```
 
 So for this study, the resulting confidence interval of the standardized
-effect is (0.30, 5.38). 
+effect is (0.30, 5.38).
 
 Depending on the underlying data distribution and applied
 test statistic this will be "back-calculated" to obtain the confidence interval
-for the value of interest (e.g. mean difference for some normally distributed 
+for the value of interest (e.g. mean difference for some normally distributed
 data or difference in proportions of some binomially distributed data).
 
+
+```{r, include = FALSE}
+options(old)
+```

@@ -5,7 +5,7 @@ output:
     toc: true
     toc_depth: 4
 description: >
-  This vignette shows how to use GroupSeq to compute group sequential 
+  This vignette shows how to use GroupSeq to compute group sequential
   probabilities under both H0 or H1.
 vignette: >
   %\VignetteIndexEntry{-3- Compute Probabilities given Bounds and Drift}
@@ -26,11 +26,11 @@ knitr::opts_chunk$set(
   fig.width = 5, fig.height = 5
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 ```
 
 
-This vignette builds right on 
+This vignette builds right on
 [-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html)
 so if you haven't seen the vignette it is recommended to visit this one first.
 
@@ -63,9 +63,9 @@ include_graphics("figures/task3-example-manual-bounds-zero-drift-results.png")
 ```
 
 thereby resulting in a type I error of about 16.3%, which clearly exceeds the
-typically allowed level of 5%. As such the design is not valid. 
+typically allowed level of 5%. As such the design is not valid.
 
-To get closer to 5% we now could start adjusting the bounds bit by bit. 
+To get closer to 5% we now could start adjusting the bounds bit by bit.
 For example, as the design already spends 15.8% of alpha at stage 1, lets
 increase the first stage bound to two.
 
@@ -107,3 +107,6 @@ at the final stage of a group sequential study.
 
 
 
+```{r, include = FALSE}
+options(old)
+```
