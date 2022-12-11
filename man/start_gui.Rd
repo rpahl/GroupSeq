@@ -6,6 +6,12 @@
 \usage{
 start_gui()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Starts the graphical user interface.
+}
+\examples{
+start_gui()
 }

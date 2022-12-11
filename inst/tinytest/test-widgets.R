@@ -8,8 +8,8 @@ exit_file("Internal gui functions - only tested interactively")
 
 # create_radiobutton
 root <- tcltk::tktoplevel()
-dummy <- container::dict()
-dummy$add("foo", tclVar("1"))
+dummy <- new.env()
+dummy[["foo"]] <- tclVar("1")
 rb1 <- create_radiobutton(root, "foo", value = 1, register = dummy)
 rb2 <- create_radiobutton(root, "foo", value = 2, register = dummy)
 tkgrid(rb1, rb2)

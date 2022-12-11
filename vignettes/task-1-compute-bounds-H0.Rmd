@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
   fig.width = 5, fig.height = 5
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 ```
 
 The option -1- menu initially looks as follows.
@@ -76,14 +76,14 @@ include_graphics("figures/task1-3stage-result.png")
 
 In the second to last column, you see how much alpha is spent at each stage,
 while in the last column you see the cumulative alpha, which should sum up
-to the overall significance level (here 5%). 
+to the overall significance level (here 5%).
 
 Obviously, there are infinitely many ways to split the 5% over the three stages.
 The default alpha spending strategy in GroupSeq is the O'Brien-Fleming type,
 which is probably the most popular group sequential design in clinical trials.
 
 As you see, the O'Brien-Fleming is very conservative at the early stages
-of the study so that only 0.069% of alpha is spent at stage 1. The effect 
+of the study so that only 0.069% of alpha is spent at stage 1. The effect
 therefore would have to be very large in order to exceed the critical
 upper bound of 3.2 at stage 1 when 33% of the total sample will have been
 collected.
@@ -101,8 +101,8 @@ alpha for the final analysis to reject `H0` for significant but moderate effects
 
 ### Pocock 3-stage design
 
-Another popular design, which actually had a significant positive impact on 
-the general popularity of group sequential designs in clinical research, 
+Another popular design, which actually had a significant positive impact on
+the general popularity of group sequential designs in clinical research,
 is the design by Pocock, which is constructed such the bounds are identical
 at each stage. Let's select `(5) Exact Pocock Bounds` and hit `CONFIRM FUNCTION`.
 
@@ -121,7 +121,7 @@ include_graphics("figures/task1-3stage-pocock-result-graph.png")
 <br>
 The resulting upper bounds are set constant over all stages at
 1.99. Obviously this design is more aggressive than the O'Brien-Fleming design
-in trying to abort early as 0.023% of alpha is already spent at the first 
+in trying to abort early as 0.023% of alpha is already spent at the first
 stage (see second to last column in above figure).
 
 While the critical bounds are constant over all stages, the spent alpha is not.
@@ -140,7 +140,7 @@ be much higher in the Pocock design to reject `H0` at the final stage.
 Beside the statistical power there are other aspects such as
 the expected sample size that can be taken into
 consideration when comparing designs which however goes beyond the scope
-of this vignette. This is also true with respect to the other available 
+of this vignette. This is also true with respect to the other available
 designs^[To be exact, these are alpha spending functions, which lead to
 certain types of designs.],
 and it is recommended to consult the literature to study the properties
@@ -148,16 +148,16 @@ of the different designs.
 
 You may have also noted that among the available design functions there is
 `(2) Pocock type`, which is is very similar to option `(5) Exact Pocock Bounds`.
-The `(2) Pocock type` is based on the alpha spending approach, 
-which always produces monotonously decreasing bounds and therefore does 
-not yield exact Pocock bounds by 
+The `(2) Pocock type` is based on the alpha spending approach,
+which always produces monotonously decreasing bounds and therefore does
+not yield exact Pocock bounds by
 definition. Since the Pocock design is very popular, the option of exact Pocock
 bounds, which are slightly harder to compute, was added to GroupSeq.
 
 
 ### Non-equidistant interim times
 
-To adjust interim times, which by default are equally spaced, the 
+To adjust interim times, which by default are equally spaced, the
 correspondin checkmark has to be deselected.
 ```{r, out.width = "35%", echo = FALSE}
 include_graphics("figures/task1-3stage-pocock-custom-times.png")
@@ -201,7 +201,7 @@ include_graphics("figures/task1-3stage-pocock-two-side-asym.png")
 <br>
 Naturally, the alpha is split up symmetrically, but can be customized if needed.
 Also the alpha spending function has to be set separately for each side.
-As an example, lets go with O'Brien-Fleming and Pocock again (don't forget to 
+As an example, lets go with O'Brien-Fleming and Pocock again (don't forget to
 hit the `CONFIRM FUNCTION` buttons).
 
 
@@ -223,5 +223,8 @@ menu option:
 [-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html)
 
 
+```{r, include = FALSE}
+options(old)
+```
 
 

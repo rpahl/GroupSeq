@@ -8,22 +8,22 @@ init_env <- function(legacy = FALSE)
 {
     if (legacy) {
         pkg.env$taskWindow <- NULL
-        pkg.env$scipen.old <- options(scipen=10)[[1]]
+        pkg.env$scipen.old <- options(scipen = 10)[[1]]
         pkg.env
     } else {
-        .env$add("par", container::dict())
-        .env$add("par.last", container::dict())
-        .env$add("name", "")
-        .env$add("root", tcltk::tktoplevel())
+        .env[["par"]] <- new.env()
+        .env[["par.last"]] <- new.env()
+        .env[["name"]] <- ""
+        .env[["root"]] <- tcltk::tktoplevel()
         .env
     }
 }
 
 
-get.par <- function() .env$at2("par")
+get.par <- function() .env[["par"]]
 
 
-get.par.last <- function() .env$at2("par.last")
+get.par.last <- function() .env[["par.last"]]
 
 
 add.par <- function(key, value) {
@@ -35,7 +35,7 @@ add.par <- function(key, value) {
 has_changed_parameters <- function()
 {
     param_list <- as.list(get.par())
-    current <- lapply(as.list(param_list), tclvalue)
+    current <- lapply(as.list(param_list), tcltk::tclvalue)
     last <- as.list(get.par.last())
     if (length(last) != length(current)) stop("length mismatch")
     last <- last[names(current)]
@@ -44,29 +44,36 @@ has_changed_parameters <- function()
 }
 
 
-isNew <- function() nchar(.env$at2("name")) == 0
+isNew <- function() nchar(.env[["name"]]) == 0
 
 
 update_title <- function()
 {
-    name <- if (isNew()) "[New]" else .env$at2("name")
+    name <- if (isNew()) "[New]" else .env[["name"]]
     plus <- if (has_changed_parameters()) " + " else ""
     title <- paste0(name, plus, " - GroupSeq")
-    tkwm.title(.env$at2("root"), title)
+    tcltk::tkwm.title(.env[["root"]], title)
 }
 
 
 update_changed_parameters <- function()
 {
-    param_list <- lapply(as.list(.env$at2("par")), FUN = tclvalue)
-    .env$replace_at("par.last", container::as.dict(param_list))
+    param_list <- lapply(
+        as.list(.env[["par"]]),
+        FUN = tcltk::tclvalue
+    )
+
+    .env[["par.last"]] <- list2env(param_list)
     update_title()
 }
 
 
 #' @title Start GroupSeq
 #' @description Starts the graphical user interface.
+#' @return No return value, called for side effects.
 #' @export
+#' @examples
+#' start_gui()
 start_gui <- function()
 {
     legacy = TRUE
@@ -75,7 +82,7 @@ start_gui <- function()
     if (legacy) {
         guiMode()
     } else {
-        gui(.env$at2("root"))
+        gui(.env[["root"]])
     }
     invisible()
 }
@@ -83,7 +90,7 @@ start_gui <- function()
 
 .onLoad <- function(libname, pkgname)
 {
-    .env <<- container::dict()
+    .env <<- new.env()
 
     doStart <- getOption("AutostartGroupSeq", default = TRUE)
     if (interactive() && doStart) {
@@ -95,16 +102,17 @@ start_gui <- function()
 
 
 onQuit <- function() {
-    isLegacy <- .env$is_empty()
+    #isLegacy <- .env$is_empty()
+    isLegacy <- TRUE
     if (isLegacy) {
         if (!is.null(pkg.env$taskWindow)) {
-            tkdestroy(pkg.env$taskWindow)
+            tcltk::tkdestroy(pkg.env$taskWindow)
             pkg.env$taskWindow <- NULL
             options(scipen = pkg.env$scipen.old)
         }
     } else {
-        tkdestroy(.env$at2("root"))
-        .env$clear()
+        tcltk::tkdestroy(.env[["root"]])
+        #.env$clear()
     }
     invisible()
 }

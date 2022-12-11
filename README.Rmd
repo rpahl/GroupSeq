@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 
-options(width = 100L)
+old <- options(width = 100L, digits = 10)
 ```
 
 
@@ -103,3 +103,8 @@ statistical functionality:
 work on a second version with more functionality and a revised user interface
 in the near future. Feel free to request new features
 [here](https://github.com/rpahl/GroupSeq/issues).
+
+
+```{r, include = FALSE}
+options(old)
+```
