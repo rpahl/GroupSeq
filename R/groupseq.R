@@ -70,6 +70,7 @@ update_changed_parameters <- function()
 
 #' @title Start GroupSeq
 #' @description Starts the graphical user interface.
+#' @return No return value, called for side effects.
 #' @export
 start_gui <- function()
 {
