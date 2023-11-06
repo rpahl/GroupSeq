@@ -38,7 +38,7 @@ jobs:
           use-public-rspm: true
 
       - name: Install Tcl
-        run: sudo apt-get install -y tcl8.6-dev
+        run: sudo apt-get install -y tcl
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
