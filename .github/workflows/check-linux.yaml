@@ -38,7 +38,7 @@ jobs:
           use-public-rspm: true
 
       - name: Set Display variable
-        run: export DISPLAY=:99
+        run: echo "export DISPLAY=:99"
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
