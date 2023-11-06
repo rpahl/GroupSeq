@@ -3,7 +3,7 @@
 <!-- badges: start -->
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-[![R-CMD-check](https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/GroupSeq/actions)
+[![R-CMD-check](https://github.com/rpahl/GroupSeq/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rpahl/GroupSeq/actions/workflows/check-standard.yaml)
 [![dependencies](https://tinyverse.netlify.com/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
 [![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=GroupSeq)
 [![downloads](https://cranlogs.r-pkg.org/badges/GroupSeq?color=3aa9e8)](https://www.r-pkg.org:443/pkg/GroupSeq)
@@ -55,9 +55,11 @@ page.
 
 Since the package was written back in 2005, the graphical user interface
 may appear a bit outdated. Still, it does it’s job and at least has
-stood the test of time[<sup>1</sup>](#refs). Luckily in recent years
-others have started to develop R-based tools with graphical user
-interface and similar (and more) statistical functionality:
+stood the test of
+time[![^1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5E1 "^1")](#refs).
+Luckily in recent years others have started to develop R-based tools
+with graphical user interface and similar (and more) statistical
+functionality:
 
 -   [gsDesign](https://CRAN.R-project.org/package=gsDesign) with a free
     [shiny web interface](https://gsdesign.shinyapps.io/prod/) including
@@ -74,7 +76,7 @@ interface and similar (and more) statistical functionality:
 
 DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim
 analysis: the alpha spending function approach</span>.” *Stat Med* 13
-(13-14): 1341–52. <doi.org/10.1002/sim.4780131308>.
+(13-14): 1341–52. <https://doi.org/10.1002/sim.4780131308>.
 
 </div>
 
