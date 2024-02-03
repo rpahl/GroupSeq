@@ -91,63 +91,47 @@ For a detailed description of the respective task follow one of the links below:
 Use this to compute the boundaries of group sequential designs under the null
 hypothesis (`H0`), that is, under a given significance level alpha (usually 5%).
 
-<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
-    <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/task-1-compute-bounds-H0.html"><img src="figures/task1-menu.png" alt="1- Compute Bounds" style="width:80%"></a></td>
-        <td>
-            <ul>
-                <li>Computes group sequential bounds under the null hypothesis for given overall significance level.</li>
-                <li>Bounds can be one- or two-sided or completely asymmetric.</li>
-                <li>User chooses number of stages and some alpha spending function.</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+```{r, out.width = "25%", echo = FALSE}
+include_graphics("figures/task1-menu.png")
+```
 
-<br>
+* Computes group sequential bounds under the null hypothesis for given overall
+  significance level.
+* Bounds can be one- or two-sided or completely asymmetric.
+* User chooses number of stages and some alpha spending function.
+
 
 #### [-2- Compute Drift given Power and Bounds](https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html)
 
 Use this to compute the target effect size of a group sequential design,
 which maintains a certain power (e.g. power = 80%).
 
-<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
-    <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/task-2-compute-drift.html"><img src="figures/task2-menu.png" alt="-2- Compute Drift given Power and Bounds" style="width:80%"></a></td>
-        <td>
-            <ul>
-                <li>Computes drift (i.e. standardized effect size) required to achieve desired power of
-                a given group sequential design.</li>
-                <li>The group sequential design is defined via alpha spending functions or custom critical bounds.</li>
-                <li>Bounds can be one- or two-sided or completely asymmetric.</li>
-                <li>User chooses number of stages.</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+```{r, out.width = "25%", echo = FALSE}
+include_graphics("figures/task2-menu.png")
+```
 
-<br>
+* Computes drift (i.e. standardized effect size) required to achieve desired power
+  of a given group sequential design.
+* The group sequential design is defined via alpha spending functions or custom
+  critical bounds.
+* Bounds can be one- or two-sided or completely asymmetric.
+* User chooses number of stages.
+
 
 #### [-3- Compute Probabilities given Bounds and Drift](https://rpahl.github.io/GroupSeq/articles/task-3-compute-bounds-H1.html)
 
 Use this to compute the power of a group sequential design.
 
-<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
-    <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/3-compute-bounds-H1.html"><img src="figures/task3-menu.png" alt="-3- Compute Probabilities given Bounds and Drift" style="width:80%"></a></td>
-        <td>
-            <ul>
-                <li>Computes power that is achieved by a group sequential design
-                given some drift (i.e. standardized effect size).</li>
-                <li>The group sequential design is defined via alpha spending functions or custom critical bounds.</li>
-                <li>Bounds can be one- or two-sided or completely asymmetric.</li>
-                <li>User chooses number of stages.</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+```{r, out.width = "25%", echo = FALSE}
+include_graphics("figures/task3-menu.png")
+```
 
-<br>
+* Computes power that is achieved by a group sequential design given some drift
+  (i.e. standardized effect size).
+* The group sequential design is defined via alpha spending functions or custom
+  critical bounds.
+* Bounds can be one- or two-sided or completely asymmetric.
+* User chooses number of stages.
 
 
 #### [-4- Compute Confidence Interval](https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html)
@@ -156,22 +140,15 @@ Use this to compute the confidence intervals for the target outcome
 at the final analysis, which can be the last stage as planned or at an earlier
 stage exceeding the critical bounds and therefore stopping early.
 
-<table style="border: 0px solid white; border-collapse: collapse; text-align:left">
-    <tr>
-        <td><a href="https://rpahl.github.io/GroupSeq/articles/task-4-compute-CI.html"><img src="figures/task4-menu.png" alt="-4- Compute Confidence Interval" style="width:80%"></a></td>
-        <td>
-            <ul>
-                <li>Compute confidence interval at final analysis stage for given expected effect size.</li>
-                <li>The group sequential design is defined via alpha spending functions or custom critical bounds.</li>
-                <li>Bounds can be one- or two-sided or completely asymmetric.</li>
-                <li>User chooses number of stages and confidence level.</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+```{r, out.width = "25%", echo = FALSE}
+include_graphics("figures/task4-menu.png")
+```
 
-<br>
-
+* Computes confidence interval at final analysis stage for given expected effect size.
+* The group sequential design is defined via alpha spending functions or custom
+  critical bounds.
+* Bounds can be one- or two-sided or completely asymmetric.
+* User chooses number of stages and confidence level.
 
 
 To close the application and, with it, all open windows, just close the main

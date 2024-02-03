@@ -1,5 +1,5 @@
-pandoc: 2.14.0.3
-pkgdown: 1.6.1
+pandoc: 3.1.1
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   GroupSeq: GroupSeq.html
@@ -8,7 +8,7 @@ articles:
   task-3-compute-bounds-H1: task-3-compute-bounds-H1.html
   task-4-compute-CI: task-4-compute-CI.html
   understanding-gs-designs: understanding-gs-designs.html
-last_built: 2022-02-05T21:41Z
+last_built: 2024-02-03T11:07Z
 urls:
   reference: https://github.com/rpahl/GroupSeq/reference
   article: https://github.com/rpahl/GroupSeq/articles
