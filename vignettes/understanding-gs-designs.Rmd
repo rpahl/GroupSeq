@@ -97,7 +97,7 @@ normalDensPlot =
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(-4, -crit)) +
     stat_function(fun = dnorm, geom = "area", fill = yellow, xlim = c(-crit, crit)) +
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(crit, 4)) +
-    stat_function(fun = dnorm, color = okabe_palette[["bluish green"]], size = 1.5) +
+    stat_function(fun = dnorm, color = okabe_palette[["bluish green"]], linewidth = 1.5) +
     geom_segment(x = 2.2, xend = 2.7, y = 0.02, yend = 0.07) +
     geom_segment(x = -2.2, xend = -2.7, y = 0.02, yend = 0.07) +
     annotate("text", label = probLabel, x = 2.9, y = 0.09, size = 3.5) +
