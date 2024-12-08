@@ -1,6 +1,6 @@
 Package: GroupSeq
 Title: Group Sequential Design Probabilities - With Graphical User Interface
-Version: 1.4.3
+Version: 1.4.4
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -16,7 +16,7 @@ Imports:
 Suggests: knitr, tinytest, rmarkdown, ggplot2, gridExtra
 VignetteBuilder: knitr
 License: GPL-3
-URL: https://rpahl.github.io/GroupSeq/
+URL: https://rpahl.github.io/GroupSeq/, https://github.com/rpahl/GroupSeq
 BugReports: https://github.com/rpahl/GroupSeq/issues
 NeedsCompilation: no
 Author: Roman Pahl [aut, cre]
