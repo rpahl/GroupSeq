@@ -73,7 +73,7 @@ navbar:
 
     github:
       icon: fab fa-github
-      href: https://github.com/rpahl/container/
+      href: https://github.com/rpahl/GroupSeq/
       aria-label: github
     stackoverflow:
       icon: fab fa-stack-overflow
