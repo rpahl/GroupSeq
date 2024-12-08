@@ -28,13 +28,13 @@ old <- options(width = 100L, digits = 10)
 
 Let's assume you have planned a two-sided 3-stage Pocock design with 80% power.
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "two-sided-three-stage-pocock-setup"}
 include_graphics("figures/task4-two-sided-3-stage-Pocock-setup.png")
 ```
 
 The resulting design requires a drift of about 3.
 
-```{r, out.width = c("55%", "38%"), echo = FALSE,fig.show="hold"}
+```{r, out.width = c("55%", "38%"), echo = FALSE,fig.show="hold", fig.alt = "two-sided-three-stage-pocock-result"}
 include_graphics("figures/task4-two-sided-3-stage-Pocock.png")
 include_graphics("figures/task4-two-sided-3-stage-Pocock-graph.png")
 ```
@@ -46,13 +46,13 @@ the critical bound (2.2894) so that you can abort the study and reject H0.
 To compute the confidence interval at this point, open option -4- of GroupSeq and
 enter the values as shown below.
 
-```{r, out.width = "45%", echo = FALSE}
+```{r, out.width = "45%", echo = FALSE, fig.alt = "task-4-CI-setup"}
 include_graphics("figures/task4-CI-setup.png")
 ```
 
 Hitting `CALCULATE` yields the following.
 
-```{r, out.width = "50%", echo = FALSE}
+```{r, out.width = "50%", echo = FALSE, fig.alt = "task-4-CI-result"}
 include_graphics("figures/task4-CI-result.png")
 ```
 

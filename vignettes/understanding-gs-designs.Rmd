@@ -66,7 +66,7 @@ data  = data.frame(x = c(1:10, 1:10, 1:20),
 ```
 
 
-```{r, out.width = "35%", message = FALSE, fig.height = 1, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of a study sample - each circle represents some measurement."}
+```{r, out.width = "35%", message = FALSE, fig.height = 1, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of a study sample - each circle represents some measurement.", fig.alt = "study-scheme"}
 dat = data[1:10, ]
 ggplot(dat, aes(x = x, y = y)) +
     geom_point(size = 10, shape = 21, aes(fill = Sample)) +
@@ -81,7 +81,7 @@ Usually some standardized test statistic is calculated and,
 assuming standard normally distributed data, the density distribution under the
 null hypothesis forms the well-known bell-shaped curve.
 
-```{r, echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3}
+```{r, echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3, fig.alt = "standard-normal-density"}
 fig.cap = "Standard Normal Density with critial bounds marking 5% significance level."
 
 blue = okabe_palette[["sky blue"]]
@@ -97,7 +97,7 @@ normalDensPlot =
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(-4, -crit)) +
     stat_function(fun = dnorm, geom = "area", fill = yellow, xlim = c(-crit, crit)) +
     stat_function(fun = dnorm, geom = "area", fill = blue, xlim = c(crit, 4)) +
-    stat_function(fun = dnorm, color = okabe_palette[["bluish green"]], size = 1.5) +
+    stat_function(fun = dnorm, color = okabe_palette[["bluish green"]], linewidth = 1.5) +
     geom_segment(x = 2.2, xend = 2.7, y = 0.02, yend = 0.07) +
     geom_segment(x = -2.2, xend = -2.7, y = 0.02, yend = 0.07) +
     annotate("text", label = probLabel, x = 2.9, y = 0.09, size = 3.5) +
@@ -139,7 +139,7 @@ numerical integration.
 Now lets consider another sample `X2` that was collected independently from `X1`.
 
 
-```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"}
+```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.alt = "study-two-samples"}
 dat = data[1:20, ]
 ggplot(dat, aes(x = x, y = y)) +
     geom_point(size = 10, shape = 21, aes(fill = Sample)) +
@@ -153,7 +153,7 @@ ggplot(dat, aes(x = x, y = y)) +
 <br>
 If we construct a distribution similar to the one above, we have the following.
 
-```{r, fig.width = 8, fig.height = 3, out.width = "85%"}
+```{r, fig.width = 8, fig.height = 3, out.width = "85%", fig.alt = "two-normal-distributions-side-by-side"}
 normalDensPlotX2 = normalDensPlot +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
@@ -177,7 +177,7 @@ qnorm(0.025/2)
 ```
 and we have
 
-```{r, echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3}
+```{r, echo = FALSE, out.width = "65%", fig.cap = fig.cap, fig.height=3, fig.alt = "standard-normal-densities-with-critical-bounds"}
 fig.cap = "Standard Normal Density with critial bounds marking 5% significance level."
 
 blue = okabe_palette[["sky blue"]]
@@ -206,7 +206,7 @@ normalDensPlotAdj =
           axis.ticks.x = element_line())
 ```
 
-```{r, fig.width = 8, fig.height = 3, out.width = "85%"}
+```{r, fig.width = 8, fig.height = 3, out.width = "85%", fig.alt = "standard-normal-densities-with-adjusted-critical-bounds"}
 normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = okabe_palette[["vermillion"]], size = 1.5)
@@ -302,7 +302,7 @@ plot_normal_dens_2d = function(zmat, ...) {
 ```
 
 
-```{r, out.width = "55%"}
+```{r, out.width = "55%", fig.alt = "2D-normal-density"}
 op = par(mar = c(0, 2, 0, 0))
 plot_normal_dens_2d(zmat, phi = 45, col = get_color(gc1, gc2))
 par(op)
@@ -352,7 +352,7 @@ which matches our results from above.
 However, we now also have a graphical intuitive interpretation to explain the
 results. For this, have a look at the next graph.
 
-```{r, out.width = "55%"}
+```{r, out.width = "55%", fig.alt = "2D-normal-density-with-critical-bounds"}
 orange = okabe_palette[["orange"]]
 crit = crit.Sidak
 get_color_edges = Vectorize(function(x1, x2) {
@@ -399,7 +399,7 @@ data of the current stage.
 For example, in the first stage we collect a sample `X1` and in a second
 stage we combine the sample `X1` with a new sample `X2`.
 
-```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center"}
+```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.alt = "group-sequential-study-sample"}
 dat = data[1:20, ]
 dat[11:20, "x"] = 11:20
 dat = rbind(data.frame(x = 1:10, y = 1.5, Sample = "X1"), dat)
@@ -419,7 +419,7 @@ correlated to the that of sample `X1`.
 With this in mind, the graphical presentation below is more precise to
 visualize the data sample setup.
 
-```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of group sequential two-stage study."}
+```{r, out.width = "35%", message = FALSE, fig.height = 1.3, fig.width = 2.5, fig.align = "center", fig.cap = "Schematic view of group sequential two-stage study.", fig.alt = "group-sequential-two-stage-study"}
 dat = data[c(1:10, 21:40), ]
 
 ggplot(dat, aes(x = x, y = y)) +
@@ -434,7 +434,7 @@ ggplot(dat, aes(x = x, y = y)) +
 The naive approach for the alpha adjustment again would be to treat both
 density distributions as independent and apply the Bonferroni correction.
 
-```{r, fig.width = 8, fig.height = 3, out.width = "85%", fig.cap = "Normal densities for stage 1 and 2 with Bonferroni bounds."}
+```{r, fig.width = 8, fig.height = 3, out.width = "85%", fig.cap = "Normal densities for stage 1 and 2 with Bonferroni bounds.", fig.alt = "normal-densities-stage-1-and-2"}
 normalDensPlotX2Adj = normalDensPlotAdj +
     labs(x = expression(x[2]), y = expression(f(x[2]))) +
     stat_function(fun = dnorm, color = fill_colors[3], size = 1.5)
@@ -455,7 +455,7 @@ zmat = matrix(z, ncol = length(x1))
 ```
 
 
-```{r, fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage design viewed from different angles."}
+```{r, fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage design viewed from different angles.", fig.alt = "bivariate-normal-densities-of-two-stage-designs"}
 op = par(mar = rep(.1, 4))
 plot_normal_dens_2d(zmat, phi = 40, col = get_color(gc1, gc2), box = FALSE)
 plot_normal_dens_2d(zmat, phi = 65, col = get_color(gc1, gc2), box = FALSE)
@@ -488,11 +488,11 @@ lead to overall 5% type I error. Let's start with so-called Pocock bounds,
 which means we want equal bounds at all stages. Using the GroupSeq package,
 these can be derived as follows.
 
-```{r, out.width = "40%", echo = FALSE}
+```{r, out.width = "40%", echo = FALSE, fig.alt = "two-stage-pocock-bounds"}
 include_graphics("figures/two-stage-Pocock-bounds.png")
 ```
 
-```{r, out.width = "70%", echo = FALSE}
+```{r, out.width = "70%", echo = FALSE, fig.alt = "two-stage-pocock-bounds-result"}
 include_graphics("figures/two-stage-Pocock-bounds-result.png")
 ```
 
@@ -520,7 +520,7 @@ a graph showing at the x-axis the "Information Rate", which marks the relative
 sample size of the respective stages, and the nominal bounds at the y-axis.
 The above Pocock design thus looks something like this.
 
-```{r, echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage Pocock design with one interim look at half of the total samples."}
+```{r, echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage Pocock design with one interim look at half of the total samples.", fig.alt = "two-stage-pocock-design-with-first-interim-look-at-half"}
 n = 100
 tt = c(.5, 1)
 crit = crit.Pocock
@@ -561,7 +561,7 @@ Probably the most popular group sequential design is the O'Brien-Fleming design.
 For our two-stage scenario with half of the sample used in each stage,
 it looks like this.
 
-```{r, echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage O'Brien-Fleming design with one interim look at 0.5."}
+```{r, echo = FALSE, out.width = "50%", fig.cap = "Group sequential 2-stage O'Brien-Fleming design with one interim look at 0.5.", fig.alt = "two-stage-OBF-design"}
 
 asOBF <- function(t, alpha = 0.05, side = 2) {
   2 * (1 - stats::pnorm((stats::qnorm(1 - (alpha / side)/2)) / sqrt(t)))
@@ -606,7 +606,7 @@ p
 
 The numbers are outlined below.
 
-```{r, out.width = "70%", echo = FALSE}
+```{r, out.width = "70%", echo = FALSE, fig.alt = "two-stage-OBF-bounds-result"}
 include_graphics("figures/two-stage-OBF-bounds-result.png")
 ```
 
@@ -633,7 +633,7 @@ spent at stage 1.
 To strengthen our intuitive understanding, let's compare the Pocock and
 O'Brien-Fleming design in the two-dimensional density view.
 
-```{r, fig.show="hold", out.width = "45%", fig.cap = "Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample."}
+```{r, fig.show="hold", out.width = "45%", fig.cap = "Bivariate normal density with critical bounds of Pocock (left) and O'Brien-Fleming design (right) both with interim analysis after 50% of the sample.", fig.alt = "pocock-vs-OBF-design"}
 op = par(mar = rep(1.5, 4))
 crit = crit.Pocock
 plot_normal_dens_2d(zmat, phi = 80, col = get_color(gc1, gc2))
@@ -645,7 +645,7 @@ par(op)
 The figure below shows how the time point of the stage 1 analysis affects the
 correlation of the stages and with that shapes the design probabilities.
 
-```{r, fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples."}
+```{r, fig.show="hold", out.width = "30%", fig.cap = "Bivariate normal density of two-stage O'Brien-Fleming design with first stage after 50% (left), 70% (middle) and 90% (right) of all samples.", fig.alt = "OBF-designs-for-different-t1"}
 
 crit = crit.OBF
 mu = 0

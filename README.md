@@ -1,24 +1,32 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-[![R-CMD-check](https://github.com/rpahl/GroupSeq/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rpahl/GroupSeq/actions/workflows/check-standard.yaml)
-[![dependencies](https://tinyverse.netlify.com/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
-[![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=GroupSeq)
-[![downloads](https://cranlogs.r-pkg.org/badges/GroupSeq?color=3aa9e8)](https://www.r-pkg.org:443/pkg/GroupSeq)
-[![total-downloads](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-[![last-commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-
+[![CRAN
+release](https://www.r-pkg.org/badges/version/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![Dependencies](https://tinyverse.netlify.app/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
+[![R-CMD-check
+status](https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/GroupSeq/actions)
+[![CRAN
+checks](https://badges.cranchecks.info/summary/GroupSeq.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
+[![Downloads per
+month](http://cranlogs.r-pkg.org/badges/last-month/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![Downloads
+total](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![Last
+commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq.svg)](https://github.com/rpahl/GroupSeq/commits/master)
+[![Lifecycle
+status](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-# GroupSeq <img src="man/figures/logo3D.png" align="right" width="200" height="250"/>
+# GroupSeq <img src="man/figures/logo3D.png" alt="logo" align="right" width="200" height="250"/>
 
 GroupSeq computes probabilities related to group sequential designs for
 normally distributed test statistics. It enables to derive critical
 boundaries, power, drift, and confidence intervals of such designs,
-mostly using the alpha spending approach of [DeMets and
-Lan](#ref-pmid7973215) ([1994](#ref-pmid7973215)).
+mostly using the alpha spending approach of DeMets and Lan
+([1994](#ref-pmid7973215)).
 
 The main motivation for the development of this package was to make this
 area of statistics freely available for a broad audience, which is one
@@ -43,7 +51,7 @@ Load the library to start the graphical user interface.
 library("GroupSeq")
 ```
 
-<img src="man/figures/menu-after-load.png" width="30%" />
+<img src="man/figures/menu-after-load.png" alt="menu-after-load" width="30%" />
 
 <br>
 
@@ -55,22 +63,26 @@ page.
 
 Since the package was written back in 2005, the graphical user interface
 may appear a bit outdated. Still, it does it’s job and at least has
-stood the test of
-time[![^1](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5E1 "^1")](#refs).
-Luckily in recent years others have started to develop R-based tools
-with graphical user interface and similar (and more) statistical
-functionality:
+stood the test of time[$^1$](#refs). Luckily in recent years others have
+started to develop R-based tools with graphical user interface and
+similar (and more) statistical functionality:
 
--   [gsDesign](https://CRAN.R-project.org/package=gsDesign) with a free
-    [shiny web interface](https://gsdesign.shinyapps.io/prod/) including
-    tutorials.
--   [rpact](https://CRAN.R-project.org/package=rpact) also with a free
-    [shiny web interface](https://rpact.shinyapps.io/public) and lots of
-    [vignettes](https://www.rpact.com/vignettes).
+- [gsDesign](https://CRAN.R-project.org/package=gsDesign) with a free
+  [shiny web interface](https://gsdesign.shinyapps.io/prod/) including
+  tutorials.
+- [rpact](https://CRAN.R-project.org/package=rpact) also with a free
+  [shiny web interface](https://rpact.shinyapps.io/public) and lots of
+  [vignettes](https://www.rpact.com/vignettes).
 
-### References
+------------------------------------------------------------------------
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+1.  The package author is considering to work on a second version with
+    more functionality and a revised user interface in the near future.
+    Feel free to request new features
+    [here](https://github.com/rpahl/GroupSeq/issues).
+
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-pmid7973215" class="csl-entry">
 
@@ -81,10 +93,3 @@ analysis: the alpha spending function approach</span>.” *Stat Med* 13
 </div>
 
 </div>
-
-------------------------------------------------------------------------
-
-1.  The package author is considering to work on a second version with
-    more functionality and a revised user interface in the near future.
-    Feel free to request new features
-    [here](https://github.com/rpahl/GroupSeq/issues).

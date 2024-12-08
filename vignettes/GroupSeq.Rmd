@@ -74,7 +74,7 @@ Loading the library opens the main GroupSeq window.
 library("GroupSeq")
 ```
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "menu-after-load"}
 include_graphics("figures/menu-after-load.png")
 ```
 
@@ -91,7 +91,7 @@ For a detailed description of the respective task follow one of the links below:
 Use this to compute the boundaries of group sequential designs under the null
 hypothesis (`H0`), that is, under a given significance level alpha (usually 5%).
 
-```{r, out.width = "25%", echo = FALSE}
+```{r, out.width = "25%", echo = FALSE, fig.alt = "task-1-menu"}
 include_graphics("figures/task1-menu.png")
 ```
 
@@ -106,7 +106,7 @@ include_graphics("figures/task1-menu.png")
 Use this to compute the target effect size of a group sequential design,
 which maintains a certain power (e.g. power = 80%).
 
-```{r, out.width = "25%", echo = FALSE}
+```{r, out.width = "25%", echo = FALSE, fig.alt = "task-2-menu"}
 include_graphics("figures/task2-menu.png")
 ```
 
@@ -122,7 +122,7 @@ include_graphics("figures/task2-menu.png")
 
 Use this to compute the power of a group sequential design.
 
-```{r, out.width = "25%", echo = FALSE}
+```{r, out.width = "25%", echo = FALSE, fig.alt = "task-3-menu"}
 include_graphics("figures/task3-menu.png")
 ```
 
@@ -140,7 +140,7 @@ Use this to compute the confidence intervals for the target outcome
 at the final analysis, which can be the last stage as planned or at an earlier
 stage exceeding the critical bounds and therefore stopping early.
 
-```{r, out.width = "25%", echo = FALSE}
+```{r, out.width = "25%", echo = FALSE, fig.alt = "task-4-menu"}
 include_graphics("figures/task4-menu.png")
 ```
 

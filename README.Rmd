@@ -26,17 +26,17 @@ old <- options(width = 100L, digits = 10)
 
 
 <!-- badges: start -->
-[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-[![R-CMD-check](https://github.com/rpahl/GroupSeq/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/rpahl/GroupSeq/actions/workflows/check-standard.yaml)
-[![dependencies](https://tinyverse.netlify.com/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
-[![Lifecycle_Badge](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://cran.r-project.org/package=GroupSeq)
-[![downloads](https://cranlogs.r-pkg.org/badges/GroupSeq?color=3aa9e8)](https://www.r-pkg.org:443/pkg/GroupSeq)
-[![total-downloads](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-[![last-commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
-
+[![CRAN release](https://www.r-pkg.org/badges/version/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![Dependencies](https://tinyverse.netlify.app/badge/GroupSeq)](https://CRAN.R-project.org/package=GroupSeq)
+[![R-CMD-check status](https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg)](https://github.com/rpahl/GroupSeq/actions)
+[![CRAN checks](https://badges.cranchecks.info/summary/GroupSeq.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
+[![Downloads per month](http://cranlogs.r-pkg.org/badges/last-month/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![Downloads total](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+[![Last commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq.svg)](https://github.com/rpahl/GroupSeq/commits/master)
+[![Lifecycle status](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-# GroupSeq <img src="man/figures/logo3D.png" align="right" width="200" height="250"/>
+# GroupSeq <img src="man/figures/logo3D.png" alt="logo" align="right" width="200" height="250"/>
 
 GroupSeq computes probabilities related to group sequential designs for normally
 distributed test statistics. It enables to derive critical boundaries, power,
@@ -66,7 +66,7 @@ Load the library to start the graphical user interface.
 library("GroupSeq")
 ```
 
-```{r, out.width = "30%", echo = FALSE}
+```{r, out.width = "30%", echo = FALSE, fig.alt = "menu-after-load"}
 include_graphics("man/figures/menu-after-load.png")
 ```
 
@@ -93,9 +93,6 @@ statistical functionality:
     [vignettes](https://www.rpact.com/vignettes).
 
 
-### References {#refs}
-
-<div id="refs"></div>
 
 ---
 
