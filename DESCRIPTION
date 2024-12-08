@@ -1,6 +1,6 @@
 Package: GroupSeq
 Title: Group Sequential Design Probabilities - With Graphical User Interface
-Version: 1.4.2
+Version: 1.4.3
 Authors@R:
     person("Roman", "Pahl",
     email = "roman.pahl@gmail.com", role = c("aut", "cre"))
@@ -8,7 +8,7 @@ Description: Computes probabilities related to group sequential designs for
     normally distributed test statistics. Enables to derive critical
     boundaries, power, drift, and confidence intervals of such designs.
     Supports the alpha spending approach by Lan-DeMets (1994)
-    <doi:10.1002/sim.4780131308>
+    <doi:10.1002/sim.4780131308>.
 Imports:
     tcltk,
     tcltk2,
