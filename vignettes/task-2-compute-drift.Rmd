@@ -35,7 +35,7 @@ it is recommended to visit this one first.
 
 The option -2- menu initially looks as follows.
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "task-2-menu"}
 include_graphics("figures/task2-menu.png")
 ```
 
@@ -44,7 +44,7 @@ include_graphics("figures/task2-menu.png")
 <br>
 For a start lets set `K=3` stages and `CALCULATE`.
 
-```{r, out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"}
+```{r, out.width = c("55%", "40%"), echo = FALSE, fig.show="hold", fig.alt = "three-stage-OBF-results"}
 include_graphics("figures/task2-3stage-OBF-result.png")
 include_graphics("figures/task2-3stage-OBF-graph.png")
 ```
@@ -65,7 +65,7 @@ effect size) is 2.51.
 
 Next lets see the required drift if we use a Pocock design.
 
-```{r, out.width = "50%"}
+```{r, out.width = "50%", fig.alt = "three-stage-pocock-result"}
 include_graphics("figures/task2-3stage-Pocock-result.png")
 ```
 
@@ -82,14 +82,14 @@ a faster study conclusion.
 
 To change the desired power, just edit the value in the input window.
 
-```{r, out.width = "35%"}
+```{r, out.width = "35%", fig.alt = "task-2-set-power"}
 include_graphics("figures/task2-set-power.png")
 ```
 
 <br>
 If we re-`CALCULATE`, we get
 
-```{r, out.width = "50%"}
+```{r, out.width = "50%", fig.alt = "three-stage-pocock-power-result"}
 include_graphics("figures/task2-3stage-Pocock-result-power90.png")
 ```
 
@@ -110,14 +110,14 @@ the higher drift (on average) will be detected earlier than a weaker effect.
 In order to enable the computation of drift for arbitrary designs, you can
 enter bounds manually.
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "task-2-set-manual-bounds"}
 include_graphics("figures/task2-set-manual-bounds.png")
 ```
 
 <br>
 Hitting `CALCULATE` for the default bounds 1, 2, 3, we get
 
-```{r, out.width = "50%"}
+```{r, out.width = "50%", fig.alt = "three-stage-pocock-manual-bounds-result"}
 include_graphics("figures/task2-3stage-Pocock-result-manual-bounds.png")
 ```
 

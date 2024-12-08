@@ -32,8 +32,8 @@ old <- options(width = 100L, digits = 10)
 
 The option -1- menu initially looks as follows.
 
-```{r, out.width = "35%", echo = FALSE}
-include_graphics("figures/task1-menu.png")
+```{r, out.width = "35%", echo = FALSE, fig.alt = "task-1-menu"}
+include_graphics(file.path("figures", "task1-menu.png"))
 ```
 
 ### Single stage
@@ -41,7 +41,7 @@ include_graphics("figures/task1-menu.png")
 As a first example, let's hit the `CALCULATE` button, which should open a
 new window with the following results.
 
-```{r, out.width = "50%"}
+```{r, out.width = "50%", fig.alt = "one-stage-result"}
 include_graphics("figures/task1-1stage-result.png")
 ```
 
@@ -61,14 +61,14 @@ Note that in GroupSeq this is called
 `#Interim Times`, which means that the final analysis also is treated as an
 'interim time'. Thus, for a 3-stage design, we select $K = 3$.
 
-```{r, out.width = "25%"}
+```{r, out.width = "25%", fig.alt = "task-1-select-K3"}
 include_graphics("figures/task1-select-K3.png")
 ```
 <br>
 
 Hit `CALCULATE` to compute the 3-stage design.
 
-```{r, out.width = "50%"}
+```{r, out.width = "50%", fig.alt = "three-stage-result"}
 include_graphics("figures/task1-3stage-result.png")
 ```
 
@@ -91,7 +91,7 @@ collected.
 To get a visual impression you can click the `Show Graph` button in the result
 window which provides the following plot.
 
-```{r, out.width = "50%"}
+```{r, out.width = "50%", fig.alt = "three-stage-result-graph"}
 include_graphics("figures/task1-3stage-result-graph.png")
 ```
 
@@ -106,14 +106,14 @@ the general popularity of group sequential designs in clinical research,
 is the design by Pocock, which is constructed such the bounds are identical
 at each stage. Let's select `(5) Exact Pocock Bounds` and hit `CONFIRM FUNCTION`.
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "three-stage-pocock-bounds"}
 include_graphics("figures/task1-3stage-pocock.png")
 ```
 
 <br>
 When hitting the `CALCULATE` button, this time we get the following.
 
-```{r, out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"}
+```{r, out.width = c("55%", "40%"), echo = FALSE, fig.show="hold", fig.alt = "three-stage-pocock-results"}
 include_graphics("figures/task1-3stage-pocock-result.png")
 include_graphics("figures/task1-3stage-pocock-result-graph.png")
 ```
@@ -159,7 +159,7 @@ bounds, which are slightly harder to compute, was added to GroupSeq.
 
 To adjust interim times, which by default are equally spaced, the
 correspondin checkmark has to be deselected.
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "three-stage-pocock-custom-times"}
 include_graphics("figures/task1-3stage-pocock-custom-times.png")
 ```
 
@@ -167,14 +167,14 @@ include_graphics("figures/task1-3stage-pocock-custom-times.png")
 The times are entered manually, for example, lets start a bit later with the
 first interim look.
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "three-stage-pocock-custom-times"}
 include_graphics("figures/task1-3stage-pocock-custom-times-entered.png")
 ```
 
 <br>
 and `CALCULATE`.
 
-```{r, out.width = "50%", echo = FALSE}
+```{r, out.width = "50%", echo = FALSE, fig.alt = "three-stage-pocock-custom-times-result"}
 include_graphics("figures/task1-3stage-pocock-custom-times-result.png")
 ```
 
@@ -187,14 +187,14 @@ this design is less aggressive to abort the study early.
 
 Last but not least, the designs can be calculated for the two-sided symmetric
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "three-stage-pocock-two-side"}
 include_graphics("figures/task1-3stage-pocock-two-side.png")
 ```
 
 <br>
 as well as the two-sided asymmetric case.
 
-```{r, out.width = "35%", echo = FALSE}
+```{r, out.width = "35%", echo = FALSE, fig.alt = "three-stage-pocock-two-side-asym"}
 include_graphics("figures/task1-3stage-pocock-two-side-asym.png")
 ```
 
@@ -205,7 +205,7 @@ As an example, lets go with O'Brien-Fleming and Pocock again (don't forget to
 hit the `CONFIRM FUNCTION` buttons).
 
 
-```{r, out.width = c("55%", "40%"), echo = FALSE,fig.show="hold"}
+```{r, out.width = c("55%", "40%"), echo = FALSE, fig.show="hold", fig.alt = "three-stage-pocock-two-side-asym-result"}
 include_graphics("figures/task1-3stage-pocock-two-side-asym-result.png")
 include_graphics("figures/task1-3stage-pocock-two-side-asym-graph.png")
 ```

@@ -2,23 +2,12 @@ url: https://github.com/rpahl/GroupSeq
 
 
 template:
-  params:
-    bootswatch: sandstone
+  bootstrap: 5
+  bootswatch: sandstone
 
 authors:
   Roman Pahl:
     href: https://rpahl.github.io/r-some-blog/about.html
-
-
-articles:
-  - title: "Overview"
-    contents:
-    - "understanding-gs-designs"
-    - "GroupSeq"
-    - "task-1-compute-bounds-H0"
-    - "task-2-compute-drift"
-    - "task-3-compute-bounds-H1"
-    - "task-4-compute-CI"
 
 home:
   links:
@@ -26,19 +15,32 @@ home:
     href: https://rpahl.github.io/r-some-blog/
 
 navbar:
-  title: "GroupSeq"
-  left:
-    - icon: fa-home fa-lg
+  structure:
+    left: [home, getStarted, changeLog, reference, articles, myPackages]
+    right: [github, stackoverflow, bluesky, blog]
+
+
+  components:
+    home:
+      icon: fa-home fa-lg
       href: index.html
-    - text: "Get started"
+      aria-label: home
+
+    getStarted:
+      text: "Get Started"
       href: articles/GroupSeq.html
-    - text: "Reference"
+
+    reference:
+      text: "Reference"
       href: reference/index.html
-    - text: "Changelog"
+
+    changeLog:
+      text: "Changelog"
       href: news/index.html
-    - text: "Articles"
+
+    articles:
+      text: "Articles"
       menu:
-        - title: "Overview"
         - text: "Overview"
           href: articles/index.html
         - text: "---"
@@ -58,19 +60,30 @@ navbar:
         - text: "Other"
         - text: "GroupSeq article in R News 2006"
           href: "https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21"
-    - text: "My Packages"
+
+    myPackages:
+      text: "My Packages"
       menu:
         - text: "container"
           href: https://rpahl.github.io/container/
         - text: "GroupSeq"
           href: https://rpahl.github.io/GroupSeq/
-  right:
-    - icon: fab fa-github
-      href: https://github.com/rpahl/GroupSeq/
-    - icon: fab fa-stack-overflow
-      href: https://stackoverflow.com/users/8120617/rpahl
-    - icon: fab fa-twitter
-      href: https://twitter.com/romanpahl
-    - icon: fas fa-blog
-      href: https://rpahl.github.io/r-some-blog/
+        - text: "pipeflow"
+          href: https://rpahl.github.io/pipeflow/
 
+    github:
+      icon: fab fa-github
+      href: https://github.com/rpahl/container/
+      aria-label: github
+    stackoverflow:
+      icon: fab fa-stack-overflow
+      href: https://stackoverflow.com/users/8120617/rpahl
+      aria-label: stackoverflow
+    bluesky:
+      icon: fab fa-bluesky
+      href: https://bsky.app/profile/rpahl.bsky.social
+      aria-label: bluesky
+    blog:
+      icon: fas fa-blog
+      href: https://rpahl.github.io/r-some-blog/
+      aria-label: blog
