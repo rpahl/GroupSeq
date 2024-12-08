@@ -74,7 +74,12 @@ similar (and more) statistical functionality:
   [shiny web interface](https://rpact.shinyapps.io/public) and lots of
   [vignettes](https://www.rpact.com/vignettes).
 
-### References
+------------------------------------------------------------------------
+
+1.  The package author is considering to work on a second version with
+    more functionality and a revised user interface in the near future.
+    Feel free to request new features
+    [here](https://github.com/rpahl/GroupSeq/issues).
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
@@ -88,10 +93,3 @@ analysis: the alpha spending function approach</span>.” *Stat Med* 13
 </div>
 
 </div>
-
-------------------------------------------------------------------------
-
-1.  The package author is considering to work on a second version with
-    more functionality and a revised user interface in the near future.
-    Feel free to request new features
-    [here](https://github.com/rpahl/GroupSeq/issues).

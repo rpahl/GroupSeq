@@ -1,21 +1,57 @@
-<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
-<url><loc>https://github.com/rpahl/GroupSeq/404.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/GroupSeq.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/index.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/task-1-compute-bounds-H0.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/task-2-compute-drift.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/task-3-compute-bounds-H1.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/task-4-compute-CI.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/articles/understanding-gs-designs.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/authors.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/index.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/news/index.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/groupseq.pkg.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/gui.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/index.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/seqDesign.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/seqProb.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/start_gui.html</loc></url>
-<url><loc>https://github.com/rpahl/GroupSeq/reference/verify_arg.html</loc></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/404.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/GroupSeq.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-1-compute-bounds-H0.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-2-compute-drift.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-3-compute-bounds-H1.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/task-4-compute-CI.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/articles/understanding-gs-designs.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/news/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/groupseq.pkg.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/gui.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/seqDesign.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/seqProb.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/start_gui.html</loc>
+  </url>
+  <url>
+    <loc>https://github.com/rpahl/GroupSeq/reference/verify_arg.html</loc>
+  </url>
 </urlset>
-

@@ -33,7 +33,7 @@ old <- options(width = 100L, digits = 10)
 The option -1- menu initially looks as follows.
 
 ```{r, out.width = "35%", echo = FALSE, fig.alt = "task-1-menu"}
-include_graphics(file.path("figures", "task1-menu.png"))
+knitr::include_graphics('figures/task1-menu.png')
 ```
 
 ### Single stage

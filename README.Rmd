@@ -93,9 +93,6 @@ statistical functionality:
     [vignettes](https://www.rpact.com/vignettes).
 
 
-### References {#refs}
-
-<div id="refs"></div>
 
 ---
 
