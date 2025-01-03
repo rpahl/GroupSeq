@@ -20,7 +20,7 @@ commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq.svg)](https://g
 status](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-# GroupSeq <img src="man/figures/logo3D.png" alt="logo" align="right" width="200" height="250"/>
+# GroupSeq <img src="man/figures/logo.png" alt="logo" align="right" width="115" height="163"/>
 
 GroupSeq computes probabilities related to group sequential designs for
 normally distributed test statistics. It enables to derive critical

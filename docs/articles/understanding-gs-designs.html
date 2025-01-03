@@ -60,14 +60,6 @@
     <li><a class="external-link dropdown-item" href="https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21">GroupSeq article in R News 2006</a></li>
   </ul>
 </li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-my-packages" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">My Packages</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-my-packages">
-<li><a class="external-link dropdown-item" href="https://rpahl.github.io/container/">container</a></li>
-    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/GroupSeq/">GroupSeq</a></li>
-    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/pipeflow/">pipeflow</a></li>
-  </ul>
-</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><a class="nav-link" href="https://github.com/rpahl/GroupSeq/" aria-label="github"><span class="fa fab fa-github"></span></a></li>
@@ -87,14 +79,14 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Understanding group sequential designs</h1>
-
-
+            
+      
       <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/HEAD/vignettes/understanding-gs-designs.Rmd"><code>vignettes/understanding-gs-designs.Rmd</code></a></small>
       <div class="d-none name"><code>understanding-gs-designs.Rmd</code></div>
     </div>
 
-
-
+    
+    
 <p>While calculating probabilities of group sequential designs can be
 considered somewhat complex, it may be less difficult than most people
 think. This vignette provides a visual explanation of the underlying
@@ -155,10 +147,6 @@ independently from <code>X1</code>.</p>
 <p><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-5-1.png" alt="study-two-samples" width="35%" style="display: block; margin: auto;"></p>
 <p><br> If we construct a distribution similar to the one above, we have
 the following.</p>
-<pre><code><span><span class="co"># Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.</span></span>
-<span><span class="co"># <span style="color: #00BBBB;">ℹ</span> Please use `linewidth` instead.</span></span>
-<span><span class="co"># <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
-<span><span class="co"># <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.</span></span></span></code></pre>
 <p><img src="understanding-gs-designs_files/figure-html/unnamed-chunk-6-1.png" alt="two-normal-distributions-side-by-side" width="85%"></p>
 <p><br> A statistical test on both samples now would control the type I
 error for each of these studies at the 5% level, but, of course, things
@@ -171,7 +159,7 @@ need to down-adjust alpha. The simplest and most common approach is to
 use the Bonferroni correction, which means we are allowed to spend
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>α</mi><mrow><mi>B</mi><mi>o</mi><mi>n</mi><mi>f</mi></mrow></msub><mo>=</mo><mi>α</mi><mi>/</mi><mn>2</mn><mo>=</mo><mn>0.025</mn></mrow><annotation encoding="application/x-tex">\alpha_{Bonf} = \alpha/2 = 0.025</annotation></semantics></math>.
 The corresponding adjusted critical bound is</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="fl">0.025</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co"># [1] -2.241402728</span></span></code></pre></div>
 <p>and we have</p>
@@ -298,8 +286,8 @@ leaving less volume under the blue area.</p>
 bounds that lead to overall 5% type I error. Let’s start with so-called
 Pocock bounds, which means we want equal bounds at all stages. Using the
 GroupSeq package, these can be derived as follows.</p>
-<p><img src="figures/two-stage-Pocock-bounds.png" alt="two-stage-pocock-bounds" width="40%"></p>
-<p><img src="figures/two-stage-Pocock-bounds-result.png" alt="two-stage-pocock-bounds-result" width="70%"></p>
+<p><img src="figures%2Ftwo-stage-Pocock-bounds.png" alt="two-stage-pocock-bounds" width="40%"></p>
+<p><img src="figures%2Ftwo-stage-Pocock-bounds-result.png" alt="two-stage-pocock-bounds-result" width="70%"></p>
 <p>So the Pocock bounds are 2.1783 and thus as expected lower than the
 Bonferroni bounds. The last entry in the ‘cumulative alpha’ column shows
 the overall alpha, which is close to 5%.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;In fact, it is closer to 5% (0.0499966086) than shown in
@@ -336,7 +324,7 @@ Group sequential 2-stage O’Brien-Fleming design with one interim look at
 </p>
 </div>
 <p>The numbers are outlined below.</p>
-<p><img src="figures/two-stage-OBF-bounds-result.png" alt="two-stage-OBF-bounds-result" width="70%"></p>
+<p><img src="figures%2Ftwo-stage-OBF-bounds-result.png" alt="two-stage-OBF-bounds-result" width="70%"></p>
 <p>Clearly the critical bounds at stage one are very conservative so
 that only 0.3% of alpha is spent there. With spending 4.7% of alpha at
 the last stage this O’Brien-Fleming design in fact is not much different

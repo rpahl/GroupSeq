@@ -60,14 +60,6 @@
     <li><a class="external-link dropdown-item" href="https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21">GroupSeq article in R News 2006</a></li>
   </ul>
 </li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-my-packages" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">My Packages</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-my-packages">
-<li><a class="external-link dropdown-item" href="https://rpahl.github.io/container/">container</a></li>
-    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/GroupSeq/">GroupSeq</a></li>
-    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/pipeflow/">pipeflow</a></li>
-  </ul>
-</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><a class="nav-link" href="https://github.com/rpahl/GroupSeq/" aria-label="github"><span class="fa fab fa-github"></span></a></li>
@@ -87,28 +79,28 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>-4- Compute Confidence Interval</h1>
-
-
+            
+      
       <small class="dont-index">Source: <a href="https://github.com/rpahl/GroupSeq/blob/HEAD/vignettes/task-4-compute-CI.Rmd"><code>vignettes/task-4-compute-CI.Rmd</code></a></small>
       <div class="d-none name"><code>task-4-compute-CI.Rmd</code></div>
     </div>
 
-
-
+    
+    
 <p>Let’s assume you have planned a two-sided 3-stage Pocock design with
 80% power.</p>
-<p><img src="figures/task4-two-sided-3-stage-Pocock-setup.png" alt="two-sided-three-stage-pocock-setup" width="35%"></p>
+<p><img src="figures%2Ftask4-two-sided-3-stage-Pocock-setup.png" alt="two-sided-three-stage-pocock-setup" width="35%"></p>
 <p>The resulting design requires a drift of about 3.</p>
-<p><img src="figures/task4-two-sided-3-stage-Pocock.png" alt="two-sided-three-stage-pocock-result" width="55%"><img src="figures/task4-two-sided-3-stage-Pocock-graph.png" alt="two-sided-three-stage-pocock-result" width="38%"></p>
+<p><img src="figures%2Ftask4-two-sided-3-stage-Pocock.png" alt="two-sided-three-stage-pocock-result" width="55%"><img src="figures%2Ftask4-two-sided-3-stage-Pocock-graph.png" alt="two-sided-three-stage-pocock-result" width="38%"></p>
 <p>During the study you perform the interim analysis as planned when
 about 67% of all samples were collected and obtain a standardized effect
 size of 2.5, exceeding the critical bound (2.2894) so that you can abort
 the study and reject H0.</p>
 <p>To compute the confidence interval at this point, open option -4- of
 GroupSeq and enter the values as shown below.</p>
-<p><img src="figures/task4-CI-setup.png" alt="task-4-CI-setup" width="45%"></p>
+<p><img src="figures%2Ftask4-CI-setup.png" alt="task-4-CI-setup" width="45%"></p>
 <p>Hitting <code>CALCULATE</code> yields the following.</p>
-<p><img src="figures/task4-CI-result.png" alt="task-4-CI-result" width="50%"></p>
+<p><img src="figures%2Ftask4-CI-result.png" alt="task-4-CI-result" width="50%"></p>
 <p>So for this study, the resulting confidence interval of the
 standardized effect is (0.30, 5.38).</p>
 <p>Depending on the underlying data distribution and applied test
