@@ -13,6 +13,8 @@ home:
   links:
   - text: Visit my R blog
     href: https://rpahl.github.io/r-some-blog/
+  - text: Visit my R packages universe
+    href: https://rpahl.r-universe.dev/packages/
 
 navbar:
   structure:
@@ -60,16 +62,6 @@ navbar:
         - text: "Other"
         - text: "GroupSeq article in R News 2006"
           href: "https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21"
-
-    myPackages:
-      text: "My Packages"
-      menu:
-        - text: "container"
-          href: https://rpahl.github.io/container/
-        - text: "GroupSeq"
-          href: https://rpahl.github.io/GroupSeq/
-        - text: "pipeflow"
-          href: https://rpahl.github.io/pipeflow/
 
     github:
       icon: fab fa-github
