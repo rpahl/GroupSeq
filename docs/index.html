@@ -40,8 +40,16 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="index.html" aria-label="home"><span class="fa fa-home fa-lg"></span></a></li>
 <li class="nav-item"><a class="nav-link" href="articles/GroupSeq.html">Get Started</a></li>
-<li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-news">
+<li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21">Version 1.1 (R News Volume 6/2, May 2006)</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="news/index.html">Changelog</a></li>
+  </ul>
+</li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
@@ -53,17 +61,6 @@
     <li><a class="dropdown-item" href="articles/task-2-compute-drift.html">-2- Compute Drift given Power and Bounds</a></li>
     <li><a class="dropdown-item" href="articles/task-3-compute-bounds-H1.html">-3- Compute Probabilities given Bounds and Drift</a></li>
     <li><a class="dropdown-item" href="articles/task-4-compute-CI.html">-4- Compute Confidence Interval</a></li>
-    <li><hr class="dropdown-divider"></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Other</h6></li>
-    <li><a class="external-link dropdown-item" href="https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21">GroupSeq article in R News 2006</a></li>
-  </ul>
-</li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-my-packages" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">My Packages</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-my-packages">
-<li><a class="external-link dropdown-item" href="https://rpahl.github.io/container/">container</a></li>
-    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/GroupSeq/">GroupSeq</a></li>
-    <li><a class="external-link dropdown-item" href="https://rpahl.github.io/pipeflow/">pipeflow</a></li>
   </ul>
 </li>
       </ul>
@@ -118,9 +115,6 @@
 <a href="https://CRAN.R-project.org/package=rpact" class="external-link">rpact</a> also with a free <a href="https://rpact.shinyapps.io/public" class="external-link">shiny web interface</a> and lots of <a href="https://www.rpact.com/vignettes" class="external-link">vignettes</a>.</li>
 </ul>
 <hr>
-<ol style="list-style-type: decimal">
-<li>The package author is considering to work on a second version with more functionality and a revised user interface in the near future. Feel free to request new features <a href="https://github.com/rpahl/GroupSeq/issues">here</a>.</li>
-</ol>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-pmid7973215" class="csl-entry">
 DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim analysis: the alpha spending function approach</span>.” <em>Stat Med</em> 13 (13-14): 1341–52. <a href="https://doi.org/10.1002/sim.4780131308" class="external-link uri">https://doi.org/10.1002/sim.4780131308</a>.
@@ -136,6 +130,7 @@ DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim analysis: th
 <li><a href="https://github.com/rpahl/GroupSeq/">Browse source code</a></li>
 <li><a href="https://github.com/rpahl/GroupSeq/issues">Report a bug</a></li>
 <li><a href="https://rpahl.github.io/r-some-blog/" class="external-link">Visit my R blog</a></li>
+<li><a href="https://rpahl.r-universe.dev/packages/" class="external-link">Visit my R packages universe</a></li>
 </ul>
 </div>
 
@@ -169,8 +164,8 @@ DeMets, D. L., and K. K. Lan. 1994. “<span class="nocase">Interim analysis: th
 <li><a href="https://CRAN.R-project.org/package=GroupSeq" class="external-link"><img src="https://tinyverse.netlify.app/badge/GroupSeq" alt="Dependencies"></a></li>
 <li><a href="https://github.com/rpahl/GroupSeq/actions"><img src="https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg" alt="R-CMD-check status"></a></li>
 <li><a href="https://cran.r-project.org/web/checks/check_results_container.html" class="external-link"><img src="https://badges.cranchecks.info/summary/GroupSeq.svg" alt="CRAN checks"></a></li>
-<li><a href="https://cran.r-project.org/package=GroupSeq" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/last-month/GroupSeq" alt="Downloads per month"></a></li>
-<li><a href="https://cran.r-project.org/package=GroupSeq" class="external-link"><img src="http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq" alt="Downloads total"></a></li>
+<li><a href="https://cran.r-project.org/package=GroupSeq" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/last-month/GroupSeq" alt="Downloads per month"></a></li>
+<li><a href="https://cran.r-project.org/package=GroupSeq" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/GroupSeq" alt="Downloads total"></a></li>
 <li><a href="https://github.com/rpahl/GroupSeq/commits/master"><img src="https://img.shields.io/github/last-commit/rpahl/GroupSeq.svg" alt="Last commit"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html#stable" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Lifecycle status"></a></li>
 </ul>

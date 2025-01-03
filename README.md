@@ -11,16 +11,16 @@ status](https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg)](http
 [![CRAN
 checks](https://badges.cranchecks.info/summary/GroupSeq.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
 [![Downloads per
-month](http://cranlogs.r-pkg.org/badges/last-month/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+month](https://cranlogs.r-pkg.org/badges/last-month/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
 [![Downloads
-total](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+total](https://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
 [![Last
 commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq.svg)](https://github.com/rpahl/GroupSeq/commits/master)
 [![Lifecycle
 status](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
-# GroupSeq <img src="man/figures/logo3D.png" alt="logo" align="right" width="200" height="250"/>
+# GroupSeq <img src="man/figures/logo.png" alt="logo" align="right" width="115" height="163"/>
 
 GroupSeq computes probabilities related to group sequential designs for
 normally distributed test statistics. It enables to derive critical
@@ -75,11 +75,6 @@ similar (and more) statistical functionality:
   [vignettes](https://www.rpact.com/vignettes).
 
 ------------------------------------------------------------------------
-
-1.  The package author is considering to work on a second version with
-    more functionality and a revised user interface in the near future.
-    Feel free to request new features
-    [here](https://github.com/rpahl/GroupSeq/issues).
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">

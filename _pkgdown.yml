@@ -13,10 +13,18 @@ home:
   links:
   - text: Visit my R blog
     href: https://rpahl.github.io/r-some-blog/
+  - text: Visit my R packages universe
+    href: https://rpahl.r-universe.dev/packages/
+
+news:
+  releases:
+  - text: "Version 1.1 (R News Volume 6/2, May 2006)"
+    href: "https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21"
+
 
 navbar:
   structure:
-    left: [home, getStarted, changeLog, reference, articles, myPackages]
+    left: [home, getStarted, reference, news, articles]
     right: [github, stackoverflow, bluesky, blog]
 
 
@@ -56,20 +64,6 @@ navbar:
           href: articles/task-3-compute-bounds-H1.html
         - text: "-4- Compute Confidence Interval"
           href: articles/task-4-compute-CI.html
-        - text: "---"
-        - text: "Other"
-        - text: "GroupSeq article in R News 2006"
-          href: "https://www.r-project.org/doc/Rnews/Rnews_2006-2.pdf#page=21"
-
-    myPackages:
-      text: "My Packages"
-      menu:
-        - text: "container"
-          href: https://rpahl.github.io/container/
-        - text: "GroupSeq"
-          href: https://rpahl.github.io/GroupSeq/
-        - text: "pipeflow"
-          href: https://rpahl.github.io/pipeflow/
 
     github:
       icon: fab fa-github
