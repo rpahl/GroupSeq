@@ -1,3 +1,18 @@
+# GroupSeq (development version)
+
+* update package site
+    * switch to bootstrap 5
+    * move link to R News article into new "News" menu combined with Changelog
+    * link to other packages via R universe link
+
+# GroupSeq 1.4.3
+
+* fix introduction vignette
+
+# GroupSeq 1.4.2
+
+* remove dependency on container package
+
 # GroupSeq 1.4.0
 
 * Create package site
