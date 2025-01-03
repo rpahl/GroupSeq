@@ -11,9 +11,9 @@ status](https://github.com/rpahl/GroupSeq/workflows/R-CMD-check/badge.svg)](http
 [![CRAN
 checks](https://badges.cranchecks.info/summary/GroupSeq.svg)](https://cran.r-project.org/web/checks/check_results_container.html)
 [![Downloads per
-month](http://cranlogs.r-pkg.org/badges/last-month/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+month](https://cranlogs.r-pkg.org/badges/last-month/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
 [![Downloads
-total](http://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
+total](https://cranlogs.r-pkg.org/badges/grand-total/GroupSeq)](https://cran.r-project.org/package=GroupSeq)
 [![Last
 commit](https://img.shields.io/github/last-commit/rpahl/GroupSeq.svg)](https://github.com/rpahl/GroupSeq/commits/master)
 [![Lifecycle
