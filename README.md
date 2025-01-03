@@ -76,11 +76,6 @@ similar (and more) statistical functionality:
 
 ------------------------------------------------------------------------
 
-1.  The package author is considering to work on a second version with
-    more functionality and a revised user interface in the near future.
-    Feel free to request new features
-    [here](https://github.com/rpahl/GroupSeq/issues).
-
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 

@@ -96,11 +96,6 @@ statistical functionality:
 
 ---
 
-1. The package author is considering to
-work on a second version with more functionality and a revised user interface
-in the near future. Feel free to request new features
-[here](https://github.com/rpahl/GroupSeq/issues).
-
 
 ```{r, include = FALSE}
 options(old)
